@@ -275,7 +275,7 @@ function tguy_sm_summary_page() {
 		<p>To manage your search statistics, go to the <a href="options-general.php?page=<?php echo plugin_basename(__FILE__); ?>">Search Meter Settings</a> page.</p>
 		<?php endif; ?>
 
-		<p>For information and updates, see the <a href="http://www.thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/">Search Meter home page</a>. You can also offer suggestions, request new features or report problems.</p>
+		<p>For information and updates, see the <a href="http://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/">Search Meter home page</a>. You can also offer suggestions, request new features or report problems.</p>
 
 		<?php if (!$options['sm_disable_donation']) { tguy_sm_show_donation_message(); } ?>
 
@@ -420,7 +420,7 @@ function tguy_sm_recent_page($max_lines, $do_show_details) {
 		<p>To manage your search statistics, go to the <a href="options-general.php?page=<?php echo plugin_basename(__FILE__); ?>">Search Meter Settings</a> page.</p>
 		<?php endif; ?>
 
-		<p>For information and updates, see the <a href="http://www.thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/">Search Meter home page</a>. You can also offer suggestions, request new features or report problems.</p>
+		<p>For information and updates, see the <a href="http://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/">Search Meter home page</a>. You can also offer suggestions, request new features or report problems.</p>
 
 		<?php if (!$options['sm_disable_donation']) { tguy_sm_show_donation_message(); } ?>
 
@@ -558,7 +558,7 @@ function tguy_sm_options_page() {
 
 		<p>To see your search statistics, go to the <a href="index.php?page=<?php echo plugin_basename(__FILE__); ?>">Search Meter Dashboard</a>.</p>
 
-		<p>For information and updates, see the <a href="http://www.thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/">Search Meter home page</a>. At that page, you can also offer suggestions, request new features or report problems.</p>
+		<p>For information and updates, see the <a href="http://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/">Search Meter home page</a>. At that page, you can also offer suggestions, request new features or report problems.</p>
 
 		<?php if ( ! tguy_sm_array_value($options, 'sm_disable_donation')) { tguy_sm_show_donation_message(); } ?>
 
