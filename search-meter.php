@@ -72,6 +72,7 @@ define('TGUY_SM_ALLOW_DUPLICATE_SAVES', false);
 
 if (is_admin()) {
 	require_once dirname(__FILE__) . '/admin.php';
+	register_activation_hook(__FILE__, 'tguy_sm_init');
 }
 
 // Template Tags

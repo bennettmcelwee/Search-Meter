@@ -98,8 +98,6 @@ div.sm-stats-clear {
 //////// Initialisation
 
 
-register_activation_hook(__FILE__, 'tguy_sm_init');
-
 function tguy_sm_init() {
 	tguy_sm_create_summary_table();
 	tguy_sm_create_recent_table();
