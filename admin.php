@@ -10,9 +10,6 @@ define('TGUY_SM_DEFAULT_VIEW_STATS_CAPABILITY', 'publish_posts');
 define('TGUY_SM_OPTIONS_CAPABILITY', 'manage_options');
 // Capability users must have in order to set options.
 
-define('TGUY_SM_DASHBOARD_NEWS_URL', 'http://thunderguy.com/public/search-meter-dashboard-news-fragment.php');
-// URL to fetch news for the dashboard from
-
 
 //////// General admin
 
@@ -88,9 +85,6 @@ div.sm-stats-clear {
 }
 #dashboard_search_meter div.sm-stats-table th {
 	color: #8F8F8F;
-}
-#dashboard_search_meter div.sm-news {
-	margin-top: 1em;
 }
 #dashboard_search_meter ul.subsubsub {
 	float: none;
@@ -181,7 +175,6 @@ function smcln_sm_summary() {
 		<h4>Searches in the Last 7 Days</h4>
 		<?php tguy_sm_summary_table(7); ?>
 	</div>
-	<div class="sm-news" style="display:none"></div>
 	<ul class="subsubsub">
 		<li><a href="index.php?page=<?php echo plugin_basename(__FILE__); ?>">Full Dashboard</a> |</li>
 		<?php if (current_user_can(TGUY_SM_OPTIONS_CAPABILITY)) : ?>
@@ -190,33 +183,6 @@ function smcln_sm_summary() {
 		<li><a href="http://thunderguy.com/semicolon/donate/">Donate</a></li>
 	</ul>
 <?php
-}
-
-// Dashboard widget ajax
-
-add_action('admin_head', 'smcln_dashboard_ajax_javascript');
-
-function smcln_dashboard_ajax_javascript() {
-	if (smcln_sm_can_view_stats()) {
-	?>
-<script type="text/javascript" >
-jQuery(document).ready(function($) {
-	$(".sm-news").load(ajaxurl, {action: 'smcln_dashboard'}, function() {
-		if ($(this).html()) {
-			$(this).slideDown();
-		}
-	});
-});
-</script>
-<?php
-	}
-}
-
-add_action('wp_ajax_smcln_dashboard', 'smcln_dashboard_ajax');
-
-function smcln_dashboard_ajax() {
-	echo wp_remote_retrieve_body( wp_remote_get(TGUY_SM_DASHBOARD_NEWS_URL) );
-	die(); // this is required to return a proper result
 }
 
 
