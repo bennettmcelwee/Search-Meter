@@ -282,7 +282,7 @@ function tguy_sm_save_search($posts) {
 	&& !is_paged() // not the second or subsequent page of a previously-counted search
 	&& !is_admin() // not using the administration console
 	&& (1 == $tguy_sm_action_count || TGUY_SM_ALLOW_DUPLICATE_SAVES)
-	&& ($_SERVER['HTTP_REFERER'] || TGUY_SM_ALLOW_EMPTY_REFERER) // proper referrer (otherwise could be search engine, cache...)
+	&& (tguy_sm_array_value($_SERVER, 'HTTP_REFERER') || TGUY_SM_ALLOW_EMPTY_REFERER) // proper referrer (otherwise could be search engine, cache...)
 	) {
 		// Get all details of this search
 		// search string is the raw query
@@ -304,7 +304,7 @@ function tguy_sm_save_search($posts) {
 			}
 			foreach (array('REQUEST_URI','REQUEST_METHOD','QUERY_STRING','REMOTE_ADDR','HTTP_USER_AGENT','HTTP_REFERER')
 			         as $header) {
-				$details .= $header . ': ' . $_SERVER[$header] . "\n";
+				$details .= $header . ': ' . tguy_sm_array_value($_SERVER, $header) . "\n";
 			}
 		}
 
