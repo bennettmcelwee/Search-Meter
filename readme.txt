@@ -77,9 +77,9 @@ The [Search Meter home page](http://thunderguy.com/semicolon/wordpress/search-me
 
 == Changelog ==
 
-= 2.8.0.2 =
-* TO DO: only show dashboard widget and links when user fulfils capability requirements
+= 2.9 =
 * Add a Search Meter dashboard widget.
+* Add Search Meter settings link on the Plugins page for convenient configuration.
 * Many small improvements.
 
 = 2.8 =
