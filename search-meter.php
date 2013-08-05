@@ -3,7 +3,7 @@
 Plugin Name: Search Meter
 Plugin URI: http://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/
 Description: Keeps track of what your visitors are searching for. After you have activated this plugin, you can check the Search Meter section in the Dashboard to see what your visitors are searching for on your blog.
-Version: 2.9
+Version: 2.9.0.1
 Author: Bennett McElwee
 Author URI: http://thunderguy.com/semicolon/
 Donate link: http://thunderguy.com/semicolon/donate/
@@ -30,7 +30,7 @@ INSTRUCTIONS
 Thanks to Kaufman (http://www.terrik.com/wordpress/) and the many others who have offered suggestions.
 
 
-Copyright (C) 2005-12 Bennett McElwee (bennett at thunderguy dotcom)
+Copyright (C) 2005-13 Bennett McElwee (bennett at thunderguy dotcom)
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of version 2 of the GNU General Public
@@ -268,20 +268,19 @@ function sm_constrain_widget_search_count($number) {
 	return max(1, min((int)$number, 100));
 }
 
-// Keep track of how many times SM has been called for this request.
-// Normally we only record the first time.
-$tguy_sm_action_count = 0;
+// Keep track of how many times this search has been saved.
+// The save function may be called many times; normally we only save the first time.
+$tguy_sm_save_count = 0;
 
 function tguy_sm_save_search($posts) {
 // Check if the request is a search, and if so then save details.
 // This is a filter but does not change the posts.
-	global $wpdb, $wp_query, $tguy_sm_action_count;
+	global $wpdb, $wp_query, $tguy_sm_save_count;
 
-	++$tguy_sm_action_count;
 	if (is_search()
 	&& !is_paged() // not the second or subsequent page of a previously-counted search
 	&& !is_admin() // not using the administration console
-	&& (1 == $tguy_sm_action_count || TGUY_SM_ALLOW_DUPLICATE_SAVES)
+	&& (0 === $tguy_sm_save_count || TGUY_SM_ALLOW_DUPLICATE_SAVES)
 	&& (tguy_sm_array_value($_SERVER, 'HTTP_REFERER') || TGUY_SM_ALLOW_EMPTY_REFERER) // proper referrer (otherwise could be search engine, cache...)
 	) {
 		// Get all details of this search
@@ -300,7 +299,7 @@ function tguy_sm_save_search($posts) {
 		$options = get_option('tguy_search_meter');
 		if ($options['sm_details_verbose']) {
 			if (TGUY_SM_ALLOW_DUPLICATE_SAVES) {
-				$details .= "Search Meter action count: $tguy_sm_action_count\n";
+				$details .= "Search Meter save count: $tguy_sm_save_count\n";
 			}
 			foreach (array('REQUEST_URI','REQUEST_METHOD','QUERY_STRING','REMOTE_ADDR','HTTP_USER_AGENT','HTTP_REFERER')
 			         as $header) {
@@ -346,6 +345,7 @@ function tguy_sm_save_search($posts) {
 			WHERE `terms` = '$search_terms' AND `date` = CURDATE()";
 			$success = $wpdb->query($query);
 		}
+		++$tguy_sm_save_count;
 	}
 	return $posts;
 }
