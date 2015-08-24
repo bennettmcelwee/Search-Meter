@@ -286,7 +286,7 @@ function tguy_sm_save_search($posts) {
 		$options = get_option('tguy_search_meter');
 
 		// Break out if we're supposed to ignore admin searches
-		if (tguy_sm_array_value($options, 'sm_ignore_admin_search')] && current_user_can("manage_options")) {
+		if (tguy_sm_array_value($options, 'sm_ignore_admin_search') && current_user_can("manage_options")) {
 			return $posts; // EARLY EXIT
 		}
 
