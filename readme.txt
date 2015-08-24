@@ -3,7 +3,7 @@ Contributors: bennettmcelwee
 Donate link: http://thunderguy.com/semicolon/donate/
 Tags: search, meter, search-meter, statistics, widget, admin, keywords
 Requires at least: 2.8
-Tested up to: 4.2.1
+Tested up to: 4.4
 Stable tag: 2.9.1
 
 Search Meter tracks what your readers are searching for on your blog. View full details of recent searches or stats for the last day, week or month.
@@ -24,7 +24,9 @@ To see your search statistics, Log in to WordPress Admin. On your dashboard you 
 
 There are a few options available if you go to the Settings section and click Search Meter. Use the radio buttons to determine who will be allowed to see the full search statistics. You can also type in a list of filter words; any search terms containing these words will not show up in the Recent Searches and Popular Searches widgets.
 
-Use the Reset Statistics button to clear all past search statistics; Search Meter will immediately start gathering fresh statistics. If you're technically-minded, you might want to check the "Keep detailed information" checkbox to make Search Meter save technical information about every search (the information is taken from the HTTP headers).
+*Advanced users*: You can check the "Ignore" box to tell Search Meter to ignore searches made by logged-in administrators, so you can test things without cluttering your search statistics. You can also check the "Keep detailed information" checkbox to make Search Meter save technical information about every search (the information is taken from the HTTP headers).
+
+Use the Reset Statistics button to clear all past search statistics; Search Meter will immediately start gathering fresh statistics.
 
 == Installation ==
 
@@ -76,6 +78,9 @@ The [Search Meter home page](http://thunderguy.com/semicolon/wordpress/search-me
 1. The Search Meter administration interface, showing some of the reports available.
 
 == Changelog ==
+
+= 2.10 =
+* Add an option to ignore searches made by logged-in administrators, so administrators can test searches without cluttering up the search stats.
 
 = 2.9.1 =
 * Ensure Search Meter can save searches even if other plugins trigger a query before the main WordPress loop.

@@ -3,7 +3,7 @@
 Plugin Name: Search Meter
 Plugin URI: http://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/
 Description: Keeps track of what your visitors are searching for. After you have activated this plugin, you can check the Search Meter section in the Dashboard to see what your visitors are searching for on your blog.
-Version: 2.9.1
+Version: 2.10
 Author: Bennett McElwee
 Author URI: http://thunderguy.com/semicolon/
 Donate link: http://thunderguy.com/semicolon/donate/
@@ -30,7 +30,7 @@ INSTRUCTIONS
 Thanks to Kaufman (http://www.terrik.com/wordpress/) and the many others who have offered suggestions.
 
 
-Copyright (C) 2005-13 Bennett McElwee (bennett at thunderguy dotcom)
+Copyright (C) 2005-15 Bennett McElwee (bennett at thunderguy dotcom)
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of version 2 of the GNU General Public
@@ -283,6 +283,13 @@ function tguy_sm_save_search($posts) {
 	&& (0 === $tguy_sm_save_count || TGUY_SM_ALLOW_DUPLICATE_SAVES)
 	&& (tguy_sm_array_value($_SERVER, 'HTTP_REFERER') || TGUY_SM_ALLOW_EMPTY_REFERER) // proper referrer (otherwise could be search engine, cache...)
 	) {
+		$options = get_option('tguy_search_meter');
+
+		// Break out if we're supposed to ignore admin searches
+		if (tguy_sm_array_value($options, 'sm_ignore_admin_search')] && current_user_can("manage_options")) {
+			return $posts; // EARLY EXIT
+		}
+
 		// Get all details of this search
 		// search string is the raw query
 		$search_string = $wp_query->query_vars['s'];
@@ -296,7 +303,6 @@ function tguy_sm_save_search($posts) {
 		$hit_count = $wp_query->found_posts; // Thanks to Will for this line
 		// Other useful details of the search
 		$details = '';
-		$options = get_option('tguy_search_meter');
 		if (tguy_sm_array_value($options, 'sm_details_verbose')) {
 			if (TGUY_SM_ALLOW_DUPLICATE_SAVES) {
 				$details .= "Search Meter save count: $tguy_sm_save_count\n";

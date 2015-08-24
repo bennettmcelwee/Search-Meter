@@ -1,6 +1,6 @@
 <?php
 /*
-Copyright (C) 2005-12 Bennett McElwee (bennett at thunderguy dotcom)
+Copyright (C) 2005-15 Bennett McElwee (bennett at thunderguy dotcom)
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of version 2 of the GNU General Public
@@ -469,6 +469,7 @@ function tguy_sm_options_page() {
 			$sm_filter_words = stripslashes($sm_filter_words);
 		}
 		$options['sm_filter_words']  = preg_replace('/\\s+/', ' ', trim($sm_filter_words));
+		$options['sm_ignore_admin_search']  = (bool)($_POST['sm_ignore_admin_search']);
 		$options['sm_details_verbose']  = (bool)($_POST['sm_details_verbose']);
 		$options['sm_disable_donation'] = (bool)($_POST['sm_disable_donation']);
 		update_option('tguy_search_meter', $options);
@@ -527,6 +528,14 @@ function tguy_sm_options_page() {
 						<textarea name="sm_filter_words" rows="3" cols="40" id="sm_filter_words" class="large-text code"><?php echo esc_html(tguy_sm_array_value($options, 'sm_filter_words')); ?></textarea>
 						</fieldset>
 					</td>
+				</tr>
+				<tr>
+					<th class="th-full" scope="row" colspan="2">
+						<label for="sm_ignore_admin_search" title='Administrators are users with "manage_options" capability'>
+							<input type="checkbox" id="sm_ignore_admin_search" name="sm_ignore_admin_search" <?php echo (tguy_sm_array_value($options, 'sm_ignore_admin_search') ? 'checked="checked"' : '') ?> />
+							Ignore searches made by logged-in administrators
+						</label>
+					</th>
 				</tr>
 				<tr>
 					<th class="th-full" scope="row" colspan="2">
