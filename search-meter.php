@@ -297,7 +297,7 @@ function tguy_sm_save_search($posts) {
 		// Other useful details of the search
 		$details = '';
 		$options = get_option('tguy_search_meter');
-		if ($options['sm_details_verbose']) {
+		if (tguy_sm_array_value($options, 'sm_details_verbose')) {
 			if (TGUY_SM_ALLOW_DUPLICATE_SAVES) {
 				$details .= "Search Meter save count: $tguy_sm_save_count\n";
 			}
