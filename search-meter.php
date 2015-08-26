@@ -100,7 +100,7 @@ function sm_list_popular_searches($before = '', $after = '', $count = 5) {
 		LIMIT $count");
 	if (count($results)) {
 		echo "$before\n<ul>\n";
-		$home_url_slash = get_settings('home') . '/';
+		$home_url_slash = get_option('home') . '/';
 		foreach ($results as $result) {
 			echo '<li><a href="'. $home_url_slash . sm_get_relative_search_url($result->terms) . '">'. htmlspecialchars($result->terms) .'</a></li>'."\n";
 		}
@@ -124,7 +124,7 @@ function sm_list_recent_searches($before = '', $after = '', $count = 5) {
 		LIMIT $count");
 	if (count($results)) {
 		echo "$before\n<ul>\n";
-		$home_url_slash = get_settings('home') . '/';
+		$home_url_slash = get_option('home') . '/';
 		foreach ($results as $result) {
 			echo '<li><a href="'. $home_url_slash . sm_get_relative_search_url($result->terms) . '">'. htmlspecialchars($result->terms) .'</a></li>'."\n";
 		}
@@ -185,9 +185,9 @@ function tguy_sm_register_widgets() {
 }
 
 class SM_Popular_Searches_Widget extends WP_Widget {
-	function SM_Popular_Searches_Widget() {
+	function __construct() {
 		$widget_ops = array('classname' => 'widget_search_meter', 'description' => __( "A list of the most popular successful searches in the last month"));
-		$this->WP_Widget('popular_searches', __('Popular Searches'), $widget_ops);
+		parent::__construct('popular_searches', __('Popular Searches'), $widget_ops);
 	}
 
 	function widget($args, $instance) {
@@ -225,9 +225,9 @@ class SM_Popular_Searches_Widget extends WP_Widget {
 }
 
 class SM_Recent_Searches_Widget extends WP_Widget {
-	function SM_Recent_Searches_Widget() {
+	function __construct() {
 		$widget_ops = array('classname' => 'widget_search_meter', 'description' => __( "A list of the most recent successful searches on your blog"));
-		$this->WP_Widget('recent_searches', __('Recent Searches'), $widget_ops);
+		parent::__construct('recent_searches', __('Recent Searches'), $widget_ops);
 	}
 
 	function widget($args, $instance) {
