@@ -313,15 +313,14 @@ function tguy_sm_save_search($posts) {
 			}
 		}
 
-		// Sanitise as necessary
-		$search_string = $wpdb->escape($search_string);
-		$search_terms = $wpdb->escape($search_terms);
-		$details = $wpdb->escape($details);
-
 		// Save the individual search to the DB
-		$query = "INSERT INTO `{$wpdb->prefix}searchmeter_recent` (`terms`,`datetime`,`hits`,`details`)
-		VALUES ('$search_string',NOW(),$hit_count,'$details')";
-		$success = $wpdb->query($query);
+		$success = $wpdb->query($wpdb->prepare("
+			INSERT INTO `{$wpdb->prefix}searchmeter_recent` (`terms`,`datetime`,`hits`,`details`)
+			VALUES (%s, NOW(), %d, %s)",
+			$search_string,
+			$search_terms,
+			$details
+		));
 		if ($success) {
 			// Ensure table never grows larger than TGUY_SM_HISTORY_SIZE + 100
 			$rowcount = $wpdb->get_var(
@@ -338,21 +337,26 @@ function tguy_sm_save_search($posts) {
 			}
 		}
 		// Save search summary into the DB. Usually this will be a new row, so try to insert first
-		$query = "INSERT INTO `{$wpdb->prefix}searchmeter` (`terms`,`date`,`count`,`last_hits`)
-		VALUES ('$search_terms',CURDATE(),1,$hit_count)";
 		// Temporarily suppress errors, as this query is expected to fail on duplicate searches in a single day. Thanks to James Collins.
 		$suppress = $wpdb->suppress_errors();
-		$success = $wpdb->query($query);
+		$success = $wpdb->query($wpdb->prepare("
+			INSERT INTO `{$wpdb->prefix}searchmeter` (`terms`,`date`,`count`,`last_hits`)
+			VALUES (%s, CURDATE(), 1, %d)",
+			$search_terms,
+			$hit_count
+		));
 		$wpdb->suppress_errors($suppress);
 		if (!$success) {
-			$query = "UPDATE `{$wpdb->prefix}searchmeter` SET
-				`count` = `count` + 1,
-				`last_hits` = $hit_count
-			WHERE `terms` = '$search_terms' AND `date` = CURDATE()";
-			$success = $wpdb->query($query);
+			$success = $wpdb->query($wpdb->prepare("
+				UPDATE `{$wpdb->prefix}searchmeter` SET
+					`count` = `count` + 1,
+					`last_hits` = %d
+				WHERE `terms` = %s AND `date` = CURDATE()",
+				$hit_count,
+				$search_terms
+			));
 		}
 		++$tguy_sm_save_count;
 	}
 	return $posts;
 }
-
