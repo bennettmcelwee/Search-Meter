@@ -38,20 +38,23 @@ function tguy_sm_stats_css() {
 	border-bottom: 1px solid #aaaaaa;
 }
 #search_meter_menu li { 
-	border: 1px solid #aaaaaa;
+	border: 1px solid #cccccc;
 	border-bottom: none;
 	line-height: 1.4em;
 	display: inline-block;
-	margin: 0 5px 0 0;
+	margin: 0 10px 0 0;
 	padding: 0;
 	list-style-type: none;
 	list-style-image: none;
 	list-style-position: outside;
 }
-#search_meter_menu li.current span { 
+#search_meter_menu li.sm-current {
+	border-color: #aaaaaa;
+}
+#search_meter_menu li.sm-current span {
 	background-color: #ffffff;
 	font-weight: bold;
-	padding: 0 5px 3px 5px;
+	padding: 0 5px 1px 5px;
 }
 #search_meter_menu li a,
 #search_meter_menu li a:visited {
