@@ -61,9 +61,6 @@ function tguy_sm_stats_css() {
 #search_meter_menu li a:hover {
 	background-color: #eaf2fa;
 }
-#search_meter_menu + .wrap {
-	margin-top: 0;
-}
 div.sm-stats-table {
 	float: left;
 	padding-right: 3em;
@@ -76,10 +73,10 @@ div.sm-stats-table h3 {
 	margin-top: 0;
 	margin-bottom: 0.5em;
 }
-div.sm-stats-table .left {
+div.sm-stats-table .sm-text {
 	text-align: left;
 }
-div.sm-stats-table .right {
+div.sm-stats-table .sm-number {
 	text-align: right;
 }
 div.sm-stats-clear {
@@ -240,7 +237,7 @@ function tguy_sm_summary_page() {
 	<div class="wrap">
 
 		<ul id="search_meter_menu">
-		<li class="current"><span>Summary</span></li>
+		<li class="sm-current"><span>Summary</span></li>
 		<li><a href="index.php?page=<?php echo plugin_basename(__FILE__); ?>&amp;recent=100">Last 100 Searches</a></li>
 		<li><a href="index.php?page=<?php echo plugin_basename(__FILE__); ?>&amp;recent=500">Last 500 Searches</a></li>
 		</ul>
@@ -322,7 +319,7 @@ function tguy_sm_summary_table($days, $do_include_successes = true) {
 		?>
 		<table cellpadding="3" cellspacing="2">
 		<tbody>
-		<tr class="alternate"><th class="left">Term</th><th>Searches</th>
+		<tr class="alternate"><th class="sm-text">Term</th><th>Searches</th>
 		<?php
 		if ($do_include_successes) {
 			?><th>Results</th><?php
@@ -333,11 +330,11 @@ function tguy_sm_summary_table($days, $do_include_successes = true) {
 			?>
 			<tr class="<?php echo $class ?>">
 			<td><a href="<?php echo get_bloginfo('wpurl').'/wp-admin/edit.php?s='.urlencode($result->terms).'&submit=Search' ?>"><?php echo htmlspecialchars($result->terms) ?></a></td>
-			<td class="right"><?php echo $result->countsum ?></td>
+			<td class="sm-number"><?php echo $result->countsum ?></td>
 			<?php
 			if ($do_include_successes) {
 				?>
-				<td class="right"><?php echo $result->hits ?></td></tr>
+				<td class="sm-number"><?php echo $result->hits ?></td></tr>
 				<?php
 			}
 			$class = ($class == '' ? 'alternate' : '');
@@ -365,12 +362,12 @@ function tguy_sm_recent_page($max_lines, $do_show_details) {
 		<ul id="search_meter_menu">
 		<li><a href="<?php echo $this_url_base ?>">Summary</a></li>
 		<?php if (100 == $max_lines) : ?>
-			<li class="current"><span>Last 100 Searches</span></li>
+			<li class="sm-current"><span>Last 100 Searches</span></li>
 		<?php else : ?>
 			<li><a href="<?php echo $this_url_base ?>&amp;recent=100">Last 100 Searches</a></li>
 		<?php endif ?>
 		<?php if (500 == $max_lines) : ?>
-			<li class="current"><span>Last 500 Searches</span></li>
+			<li class="sm-current"><span>Last 500 Searches</span></li>
 		<?php else : ?>
 			<li><a href="<?php echo $this_url_base ?>&amp;recent=500">Last 500 Searches</a></li>
 		<?php endif ?>
@@ -393,11 +390,11 @@ function tguy_sm_recent_page($max_lines, $do_show_details) {
 			?>
 			<table cellpadding="3" cellspacing="2">
 			<tbody>
-			<tr class="alternate"><th class="left">Date &amp; time</th><th class="left">Term</th><th class="right">Results</th>
+			<tr class="alternate"><th class="sm-text">Date &amp; time</th><th class="sm-text">Term</th><th class="sm-number">Results</th>
 			<?php if ($do_show_details) { ?>
-				<th class="left">Details</th>
+				<th class="sm-text">Details</th>
 			<?php } else if ($is_details_available) { ?>
-				<th class="left"><a href="<?php echo $this_url_base . $this_url_recent_arg . '&amp;details=1' ?>">Show details</a></th>
+				<th class="sm-text"><a href="<?php echo $this_url_base . $this_url_recent_arg . '&amp;details=1' ?>">Show details</a></th>
 			<?php } ?>
 			</tr>
 			<?php
@@ -407,7 +404,7 @@ function tguy_sm_recent_page($max_lines, $do_show_details) {
 				<tr valign="top" class="<?php echo $class ?>">
 				<td><?php echo $result->datetime ?></td>
 				<td><a href="<?php echo get_bloginfo('wpurl').'/wp-admin/edit.php?s='.urlencode($result->terms).'&submit=Search' ?>"><?php echo htmlspecialchars($result->terms) ?></a></td>
-				<td class="right"><?php echo $result->hits ?></td>
+				<td class="sm-number"><?php echo $result->hits ?></td>
 				<?php if ($do_show_details) : ?>
 					<td><?php echo str_replace("\n", "<br />", htmlspecialchars($result->details)) ?></td>
 				<?php endif ?>
