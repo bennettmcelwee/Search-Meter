@@ -1,7 +1,7 @@
 === Search Meter ===
 Contributors: bennettmcelwee
 Donate link: http://thunderguy.com/semicolon/donate/
-Tags: search, meter, search-meter, statistics, widget, admin, keywords
+Tags: search, meter, search-meter, statistics, widget, admin, keywords, terms, search terms
 Requires at least: 3.2
 Tested up to: 4.3
 Stable tag: 2.9.1
@@ -82,7 +82,7 @@ The [Search Meter home page](http://thunderguy.com/semicolon/wordpress/search-me
 = 2.10 =
 * Add an option to ignore searches made by logged-in administrators, so administrators can test searches without cluttering up the search stats.
 * Requires WP 3.2.
-* Upgrade deprecated code.
+* Upgrade deprecated code. Minor restyling.
 
 = 2.9.1 =
 * Ensure Search Meter can save searches even if other plugins trigger a query before the main WordPress loop.
