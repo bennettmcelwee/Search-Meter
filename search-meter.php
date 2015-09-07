@@ -321,17 +321,28 @@ function tguy_sm_save_search($posts) {
 			$search_terms,
 			$details
 		));
+		
+		
+		// Ensure that history size can be overriden by a user using their functions.php.
+		// Ensure table never grows larger than History Size + 100.  To use this, 
+		// users just need to add this code to their theme somewhere (usually functions.php).
+		// add_filter('search-meter-history-size', 50000);
+		$useHistorySize = apply_filters('search-meter-history-size', TGUY_SM_HISTORY_SIZE) + 100;		
+		
 		if ($success) {
-			// Ensure table never grows larger than TGUY_SM_HISTORY_SIZE + 100
+			// Ensure table never grows larger than $useHistorySize
 			$rowcount = $wpdb->get_var(
 				"SELECT count(`datetime`) as rowcount
 				FROM `{$wpdb->prefix}searchmeter_recent`");
-			if ((TGUY_SM_HISTORY_SIZE + 100) < $rowcount) {
-				// find time of (TGUY_SM_HISTORY_SIZE)th entry
-				$dateZero = $wpdb->get_var(
+			
+			if ($useHistorySize < $rowcount) 
+			{
+				// find time of ($useHistorySize)th entry
+				$dateZero = $wpdb->get_var($wpdb->prepare(
 					"SELECT `datetime`
 					FROM `{$wpdb->prefix}searchmeter_recent`
-					ORDER BY `datetime` DESC LIMIT ".TGUY_SM_HISTORY_SIZE.", 1");
+					ORDER BY `datetime` DESC LIMIT %d, 1", $useHistorySize));
+				
 				$query = "DELETE FROM `{$wpdb->prefix}searchmeter_recent` WHERE `datetime` < '$dateZero'";
 				$success = $wpdb->query($query);
 			}
