@@ -327,15 +327,15 @@ function tguy_sm_save_search($posts) {
 		// Ensure table never grows larger than History Size + 100.  To use this, 
 		// users just need to add this code to their theme somewhere (usually functions.php).
 		// add_filter('search-meter-history-size', 50000);
-		$useHistorySize = apply_filters('search-meter-history-size', TGUY_SM_HISTORY_SIZE) + 100;		
+		$useHistorySize = apply_filters('search-meter-history-size', TGUY_SM_HISTORY_SIZE);		
 		
 		if ($success) {
-			// Ensure table never grows larger than $useHistorySize
+			// Ensure table never grows larger than $useHistorySize + 100
 			$rowcount = $wpdb->get_var(
 				"SELECT count(`datetime`) as rowcount
 				FROM `{$wpdb->prefix}searchmeter_recent`");
 			
-			if ($useHistorySize < $rowcount) 
+			if ($useHistorySize + 100 < $rowcount) 
 			{
 				// find time of ($useHistorySize)th entry
 				$dateZero = $wpdb->get_var($wpdb->prepare(
