@@ -260,7 +260,7 @@ function tguy_sm_save_search($posts) {
 
 	// The filter may get called more than once for a given request. We ignore these duplicates.
 	// Recording duplicate searches can be enabled by adding this line to functions.php:
-	//   add_filter('search_meter_record_duplicates', true);
+	//   add_filter('search_meter_record_duplicates', function() { return true; });
 	// Setting to true will record duplicates (the fact that it's a dupe will be recorded in the
 	// details). This will mess up the stats, but could be useful for troubleshooting.
 	$record_duplicates = apply_filters('search_meter_record_duplicates', false);		
@@ -317,7 +317,7 @@ function tguy_sm_save_search($posts) {
 				FROM `{$wpdb->prefix}searchmeter_recent`");
 			
 			// History size can be overridden by a user by adding a line like this to functions.php:
-			//   add_filter('search_meter_history_size', 50000);
+			//   add_filter('search_meter_history_size', function() { return 50000; });
 			$history_size = apply_filters('search_meter_history_size', 500);		
 
 			// Ensure history table never grows larger than (history size) + 100; truncate it
