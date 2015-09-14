@@ -51,14 +51,6 @@ function tguy_sm_array_value(&$array, $key) {
 }
 
 
-// Parameters (you can change these if you know what you're doing)
-
-define('TGUY_SM_ALLOW_EMPTY_REFERER', false);
-// Searches with an empty referer header are often bogus requests
-// from Google's AdSense crawler or something similar, so they are
-// excluded. Set this to true to record all such searches.
-
-
 if (is_admin()) {
 	require_once dirname(__FILE__) . '/admin.php';
 	register_activation_hook(__FILE__, 'tguy_sm_init');
@@ -277,7 +269,7 @@ function tguy_sm_save_search($posts) {
 	&& !is_paged() // not the second or subsequent page of a previously-counted search
 	&& !is_admin() // not using the administration console
 	&& (0 === $tguy_sm_save_count || $record_duplicates)
-	&& (tguy_sm_array_value($_SERVER, 'HTTP_REFERER') || TGUY_SM_ALLOW_EMPTY_REFERER) // proper referrer (otherwise could be search engine, cache...)
+	&& (tguy_sm_array_value($_SERVER, 'HTTP_REFERER')) // proper referrer (otherwise could be search engine, cache...)
 	) {
 		$options = get_option('tguy_search_meter');
 
