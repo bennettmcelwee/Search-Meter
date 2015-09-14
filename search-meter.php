@@ -55,7 +55,8 @@ function tguy_sm_array_value(&$array, $key) {
 
 define('TGUY_SM_HISTORY_SIZE', 500);
 // The number of recent searches that will be saved. The table can
-// contain up to 100 more rows than this number 
+// contain up to 100 more rows than this number.
+// Can be overridden with e.g. add_filter('search_meter_history_size', 50000);
 
 define('TGUY_SM_ALLOW_EMPTY_REFERER', false);
 // Searches with an empty referer header are often bogus requests
@@ -321,17 +322,28 @@ function tguy_sm_save_search($posts) {
 			$search_terms,
 			$details
 		));
+		
+		
 		if ($success) {
-			// Ensure table never grows larger than TGUY_SM_HISTORY_SIZE + 100
 			$rowcount = $wpdb->get_var(
 				"SELECT count(`datetime`) as rowcount
 				FROM `{$wpdb->prefix}searchmeter_recent`");
-			if ((TGUY_SM_HISTORY_SIZE + 100) < $rowcount) {
-				// find time of (TGUY_SM_HISTORY_SIZE)th entry
-				$dateZero = $wpdb->get_var(
+			
+			// History size can be overridden by a user by adding a line like this to functions.php:
+			//   add_filter('search_meter_history_size', 50000);
+			$history_size = apply_filters('search_meter_history_size', TGUY_SM_HISTORY_SIZE);                
+
+			// Ensure history table never grows larger than (history size) + 100; truncate it
+			// to (history size) when it gets too big. (This way we will only truncate the table
+			// every 100 searches, rather than every time.)
+			if ($history_size + 100 < $rowcount) 
+			{
+				// find time of ($history_size)th entry; delete everything before that
+				$dateZero = $wpdb->get_var($wpdb->prepare(
 					"SELECT `datetime`
 					FROM `{$wpdb->prefix}searchmeter_recent`
-					ORDER BY `datetime` DESC LIMIT ".TGUY_SM_HISTORY_SIZE.", 1");
+					ORDER BY `datetime` DESC LIMIT %d, 1", $history_size));
+				
 				$query = "DELETE FROM `{$wpdb->prefix}searchmeter_recent` WHERE `datetime` < '$dateZero'";
 				$success = $wpdb->query($query);
 			}
