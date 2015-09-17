@@ -8,7 +8,7 @@ Author: Bennett McElwee
 Author URI: http://thunderguy.com/semicolon/
 Donate link: http://thunderguy.com/semicolon/donate/
 
-$Revision: 1232709 $
+$Revision: 1247516 $
 
 
 INSTRUCTIONS
