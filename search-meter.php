@@ -3,7 +3,7 @@
 Plugin Name: Search Meter
 Plugin URI: http://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/
 Description: Keeps track of what your visitors are searching for. After you have activated this plugin, you can check the Search Meter section in the Dashboard to see what your visitors are searching for on your blog.
-Version: 2.10
+Version: 2.10.0.1
 Author: Bennett McElwee
 Author URI: http://thunderguy.com/semicolon/
 Donate link: http://thunderguy.com/semicolon/donate/
@@ -27,7 +27,7 @@ INSTRUCTIONS
   sm_list_recent_searches() template tags.
 * For full details, see http://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/
 
-Thanks to Kaufman (http://www.terrik.com/wordpress/) and the many others who have offered suggestions.
+Thanks to everyone who has suggested improvements. It takes a village to build a plugin.
 
 
 Copyright (C) 2005-15 Bennett McElwee (bennett at thunderguy dotcom)
@@ -49,25 +49,6 @@ or by writing to the Free Software Foundation, Inc.,
 function tguy_sm_array_value(&$array, $key) {
 	return (is_array($array) && array_key_exists($key, $array)) ? $array[$key] : null;
 }
-
-
-// Parameters (you can change these if you know what you're doing)
-
-define('TGUY_SM_HISTORY_SIZE', 500);
-// The number of recent searches that will be saved. The table can
-// contain up to 100 more rows than this number 
-
-define('TGUY_SM_ALLOW_EMPTY_REFERER', false);
-// Searches with an empty referer header are often bogus requests
-// from Google's AdSense crawler or something similar, so they are
-// excluded. Set this to true to record all such searches.
-
-define('TGUY_SM_ALLOW_DUPLICATE_SAVES', false);
-// It may be that the filter gets called more than once for a given
-// request. Search Meter ignores these duplicates. Set this to true
-// to record duplicates (the fact that it's a dupe will be recorded
-// in the details). This will mess up the stats, but could be useful
-// for troubleshooting.
 
 
 if (is_admin()) {
@@ -277,11 +258,18 @@ function tguy_sm_save_search($posts) {
 // This is a filter but does not change the posts.
 	global $wpdb, $wp_query, $tguy_sm_save_count;
 
+	// The filter may get called more than once for a given request. We ignore these duplicates.
+	// Recording duplicate searches can be enabled by adding this line to functions.php:
+	//   add_filter('search_meter_record_duplicates', function() { return true; });
+	// Setting to true will record duplicates (the fact that it's a dupe will be recorded in the
+	// details). This will mess up the stats, but could be useful for troubleshooting.
+	$record_duplicates = apply_filters('search_meter_record_duplicates', false);		
+
 	if (is_search()
 	&& !is_paged() // not the second or subsequent page of a previously-counted search
 	&& !is_admin() // not using the administration console
-	&& (0 === $tguy_sm_save_count || TGUY_SM_ALLOW_DUPLICATE_SAVES)
-	&& (tguy_sm_array_value($_SERVER, 'HTTP_REFERER') || TGUY_SM_ALLOW_EMPTY_REFERER) // proper referrer (otherwise could be search engine, cache...)
+	&& (0 === $tguy_sm_save_count || $record_duplicates)
+	&& (tguy_sm_array_value($_SERVER, 'HTTP_REFERER')) // proper referrer (otherwise could be search engine, cache...)
 	) {
 		$options = get_option('tguy_search_meter');
 
@@ -304,7 +292,7 @@ function tguy_sm_save_search($posts) {
 		// Other useful details of the search
 		$details = '';
 		if (tguy_sm_array_value($options, 'sm_details_verbose')) {
-			if (TGUY_SM_ALLOW_DUPLICATE_SAVES) {
+			if ($record_duplicates) {
 				$details .= "Search Meter save count: $tguy_sm_save_count\n";
 			}
 			foreach (array('REQUEST_URI','REQUEST_METHOD','QUERY_STRING','REMOTE_ADDR','HTTP_USER_AGENT','HTTP_REFERER')
@@ -321,17 +309,28 @@ function tguy_sm_save_search($posts) {
 			$search_terms,
 			$details
 		));
+		
 		if ($success) {
-			// Ensure table never grows larger than TGUY_SM_HISTORY_SIZE + 100
+
 			$rowcount = $wpdb->get_var(
 				"SELECT count(`datetime`) as rowcount
 				FROM `{$wpdb->prefix}searchmeter_recent`");
-			if ((TGUY_SM_HISTORY_SIZE + 100) < $rowcount) {
-				// find time of (TGUY_SM_HISTORY_SIZE)th entry
-				$dateZero = $wpdb->get_var(
+			
+			// History size can be overridden by a user by adding a line like this to functions.php:
+			//   add_filter('search_meter_history_size', function() { return 50000; });
+			$history_size = apply_filters('search_meter_history_size', 500);		
+
+			// Ensure history table never grows larger than (history size) + 100; truncate it
+			// to (history size) when it gets too big. (This we way will only truncate the table
+			// every 100 searches, rather than every time.)
+			if ($history_size + 100 < $rowcount) 
+			{
+				// find time of ($history_size)th entry; delete everything before that
+				$dateZero = $wpdb->get_var($wpdb->prepare(
 					"SELECT `datetime`
 					FROM `{$wpdb->prefix}searchmeter_recent`
-					ORDER BY `datetime` DESC LIMIT ".TGUY_SM_HISTORY_SIZE.", 1");
+					ORDER BY `datetime` DESC LIMIT %d, 1", $history_size));
+				
 				$query = "DELETE FROM `{$wpdb->prefix}searchmeter_recent` WHERE `datetime` < '$dateZero'";
 				$success = $wpdb->query($query);
 			}

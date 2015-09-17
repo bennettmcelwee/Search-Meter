@@ -79,6 +79,9 @@ The [Search Meter home page](http://thunderguy.com/semicolon/wordpress/search-me
 
 == Changelog ==
 
+= 2.10.0.1 =
+* Settings for search history size and recording duplicates can now be altered in filters. See the code for details. (Thanks to Dan Harrison)
+
 = 2.10 =
 * Add an option to ignore searches made by logged-in administrators, so administrators can test searches without cluttering up the search stats.
 * Requires WP 3.2.
