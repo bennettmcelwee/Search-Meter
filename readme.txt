@@ -80,6 +80,7 @@ The [Search Meter home page](http://thunderguy.com/semicolon/wordpress/search-me
 == Changelog ==
 = next =
 * When uninstalled, delete all options and data.
+* Track searches made via ajax requests.
 
 = 2.11 =
 * Settings for search history size and recording duplicates can now be altered in filters. See the code for details. (Thanks to Dan Harrison)

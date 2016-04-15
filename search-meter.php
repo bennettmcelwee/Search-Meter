@@ -3,7 +3,7 @@
 Plugin Name: Search Meter
 Plugin URI: http://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/
 Description: Keeps track of what your visitors are searching for. After you have activated this plugin, you can check the Search Meter section in the Dashboard to see what your visitors are searching for on your blog.
-Version: 2.11
+Version: 2.11+
 Author: Bennett McElwee
 Author URI: http://thunderguy.com/semicolon/
 Donate link: http://thunderguy.com/semicolon/donate/
@@ -30,7 +30,7 @@ INSTRUCTIONS
 Thanks to everyone who has suggested improvements. It takes a village to build a plugin.
 
 
-Copyright (C) 2005-15 Bennett McElwee (bennett at thunderguy dotcom)
+Copyright (C) 2005-16 Bennett McElwee (bennett at thunderguy dotcom)
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of version 2 of the GNU General Public
@@ -50,8 +50,13 @@ function tguy_sm_array_value(&$array, $key) {
 	return (is_array($array) && array_key_exists($key, $array)) ? $array[$key] : null;
 }
 
+function tguy_is_admin_interface() {
+	// ajax requests return true for is_admin(), but they're not part of the admin UI
+	return is_admin() && ( ! defined('DOING_AJAX') || ! DOING_AJAX);
+}
 
-if (is_admin()) {
+
+if (tguy_is_admin_interface()) {
 	require_once dirname(__FILE__) . '/admin.php';
 	register_activation_hook(__FILE__, 'tguy_sm_init');
 }
@@ -267,7 +272,7 @@ function tguy_sm_save_search($posts) {
 
 	if (is_search()
 	&& !is_paged() // not the second or subsequent page of a previously-counted search
-	&& !is_admin() // not using the administration console
+	&& !tguy_is_admin_interface() // not using the administration console
 	&& (0 === $tguy_sm_save_count || $record_duplicates)
 	&& (tguy_sm_array_value($_SERVER, 'HTTP_REFERER')) // proper referrer (otherwise could be search engine, cache...)
 	) {
