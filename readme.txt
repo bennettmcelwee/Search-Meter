@@ -78,6 +78,8 @@ The [Search Meter home page](http://thunderguy.com/semicolon/wordpress/search-me
 1. The Search Meter administration interface, showing some of the reports available.
 
 == Changelog ==
+= next =
+* When uninstalled, delete all options and data.
 
 = 2.11 =
 * Settings for search history size and recording duplicates can now be altered in filters. See the code for details. (Thanks to Dan Harrison)
