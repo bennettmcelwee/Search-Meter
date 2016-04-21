@@ -3,12 +3,12 @@
 Plugin Name: Search Meter
 Plugin URI: http://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/
 Description: Keeps track of what your visitors are searching for. After you have activated this plugin, you can check the Search Meter section in the Dashboard to see what your visitors are searching for on your blog.
-Version: 2.11+
+Version: 2.12
 Author: Bennett McElwee
 Author URI: http://thunderguy.com/semicolon/
 Donate link: http://thunderguy.com/semicolon/donate/
 
-$Revision: 1247516 $
+$Revision: 1400894 $
 
 
 INSTRUCTIONS

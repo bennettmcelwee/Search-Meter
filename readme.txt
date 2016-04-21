@@ -3,7 +3,7 @@ Contributors: bennettmcelwee
 Donate link: http://thunderguy.com/semicolon/donate/
 Tags: search, meter, search-meter, statistics, widget, admin, keywords, terms, search terms
 Requires at least: 3.2
-Tested up to: 4.3
+Tested up to: 4.5
 Stable tag: 2.11
 
 Search Meter tracks what your readers are searching for on your blog. View full details of recent searches or stats for the last day, week or month.
@@ -78,9 +78,9 @@ The [Search Meter home page](http://thunderguy.com/semicolon/wordpress/search-me
 1. The Search Meter administration interface, showing some of the reports available.
 
 == Changelog ==
-= next =
-* When uninstalled, delete all options and data.
-* Track searches made via ajax requests.
+= 2.12 =
+* When uninstalled, delete all options and data. (Thanks to Scott Allen)
+* Track searches made via ajax requests. (Thanks to tliebig)
 
 = 2.11 =
 * Settings for search history size and recording duplicates can now be altered in filters. See the code for details. (Thanks to Dan Harrison)
