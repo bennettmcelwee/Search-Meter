@@ -3,7 +3,7 @@
 Plugin Name: Search Meter
 Plugin URI: http://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/
 Description: Keeps track of what your visitors are searching for. After you have activated this plugin, you can check the Search Meter section in the Dashboard to see what your visitors are searching for on your blog.
-Version: 2.12
+Version: 2.12.1
 Author: Bennett McElwee
 Author URI: http://thunderguy.com/semicolon/
 Donate link: http://thunderguy.com/semicolon/donate/
@@ -78,7 +78,7 @@ function sm_list_popular_searches($before = '', $after = '', $count = 5) {
 	$results = $wpdb->get_results(
 		"SELECT `terms`, SUM(`count`) AS countsum
 		FROM `{$wpdb->prefix}searchmeter`
-		WHERE DATE_SUB( CURDATE( ) , INTERVAL 30 DAY ) <= `date`
+		WHERE DATE_SUB( UTC_DATE( ) , INTERVAL 30 DAY ) <= `date`
 		AND 0 < `last_hits`
 		{$filter_term}
 		GROUP BY `terms`
@@ -309,7 +309,7 @@ function tguy_sm_save_search($posts) {
 		// Save the individual search to the DB
 		$success = $wpdb->query($wpdb->prepare("
 			INSERT INTO `{$wpdb->prefix}searchmeter_recent` (`terms`,`datetime`,`hits`,`details`)
-			VALUES (%s, NOW(), %d, %s)",
+			VALUES (%s, UTC_TIMESTAMP(), %d, %s)",
 			$search_string,
 			$hit_count,
 			$details
@@ -345,7 +345,7 @@ function tguy_sm_save_search($posts) {
 		$suppress = $wpdb->suppress_errors();
 		$success = $wpdb->query($wpdb->prepare("
 			INSERT INTO `{$wpdb->prefix}searchmeter` (`terms`,`date`,`count`,`last_hits`)
-			VALUES (%s, CURDATE(), 1, %d)",
+			VALUES (%s, UTC_DATE(), 1, %d)",
 			$search_terms,
 			$hit_count
 		));
@@ -355,7 +355,7 @@ function tguy_sm_save_search($posts) {
 				UPDATE `{$wpdb->prefix}searchmeter` SET
 					`count` = `count` + 1,
 					`last_hits` = %d
-				WHERE `terms` = %s AND `date` = CURDATE()",
+				WHERE `terms` = %s AND `date` = UTC_DATE()",
 				$hit_count,
 				$search_terms
 			));
