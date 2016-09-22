@@ -65,10 +65,6 @@ Show a simple list of the 5 most recent successful search terms, hyperlinked to 
 
 == Frequently Asked Questions ==
 
-= Why don't search terms with spaces work? =
-
-There is a [bug](http://core.trac.wordpress.org/ticket/13961) in the way WordPress handles spaces in pretty permalinks. The WordPress developers will fix this at some point. Until then, I have written a plugin called [Search Fixer](http://thunderguy.com/semicolon/2011/06/08/search-fixer-wordpress-plugin/) which should improve things.
-
 = Where can I find out more information? =
 
 The [Search Meter home page](http://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/) has more information and a form to submit comments and questions.
@@ -78,6 +74,11 @@ The [Search Meter home page](http://thunderguy.com/semicolon/wordpress/search-me
 1. The Search Meter administration interface, showing some of the reports available.
 
 == Changelog ==
+= 2.13 =
+* Search Summary and Recent Searches can be downloaded as CSV files.
+* All stats are now displayed in the WordPress time zone, and stored in the database as UTC. Previously, they were stored and displayed in the server time zone, which was confusing. The change means that old search statistics may be out by up to 13 hours.
+* Updated licensing, now using GPL3.
+
 = 2.12 =
 * When uninstalled, delete all options and data. (Thanks to Scott Allen)
 * Track searches made via ajax requests. (Thanks to tliebig)

@@ -1,16 +1,8 @@
 <?php
 /*
-Copyright (C) 2005-15 Bennett McElwee (bennett at thunderguy dotcom)
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of version 2 of the GNU General Public
-License as published by the Free Software Foundation.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details, available at
-http://www.gnu.org/copyleft/gpl.html
+Copyright (C) 2005-16 Bennett McElwee (bennett at thunderguy dotcom)
+This program is distributed under the terms in the included LICENSE file.
+If you would like to use it under different terms, contact the author.
 */
 
 //////// Parameters
@@ -28,6 +20,9 @@ define('TGUY_SM_OPTIONS_CAPABILITY', 'manage_options');
 
 add_action('admin_head', 'tguy_sm_stats_css');
 
+// Check for download requests before we output anything else
+add_action('init', 'tguy_sm_download', 10);
+
 function tguy_sm_stats_css() {
 ?>
 <style type="text/css">
@@ -37,7 +32,7 @@ function tguy_sm_stats_css() {
 	padding: 0;
 	border-bottom: 1px solid #aaaaaa;
 }
-#search_meter_menu li { 
+#search_meter_menu li {
 	border: 1px solid #cccccc;
 	border-bottom: none;
 	line-height: 1.4em;
@@ -281,6 +276,21 @@ function tguy_sm_summary_page() {
 		</div>
 		<div class="sm-stats-clear"></div>
 
+		<h3>Download summary</h3>
+
+		<p>Download your 30-day summary as a CSV file, which can be opened by any spreadsheet program or text editor.</p>
+
+		<form name="tguy_sm_admin" action="" method="post">
+			<?php
+			if (function_exists('wp_nonce_field')) {
+				wp_nonce_field('search-meter-download');
+			}
+			?>
+			<p class="submit">
+				<input name="tguy_sm_download_summary" class="button-secondary" value="Download Summary" type="submit" />
+			</p>
+		</form>
+
 		<h2>Notes</h2>
 
 		<?php if (current_user_can(TGUY_SM_OPTIONS_CAPABILITY)) : ?>
@@ -383,7 +393,7 @@ function tguy_sm_recent_page($max_lines, $do_show_details) {
 
 		<div class="sm-stats-table">
 		<?php
-		$query = 
+		$query =
 			"SELECT `datetime`, `terms`, `hits`, `details`
 			FROM `{$wpdb->prefix}searchmeter_recent`
 			ORDER BY `datetime` DESC, `terms` ASC
@@ -405,7 +415,7 @@ function tguy_sm_recent_page($max_lines, $do_show_details) {
 			foreach ($results as $result) {
 				?>
 				<tr valign="top" class="<?php echo $class ?>">
-				<td><?php echo $result->datetime ?></td>
+				<td><?php echo tguy_sm_format_utc_as_local('Y-m-d H:i:s', $result->datetime) ?></td>
 				<td><a href="<?php echo get_bloginfo('wpurl').'/wp-admin/edit.php?s='.urlencode($result->terms).'&submit=Search' ?>"><?php echo htmlspecialchars($result->terms) ?></a></td>
 				<td class="sm-number"><?php echo $result->hits ?></td>
 				<?php if ($do_show_details) : ?>
@@ -425,6 +435,21 @@ function tguy_sm_recent_page($max_lines, $do_show_details) {
 		?>
 		</div>
 		<div class="sm-stats-clear"></div>
+
+		<h3>Download recent searches</h3>
+
+		<p>Download your recent searches as a CSV file, which can be opened by any spreadsheet program or text editor.</p>
+
+		<form name="tguy_sm_admin" action="" method="post">
+			<?php
+			if (function_exists('wp_nonce_field')) {
+				wp_nonce_field('search-meter-download');
+			}
+			?>
+			<p class="submit">
+				<input name="tguy_sm_download_individual" class="button-secondary" value="Download Recent Searches" type="submit" />
+			</p>
+		</form>
 
 		<h2>Notes</h2>
 
@@ -449,10 +474,10 @@ add_filter('plugin_action_links_'.plugin_basename(dirname(__FILE__).'/search-met
 
 function tguy_sm_settings_link($links) {
 	if (current_user_can(TGUY_SM_OPTIONS_CAPABILITY)) {
-		$settings_link = '<a href="options-general.php?page='.plugin_basename(__FILE__).'">Settings</a>'; 
+		$settings_link = '<a href="options-general.php?page='.plugin_basename(__FILE__).'">Settings</a>';
 		array_unshift($links, $settings_link);
 	}
-	return $links; 
+	return $links;
 }
 
 
@@ -469,9 +494,9 @@ function tguy_sm_options_page() {
 			$sm_filter_words = stripslashes($sm_filter_words);
 		}
 		$options['sm_filter_words']  = preg_replace('/\\s+/', ' ', trim($sm_filter_words));
-		$options['sm_ignore_admin_search']  = (bool)($_POST['sm_ignore_admin_search']);
-		$options['sm_details_verbose']  = (bool)($_POST['sm_details_verbose']);
-		$options['sm_disable_donation'] = (bool)($_POST['sm_disable_donation']);
+		$options['sm_ignore_admin_search']  = (bool)tguy_sm_array_value($_POST, 'sm_ignore_admin_search');
+		$options['sm_details_verbose']  = (bool)tguy_sm_array_value($_POST, 'sm_details_verbose');
+		$options['sm_disable_donation'] = (bool)tguy_sm_array_value($_POST, 'sm_disable_donation');
 		update_option('tguy_search_meter', $options);
 		echo '<div id="message" class="updated fade"><p><strong>Plugin settings saved.</strong></p></div>';
 	} else if (isset($_POST['tguy_sm_reset'])) {
@@ -508,11 +533,11 @@ function tguy_sm_options_page() {
 								<?php echo ($view_stats_capability=='read'?"checked=\"checked\"":"") ?> />
 							All logged-in users</label><br>
 						<label title='Users with "publish_posts" capability'>
-							<input type="radio" name="sm_view_stats_capability" value="publish_posts" 
+							<input type="radio" name="sm_view_stats_capability" value="publish_posts"
 								<?php echo ($view_stats_capability=='publish_posts'?"checked=\"checked\"":"") ?> />
 							Post authors and administrators</label><br>
 						<label title='Users with "manage_options" capability'>
-							<input type="radio" name="sm_view_stats_capability" value="manage_options" 
+							<input type="radio" name="sm_view_stats_capability" value="manage_options"
 								<?php echo ($view_stats_capability=='manage_options'?"checked=\"checked\"":"") ?> />
 							Administrators only</label>
 						</fieldset>
@@ -522,8 +547,8 @@ function tguy_sm_options_page() {
 					<th scope="row">Search filter</th>
 					<td>
 						<fieldset>
-						<label for="sm_filter_words">When a search term contains any of these words, it will be filtered 
-						and will not show up in the Recent Searches or Popular Searches widgets. This will match inside words, 
+						<label for="sm_filter_words">When a search term contains any of these words, it will be filtered
+						and will not show up in the Recent Searches or Popular Searches widgets. This will match inside words,
 						so &#8220;press&#8221; will match &#8220;WordPress&#8221;.</label>
 						<textarea name="sm_filter_words" rows="3" cols="40" id="sm_filter_words" class="large-text code"><?php echo esc_html(tguy_sm_array_value($options, 'sm_filter_words')); ?></textarea>
 						</fieldset>
@@ -592,6 +617,67 @@ function tguy_sm_reset_stats() {
 	// Delete all records
 	$wpdb->query("DELETE FROM `{$wpdb->prefix}searchmeter`");
 	$wpdb->query("DELETE FROM `{$wpdb->prefix}searchmeter_recent`");
+}
+
+// Service a download request if there is one
+function tguy_sm_download() {
+	if (isset($_POST['tguy_sm_download_summary'])) {
+		check_admin_referer('search-meter-download');
+		tguy_sm_download_summary();
+	} else if (isset($_POST['tguy_sm_download_individual'])) {
+		check_admin_referer('search-meter-download');
+		tguy_sm_download_individual();
+	}
+}
+function tguy_sm_download_summary() {
+	global $wpdb;
+	$results = $wpdb->get_results(
+		"SELECT `terms`, `count`, `date`, `last_hits`
+		FROM `{$wpdb->prefix}searchmeter`
+		ORDER BY `date` ASC, `terms` ASC");
+	$results_array = [['Date', 'Search terms', 'Searches', 'Results']];
+	foreach ($results as $result) {
+		$results_array[] = [tguy_sm_format_utc_as_local('Y-m-d', $result->date), $result->terms, $result->count, $result->last_hits];
+	}
+	tguy_sm_download_to_csv($results_array, 'search-summary');
+}
+
+function tguy_sm_download_individual() {
+	global $wpdb;
+	$results = $wpdb->get_results(
+		"SELECT `terms`, `datetime`, `hits`, `details`
+		FROM `{$wpdb->prefix}searchmeter_recent`
+		ORDER BY `datetime` ASC");
+	$results_array = [['Date', 'Search terms', 'Results', 'Details']];
+	foreach ($results as $result) {
+		$results_array[] = [tguy_sm_format_utc_as_local('Y-m-d H:i:s', $result->datetime), $result->terms, $result->hits, $result->details];
+	}
+	tguy_sm_download_to_csv($results_array, 'recent-searches');
+}
+
+// Similar to PHP date(), but the timestamp is a string in UTC, and we return a string in Wordpress time zone
+function tguy_sm_format_utc_as_local($format, $timestamp = 'now') {
+	$tz = get_option('timezone_string');
+	$datetime = date_create($timestamp, new DateTimeZone('UTC'));
+	if ($tz) {
+		$datetime->setTimezone(new DateTimeZone($tz));
+		return $datetime->format($format);
+	} else {
+		return gmdate($format, $datetime->getTimestamp() + get_option('gmt_offset') * HOUR_IN_SECONDS);
+	}
+}
+
+function tguy_sm_download_to_csv($array, $filenamebase) {
+	header('Last-Modified: ' . current_time('D, d M Y H:i:s', true) . ' GMT');
+	header('Content-Type: application/csv');
+	header('Content-Disposition: attachment; filename="'.$filenamebase.'-'.current_time('Ymd-His').'.csv";');
+
+    // see http://www.php.net/manual/en/wrappers.php.php#refsect2-wrappers.php-unknown-unknown-unknown-descriptioq
+    $f = fopen('php://output', 'w');
+    foreach ($array as $line) {
+        fputcsv($f, $line);
+    }
+    exit;
 }
 
 function tguy_sm_show_donation_message() {
