@@ -40,7 +40,7 @@ function tguy_sm_stats_css() {
 	padding: 0;
 	border-bottom: 1px solid #aaaaaa;
 }
-#search_meter_menu li { 
+#search_meter_menu li {
 	border: 1px solid #cccccc;
 	border-bottom: none;
 	line-height: 1.4em;
@@ -284,6 +284,21 @@ function tguy_sm_summary_page() {
 		</div>
 		<div class="sm-stats-clear"></div>
 
+		<h3>Download summary</h3>
+
+		<p>Download your 30-day summary as a CSV file, which can be opened by any spreadsheet program or text editor.</p>
+
+		<form name="tguy_sm_admin" action="" method="post">
+			<?php
+			if (function_exists('wp_nonce_field')) {
+				wp_nonce_field('search-meter-download');
+			}
+			?>
+			<p class="submit">
+				<input name="tguy_sm_download_summary" class="button-secondary" value="Download Summary" type="submit" />
+			</p>
+		</form>
+
 		<h2>Notes</h2>
 
 		<?php if (current_user_can(TGUY_SM_OPTIONS_CAPABILITY)) : ?>
@@ -386,7 +401,7 @@ function tguy_sm_recent_page($max_lines, $do_show_details) {
 
 		<div class="sm-stats-table">
 		<?php
-		$query = 
+		$query =
 			"SELECT `datetime`, `terms`, `hits`, `details`
 			FROM `{$wpdb->prefix}searchmeter_recent`
 			ORDER BY `datetime` DESC, `terms` ASC
@@ -429,6 +444,21 @@ function tguy_sm_recent_page($max_lines, $do_show_details) {
 		</div>
 		<div class="sm-stats-clear"></div>
 
+		<h3>Download recent searches</h3>
+
+		<p>Download your recent searches as a CSV file, which can be opened by any spreadsheet program or text editor.</p>
+
+		<form name="tguy_sm_admin" action="" method="post">
+			<?php
+			if (function_exists('wp_nonce_field')) {
+				wp_nonce_field('search-meter-download');
+			}
+			?>
+			<p class="submit">
+				<input name="tguy_sm_download_individual" class="button-secondary" value="Download Recent Searches" type="submit" />
+			</p>
+		</form>
+
 		<h2>Notes</h2>
 
 		<?php if (current_user_can(TGUY_SM_OPTIONS_CAPABILITY)) : ?>
@@ -452,10 +482,10 @@ add_filter('plugin_action_links_'.plugin_basename(dirname(__FILE__).'/search-met
 
 function tguy_sm_settings_link($links) {
 	if (current_user_can(TGUY_SM_OPTIONS_CAPABILITY)) {
-		$settings_link = '<a href="options-general.php?page='.plugin_basename(__FILE__).'">Settings</a>'; 
+		$settings_link = '<a href="options-general.php?page='.plugin_basename(__FILE__).'">Settings</a>';
 		array_unshift($links, $settings_link);
 	}
-	return $links; 
+	return $links;
 }
 
 
@@ -511,11 +541,11 @@ function tguy_sm_options_page() {
 								<?php echo ($view_stats_capability=='read'?"checked=\"checked\"":"") ?> />
 							All logged-in users</label><br>
 						<label title='Users with "publish_posts" capability'>
-							<input type="radio" name="sm_view_stats_capability" value="publish_posts" 
+							<input type="radio" name="sm_view_stats_capability" value="publish_posts"
 								<?php echo ($view_stats_capability=='publish_posts'?"checked=\"checked\"":"") ?> />
 							Post authors and administrators</label><br>
 						<label title='Users with "manage_options" capability'>
-							<input type="radio" name="sm_view_stats_capability" value="manage_options" 
+							<input type="radio" name="sm_view_stats_capability" value="manage_options"
 								<?php echo ($view_stats_capability=='manage_options'?"checked=\"checked\"":"") ?> />
 							Administrators only</label>
 						</fieldset>
@@ -525,8 +555,8 @@ function tguy_sm_options_page() {
 					<th scope="row">Search filter</th>
 					<td>
 						<fieldset>
-						<label for="sm_filter_words">When a search term contains any of these words, it will be filtered 
-						and will not show up in the Recent Searches or Popular Searches widgets. This will match inside words, 
+						<label for="sm_filter_words">When a search term contains any of these words, it will be filtered
+						and will not show up in the Recent Searches or Popular Searches widgets. This will match inside words,
 						so &#8220;press&#8221; will match &#8220;WordPress&#8221;.</label>
 						<textarea name="sm_filter_words" rows="3" cols="40" id="sm_filter_words" class="large-text code"><?php echo esc_html(tguy_sm_array_value($options, 'sm_filter_words')); ?></textarea>
 						</fieldset>
@@ -560,22 +590,6 @@ function tguy_sm_options_page() {
 
 			<p class="submit">
 				<input name="Submit" class="button-primary" value="Save Changes" type="submit">
-			</p>
-		</form>
-
-		<h3>Download statistics</h3>
-
-		<p>Download your search statistics as CSV files, which can be opened by any spreadsheet program or text editor.</p>
-
-		<form name="tguy_sm_admin" action="" method="post">
-			<?php
-			if (function_exists('wp_nonce_field')) {
-				wp_nonce_field('search-meter-download');
-			}
-			?>
-			<p class="submit">
-				<input name="tguy_sm_download_summary" class="button-secondary" value="Download Summary" type="submit" />
-				<input name="tguy_sm_download_individual" class="button-secondary" value="Download Recent Searches" type="submit" />
 			</p>
 		</form>
 
