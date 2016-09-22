@@ -1,16 +1,8 @@
 <?php
 /*
 Copyright (C) 2005-16 Bennett McElwee (bennett at thunderguy dotcom)
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of version 2 of the GNU General Public
-License as published by the Free Software Foundation.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details, available at
-http://www.gnu.org/copyleft/gpl.html
+This program is distributed under the terms in the included LICENSE file.
+If you would like to use it under different terms, contact the author.
 */
 
 //////// Parameters

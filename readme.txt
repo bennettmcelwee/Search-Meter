@@ -74,9 +74,10 @@ The [Search Meter home page](http://thunderguy.com/semicolon/wordpress/search-me
 1. The Search Meter administration interface, showing some of the reports available.
 
 == Changelog ==
-= 2.12.1 =
+= 2.13 =
 * Search Summary and Recent Searches can be downloaded as CSV files.
 * All stats are now displayed in the WordPress time zone, and stored in the database as UTC. Previously, they were stored and displayed in the server time zone, which was confusing. The change means that old search statistics may be out by up to 13 hours.
+* Updated licensing, now using GPL3.
 
 = 2.12 =
 * When uninstalled, delete all options and data. (Thanks to Scott Allen)

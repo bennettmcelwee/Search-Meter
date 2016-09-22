@@ -3,7 +3,7 @@
 Plugin Name: Search Meter
 Plugin URI: http://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/
 Description: Keeps track of what your visitors are searching for. After you have activated this plugin, you can check the Search Meter section in the Dashboard to see what your visitors are searching for on your blog.
-Version: 2.12.1
+Version: 2.13
 Author: Bennett McElwee
 Author URI: http://thunderguy.com/semicolon/
 Donate link: http://thunderguy.com/semicolon/donate/
@@ -27,22 +27,12 @@ INSTRUCTIONS
   sm_list_recent_searches() template tags.
 * For full details, see http://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/
 
-Thanks to everyone who has suggested improvements. It takes a village to build a plugin.
+Thanks to everyone who has suggested or contributed improvements. It takes a village to build a plugin.
 
 
 Copyright (C) 2005-16 Bennett McElwee (bennett at thunderguy dotcom)
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of version 2 of the GNU General Public
-License as published by the Free Software Foundation.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details, available at
-http://www.gnu.org/copyleft/gpl.html
-or by writing to the Free Software Foundation, Inc.,
-51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+This program is distributed under the terms in the included LICENSE file.
+If you would like to use it under different terms, contact the author.
 */
 
 // This is here to avoid E_NOTICE when indexing nonexistent array keys. There's probably a better solution. Suggestions are welcome.
