@@ -1,12 +1,12 @@
 <?php
 /*
 Plugin Name: Search Meter
-Plugin URI: http://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/
 Description: Keeps track of what your visitors are searching for. After you have activated this plugin, you can check the Search Meter section in the Dashboard to see what your visitors are searching for on your blog.
 Version: 2.12
 Author: Bennett McElwee
 Author URI: http://thunderguy.com/semicolon/
-Donate link: http://thunderguy.com/semicolon/donate/
+Text Domain: search-meter
+Domain Path: /languages
 
 $Revision: 1400894 $
 
@@ -44,6 +44,11 @@ http://www.gnu.org/copyleft/gpl.html
 or by writing to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
+
+function search_meter_load_plugin_textdomain() {
+    load_plugin_textdomain( 'search-meter', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
+}
+add_action( 'plugins_loaded', 'search_meter_load_plugin_textdomain' );
 
 // This is here to avoid E_NOTICE when indexing nonexistent array keys. There's probably a better solution. Suggestions are welcome.
 function tguy_sm_array_value(&$array, $key) {
@@ -172,13 +177,13 @@ function tguy_sm_register_widgets() {
 
 class SM_Popular_Searches_Widget extends WP_Widget {
 	function __construct() {
-		$widget_ops = array('classname' => 'widget_search_meter', 'description' => __( "A list of the most popular successful searches in the last month"));
-		parent::__construct('popular_searches', __('Popular Searches'), $widget_ops);
+		$widget_ops = array('classname' => 'widget_search_meter', 'description' => __( "A list of the most popular successful searches in the last month", "search-meter"));
+		parent::__construct('popular_searches', __('Popular Searches', "search-meter"), $widget_ops);
 	}
 
 	function widget($args, $instance) {
 		extract($args);
-		$title = apply_filters('widget_title', empty($instance['popular-searches-title']) ? __('Popular Searches') : $instance['popular-searches-title']);
+		$title = apply_filters('widget_title', empty($instance['popular-searches-title']) ? __('Popular Searches', "search-meter") : $instance['popular-searches-title']);
 		$count = (int) (empty($instance['popular-searches-number']) ? 5 : $instance['popular-searches-number']);
 		
 		echo $before_widget;
@@ -198,27 +203,27 @@ class SM_Popular_Searches_Widget extends WP_Widget {
 	
 	function form($instance){
 		//Defaults
-		$instance = wp_parse_args((array) $instance, array('popular-searches-title' => 'Popular Searches', 'popular-searches-number' => 5));
+		$instance = wp_parse_args((array) $instance, array('popular-searches-title' => __('Popular Searches', "search-meter"), 'popular-searches-number' => 5));
 		
 		$title = htmlspecialchars($instance['popular-searches-title']);
 		$count = htmlspecialchars($instance['popular-searches-number']);
 		
 		# Output the options
-		echo '<p><label for="' . $this->get_field_name('popular-searches-title') . '">' . __('Title:') . ' <input class="widefat" id="' . $this->get_field_id('title') . '" name="' . $this->get_field_name('popular-searches-title') . '" type="text" value="' . $title . '" /></label></p>';
-		echo '<p><label for="' . $this->get_field_name('popular-searches-number') . '">' . __('Number of searches to show:') . ' <input id="' . $this->get_field_id('popular-searches-number') . '" name="' . $this->get_field_name('popular-searches-number') . '" type="text" value="' . $count . '" size="3" /></label></p>';
+		echo '<p><label for="' . $this->get_field_name('popular-searches-title') . '">' . __('Title:', 'search-meter') . ' <input class="widefat" id="' . $this->get_field_id('title') . '" name="' . $this->get_field_name('popular-searches-title') . '" type="text" value="' . $title . '" /></label></p>';
+		echo '<p><label for="' . $this->get_field_name('popular-searches-number') . '">' . __('Number of searches to show:',"search-meter") . ' <input id="' . $this->get_field_id('popular-searches-number') . '" name="' . $this->get_field_name('popular-searches-number') . '" type="text" value="' . $count . '" size="3" /></label></p>';
 		echo '<p><small>Powered by Search Meter</small></p>';
 	}
 }
 
 class SM_Recent_Searches_Widget extends WP_Widget {
 	function __construct() {
-		$widget_ops = array('classname' => 'widget_search_meter', 'description' => __( "A list of the most recent successful searches on your blog"));
-		parent::__construct('recent_searches', __('Recent Searches'), $widget_ops);
+		$widget_ops = array('classname' => 'widget_search_meter', 'description' => __( "A list of the most recent successful searches on your blog", 'search-meter'));
+		parent::__construct('recent_searches', __('Recent Searches', "search-meter"), $widget_ops);
 	}
 
 	function widget($args, $instance) {
 		extract($args);
-		$title = apply_filters('widget_title', empty($instance['recent-searches-title']) ? __('Recent Searches') : $instance['recent-searches-title']);
+		$title = apply_filters('widget_title', empty($instance['recent-searches-title']) ? __('Recent Searches', "search-meter") : $instance['recent-searches-title']);
 		$count = (int) (empty($instance['recent-searches-number']) ? 5 : $instance['recent-searches-number']);
 		
 		echo $before_widget;
@@ -238,14 +243,14 @@ class SM_Recent_Searches_Widget extends WP_Widget {
 	
 	function form($instance){
 		//Defaults
-		$instance = wp_parse_args((array) $instance, array('recent-searches-title' => 'Recent Searches', 'recent-searches-number' => 5));
+		$instance = wp_parse_args((array) $instance, array('recent-searches-title' => __('Recent Searches', "search-meter"), 'recent-searches-number' => 5));
 		
 		$title = htmlspecialchars($instance['recent-searches-title']);
 		$count = htmlspecialchars($instance['recent-searches-number']);
 		
 		# Output the options
-		echo '<p><label for="' . $this->get_field_name('recent-searches-title') . '">' . __('Title:') . ' <input class="widefat" id="' . $this->get_field_id('title') . '" name="' . $this->get_field_name('recent-searches-title') . '" type="text" value="' . $title . '" /></label></p>';
-		echo '<p><label for="' . $this->get_field_name('recent-searches-number') . '">' . __('Number of searches to show:') . ' <input id="' . $this->get_field_id('recent-searches-number') . '" name="' . $this->get_field_name('recent-searches-number') . '" type="text" value="' . $count . '" size="3" /></label></p>';
+		echo '<p><label for="' . $this->get_field_name('recent-searches-title') . '">' . __('Title:', 'search-meter') . ' <input class="widefat" id="' . $this->get_field_id('title') . '" name="' . $this->get_field_name('recent-searches-title') . '" type="text" value="' . $title . '" /></label></p>';
+		echo '<p><label for="' . $this->get_field_name('recent-searches-number') . '">' . __('Number of searches to show:', 'search-meter') . ' <input id="' . $this->get_field_id('recent-searches-number') . '" name="' . $this->get_field_name('recent-searches-number') . '" type="text" value="' . $count . '" size="3" /></label></p>';
 		echo '<p><small>Powered by Search Meter</small></p>';
 	}
 }
@@ -265,7 +270,7 @@ function tguy_sm_save_search($posts) {
 
 	// The filter may get called more than once for a given request. We ignore these duplicates.
 	// Recording duplicate searches can be enabled by adding this line to functions.php:
-	//   add_filter('search_meter_record_duplicates', function() { return true; });
+	// add_filter('search_meter_record_duplicates', function() { return true; });
 	// Setting to true will record duplicates (the fact that it's a dupe will be recorded in the
 	// details). This will mess up the stats, but could be useful for troubleshooting.
 	$record_duplicates = apply_filters('search_meter_record_duplicates', false);		

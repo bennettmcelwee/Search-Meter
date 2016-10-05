@@ -1,0 +1,512 @@
+# Copyright (C) 2016 WordPress
+# This file is distributed under the same license as the WordPress package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Search Meter\n"
+"Report-Msgid-Bugs-To: https://make.wordpress.org/polyglots/\n"
+"POT-Creation-Date: 2016-10-05 11:07+0200\n"
+"PO-Revision-Date: 2016-10-05 11:08+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_BE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-KeywordsList: __;_e;_;esc_html__\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: admin.php:169 admin.php:201 admin.php:202
+msgid "Search Meter"
+msgstr "Search Meter"
+
+#: admin.php:177
+msgid "Searches in the Last 7 Days"
+msgstr "Recherches ces 7 derniers jours"
+
+#: admin.php:181
+msgid "Full Dashboard"
+msgstr "Statistiques complètes"
+
+#: admin.php:183 admin.php:449
+msgid "Settings"
+msgstr "Paramètres"
+
+#: admin.php:232
+msgid "Search summary"
+msgstr "Résumé des recherches"
+
+#: admin.php:235 admin.php:361
+msgid "Summary"
+msgstr "Résumé"
+
+#: admin.php:236 admin.php:363 admin.php:365
+msgid "Last 100 Searches"
+msgstr "100 dernières recherches"
+
+#: admin.php:237 admin.php:368 admin.php:370
+msgid "Last 500 Searches"
+msgstr "500 dernières recherches"
+
+#: admin.php:240
+msgid ""
+"These tables show the most popular searches on your blog for the given time "
+"periods. <strong>Term</strong> is the text that was searched for; you can "
+"click it to see which posts contain that term. (This won't be counted as "
+"another search.) <strong>Searches</strong> is the number of times the term "
+"was searched for. <strong>Results</strong> is the number of posts that were "
+"returned from the <em>last</em> search for that term."
+msgstr ""
+"Ces tableaux montrent les recherches les plus populaires sur votre blog pour "
+"les périodes de temps donnés <strong>terme</strong> est le texte qui a été "
+"recherché. vous pouvez cliquer dessus pour voir quels messages contiennent "
+"ce terme. (Ce ne sera pas considéré comme une autre recherche.) "
+"<strong>Recherches</strong> est le nombre de fois que le terme a été "
+"cherché. Les <strong>résultats</strong> sont le nombre de postes qui ont été "
+"renvoyés par la <em>dernière</em> recherche de ce terme."
+
+#: admin.php:244 admin.php:261
+msgid "Yesterday and today"
+msgstr "Hier et aujourd'hui"
+
+#: admin.php:248 admin.php:265
+msgid "Last 7 days"
+msgstr "7 derniers jours"
+
+#: admin.php:252 admin.php:269
+msgid "Last 30 days"
+msgstr "30 derniers jours"
+
+#: admin.php:257
+msgid "Unsuccessful search summary"
+msgstr "Résumé des recherches infructueuses"
+
+#: admin.php:258
+msgid ""
+"These tables show only the search terms for which the last search yielded no "
+"results. People are searching your blog for these terms; maybe you should "
+"give them what they want."
+msgstr ""
+"Ces tableaux montrent que les termes de recherche pour lesquels la dernière "
+"recherche n'a donné aucun résultat. Les gens sont à la recherche de ces "
+"termes; peut-être vous devriez leur donner ce qu'ils veulent."
+
+#: admin.php:276 admin.php:430 admin.php:575
+msgid "Notes"
+msgstr "Notes"
+
+#: admin.php:277 admin.php:431
+#, php-format
+msgid ""
+"To manage your search statistics, go to the <a href=\"options-general.php?"
+"page=%1$s\">Search Meter Settings</a>."
+msgstr ""
+"Pour gérer vos statistiques de recherche, rendez-vous dans les <a href="
+"\"options-general.php?page=%1$s\">paramètres de Search Meter</a>."
+
+#: admin.php:278 admin.php:432 admin.php:577
+#, php-format
+msgid ""
+"For information and updates, see the <a href=\"%1$s\">Search Meter home "
+"page</a>. At that page, you can also offer suggestions, request new features "
+"or report problems."
+msgstr ""
+"Pour plus d'informations et de mises à jour, consultez la <a href=\"%1$s"
+"\">page d'accueil de Search Meter</a>. A cette page, vous pouvez également "
+"déposer des suggestions, demander de nouvelles fonctionnalités ou rapporter "
+"des problèmes."
+
+#: admin.php:313 admin.php:389
+msgid "Term"
+msgstr "Terme"
+
+#: admin.php:313
+msgid "Searches"
+msgstr "Recherches"
+
+#: admin.php:316 admin.php:389
+msgid "Results"
+msgstr "Résultats"
+
+#: admin.php:344
+msgid "No searches recorded for this period."
+msgstr "Pas de recherches enregistrée pendant cette période."
+
+#: admin.php:358 search-meter.php:221 search-meter.php:226 search-meter.php:246
+msgid "Recent Searches"
+msgstr "Recherches récentes"
+
+#: admin.php:374
+#, php-format
+msgid ""
+"This table shows the last %d searches on this blog. <strong>Term</strong> is "
+"the text that was searched for; you can click it to see which posts contain "
+"that term. (This won't be counted as another search.) <strong>Results</"
+"strong> is the number of posts that were returned from the search."
+msgstr ""
+"Ce tableau présente les %d dernières recherches sur le site. <strong>Terme</"
+"strong> est le texte qui a été recherché ; vous pouvez cliquer dessus pour "
+"voir quels messages contiennent ce terme . (Cela ne sera pas considéré comme "
+"une nouvelle recherche.) <strong>Résultats</strong> est le nombre de postes "
+"qui ont été renvoyés par la recherche."
+
+#: admin.php:389
+msgid "Date &amp; time"
+msgstr "Date"
+
+#: admin.php:391
+msgid "Details"
+msgstr "Détails"
+
+#: admin.php:393
+msgid "Show details"
+msgstr "Afficher les détails"
+
+#: admin.php:422
+msgid "No searches recorded."
+msgstr "Pas de recherches enregistrée pendant cette période."
+
+#: admin.php:473
+msgid "Plugin settings saved"
+msgstr "Paramètres sauvegardés"
+
+#: admin.php:477
+msgid "Statistics have been reset"
+msgstr "Statistiques réinitialisées avec succès"
+
+#: admin.php:487
+msgid "Search Meter Settings"
+msgstr "Paramètres de Search Meter"
+
+#: admin.php:501
+msgid "Show statistics to"
+msgstr "Afficher les statistiques à"
+
+#: admin.php:507
+msgid "All logged-in users"
+msgstr "Tous les utilisateurs connectés"
+
+#: admin.php:511
+msgid "Post authors and administrators"
+msgstr "Auteurs et administrateurs"
+
+#: admin.php:515
+msgid "Administrators only"
+msgstr "Administrateurs seulement"
+
+#: admin.php:520
+msgid "Search filter"
+msgstr "Filtrage des recherches"
+
+#: admin.php:523
+msgid ""
+"When a search term contains any of these words, it will be filtered and will "
+"not show up in the Recent Searches or Popular Searches widgets. This will "
+"match inside words, so \"press\" will match \"WordPress\"."
+msgstr ""
+"Quand un terme de recherche contient un de ces mots, il sera filtré et ne "
+"sera pas affiché dans les recherches récentes ou le widget des recherches "
+"populaires. Ce filtre recherchera à l'intérieur des mots de sorte que \"press"
+"\" filtre \"Wordpress\"."
+
+#: admin.php:532
+msgid "Ignore searches made by logged-in administrators"
+msgstr "Ignorer les recherches effectuées par un administrateur conntecté."
+
+#: admin.php:540
+msgid ""
+"Keep detailed information about recent searches (taken from HTTP headers)"
+msgstr ""
+"Gardez des informations détaillées sur les recherches récentes (provenant de "
+"l'en-têtes HTTP)"
+
+#: admin.php:548
+msgid "Hide the \"Do you find this plugin useful\" box"
+msgstr "Masquer le panneau \"Trouvez-vous ce plugin utile\""
+
+#: admin.php:555
+msgid "Save Changes"
+msgstr "Sauvegarder"
+
+#: admin.php:559
+msgid "Reset statistics"
+msgstr "Réinitialiser les statistiques"
+
+#: admin.php:561
+msgid ""
+"Click this button to reset all search statistics. This will delete all "
+"information about previous searches."
+msgstr ""
+"Cliquez sur ce bouton pour réinitialiser toutes les statistiques de "
+"recherche. Ceci supprimera toutes les informations sur les précédentes "
+"recherches effectuées sur le site."
+
+#: admin.php:570
+msgid "Reset Statistics"
+msgstr "Réinitiatliser"
+
+#: admin.php:570
+msgid ""
+"You are about to delete all saved search statistics.\\n  'Cancel' to stop, "
+"'OK' to delete."
+msgstr "Vous êtes sur le point d'effacer toutes les précédent"
+
+#: admin.php:576
+#, php-format
+msgid ""
+"To see your search statistics, go to the <a href=\"index.php?page=%1$s"
+"\">Search Meter Dashboard</a>."
+msgstr ""
+"Pour voir vos statistiques de recherche, rendez-vous sur le <a href=\"index."
+"php?page=%1$s\">tableau de bord Search Meter</a>"
+
+#: admin.php:596
+msgid "Do you find this plugin useful?"
+msgstr "Trouvez-vous ce plugin utile?"
+
+#: admin.php:597
+#, php-format
+msgid ""
+"I write WordPress plugins because I enjoy doing it, but it does take up a "
+"lot of my time. If you think this plugin is useful, please consider donating "
+"some appropriate amount by clicking the <strong>Donate</strong> button. You "
+"can also send <strong>Bitcoins</strong> to address <tt>%1$s</tt>. Thanks!"
+msgstr ""
+"Je développe développer des plugins Wordpress car j'adore faire celà mais "
+"cela prend beaucoup de mon temps. Si vous pensez que ce plugin vous a été "
+"utile, s'il vous plaît envisagez de faire un don du montant que vous jugez "
+"approprié en cliquant sur le bouton <strong>Donate</strong>. <br />Ou vous "
+"pouvez également m'envoyer des <strong>Bitcoins</strong> à cette adresse <tt>"
+"%1$s</tt>. <br />Merci d'avance!"
+
+#: admin.php:605
+msgid "Make payments with PayPal - it's fast, free and secure!"
+msgstr ""
+
+#: search-meter.php:180
+msgid "A list of the most popular successful searches in the last month"
+msgstr ""
+"Une liste des recherches les plus populaires avec succès le mois dernier."
+
+#: search-meter.php:181 search-meter.php:186 search-meter.php:206
+msgid "Popular Searches"
+msgstr "Recherches populaires"
+
+#: search-meter.php:212 search-meter.php:252
+msgid "Title:"
+msgstr "Titre:"
+
+#: search-meter.php:213 search-meter.php:253
+msgid "Number of searches to show:"
+msgstr "Nombre de recherches à afficher:"
+
+#: search-meter.php:220
+msgid "A list of the most recent successful searches on your blog"
+msgstr "Liste des recherches récentes effectuées sur votre blog"
+
+#~ msgid ""
+#~ "To manage your search statistics, go to the <a href=\"options-general.php?"
+#~ "page=%1$s\">Search Meter Dashboard</a>."
+#~ msgstr ""
+#~ "Pour gérer vos statistiques de recherche, aller à la <a href=\"options-"
+#~ "general.php?page=%1$s\">recherche</a> de <a href=\"options-general.php?"
+#~ "page=%1$s\">compteur Dashboard</a> ."
+
+#~ msgid "<span>Pourquoi choisir</span> Aedes IT<span>?</span>"
+#~ msgstr "<span>Mit</span> Aedes IT<span>...</span>"
+
+#~ msgid "Nos services"
+#~ msgstr "Unsere Dienstleistungen"
+
+#~ msgid "Développement"
+#~ msgstr "Entwicklung"
+
+#~ msgid ""
+#~ "Grâce à des partenariats avec les principaux acteurs du secteur, nous "
+#~ "développons les applications qui correspondent à vos besoins. Nous "
+#~ "n’avons pas de produit standard, mais nous adaptons à vos attentes.<br /"
+#~ "><strong>Notre priorité : la facilité d’utilisation</strong>."
+#~ msgstr ""
+#~ "<strong>Möchten Sie Ihre Geschäftsprozesse anhand berufsspezifischer "
+#~ "Applikationen optimieren?</strong><br>Aedes IT kümmert sich um die "
+#~ "Entwicklung „auf Maß“, um die Installation und die Wartung der "
+#~ "Applikationen."
+
+#~ msgid ""
+#~ "Nous créons le site web qui vous correspond ! Nous exploitons votre "
+#~ "budget au mieux et vous proposons un <strong>package complet – graphisme, "
+#~ "textes, images</strong>, etc. Bien évidemment, nous vous formerons au "
+#~ "maniement de votre nouvel outil."
+#~ msgstr ""
+#~ "<strong>Sie würden gerne Ihre Dienstleistungen und die Vorzüge Ihres "
+#~ "Unternehmens im Internet vorstellen? Dann sind Sie bei uns richtig!</"
+#~ "strong><br>Aedes IT entwickelt mit Ihnen zusammen eine Website, die zu "
+#~ "Ihnen passt. Wir kümmern uns je nach Wunsch um die Grafik, das Erstellen "
+#~ "der Inhalte, die Suchmaschinenoptimierung und wir schulen Sie für den "
+#~ "korrekten Umgang mit der Website."
+
+#~ msgid ""
+#~ "<strong>Créativité et innovation</strong> sont nos maîtres mots. Nous "
+#~ "créons l’identité graphique qui vous ressemble. Pour y arriver, nous "
+#~ "sommes constamment à la recherche d’inspiration nouvelle et n’hésitons "
+#~ "pas à nous engager sur des voies novatrices."
+#~ msgstr ""
+#~ "<strong>Sind Sie der Meinung, dass Ihre grafische Kommunikation Ihr "
+#~ "Unternehmen nicht gut widerspiegelt? </strong><br>Aedes IT hilft Ihnen, "
+#~ "in Sachen Grafik die richtigen Akzente zu setzen und kohärenter "
+#~ "aufzutreten. Dazu arbeiten wir eine komplette grafische Darstellung aus, "
+#~ "die Sie für Ihre Website, Ihre Visitenkarten, usw. benutzen können."
+
+#~ msgid ""
+#~ "Vous désirez avoir accès à vos données à tout moment et n’importe où ? "
+#~ "Nous nous chargeons de vos <strong>installations réseau et d’une "
+#~ "intégration Cloud</strong>. Ensemble, nous trouverons une solution simple "
+#~ "à utiliser et sécurisée, qui répondra à vos attentes."
+#~ msgstr ""
+#~ "<strong>Sie brauchen Unterstützung beim Kauf eines Servers, eines "
+#~ "Computers, eines Bildschirms oder eines mobilen Endgeräts?</"
+#~ "strong><br>Aedes IT analysiert mit Ihnen zusammen Ihre Bedürfnisse, "
+#~ "installiert und konfiguriert das Material und kümmert sich vor Ort um die "
+#~ "Wartung."
+
+#~ msgid "Actualités"
+#~ msgstr "News"
+
+#~ msgid "Plus d'articles"
+#~ msgstr "Mehr erfahren"
+
+#~ msgid "Pas d'article pour le moment"
+#~ msgstr "Kein Artikel vorhanden"
+
+#~ msgid "Réalisations"
+#~ msgstr "Laufende Projekte"
+
+#~ msgid "Voir le projet"
+#~ msgstr "Projekt anzeigen"
+
+#~ msgid "Contactez Aedes IT"
+#~ msgstr "Kontakt Aedes IT"
+
+#~ msgid "Telephone"
+#~ msgstr "Telefon"
+
+#~ msgid "Email"
+#~ msgstr "Email"
+
+#~ msgid "Veuillez patienter pendant le chargement de la carte..."
+#~ msgstr "Bitte warten Sie, während Karte geladen ..."
+
+#~ msgid "Nom &amp; prénom"
+#~ msgstr "Name"
+
+#~ msgid "E-Mail"
+#~ msgstr "Email"
+
+#~ msgid "N° de téléphone"
+#~ msgstr "Telefon"
+
+#~ msgid "Téléphone"
+#~ msgstr "Telefon"
+
+#~ msgid "Votre message"
+#~ msgstr "Ihre Nachricht"
+
+#~ msgid "Envoyer"
+#~ msgstr "Senden"
+
+#~ msgid "Votre message a bien été envoyé."
+#~ msgstr "Ihre Nachricht wurde versandt."
+
+#~ msgid "Fermer"
+#~ msgstr "Schließen"
+
+#~ msgid "L’assurance d’un partenaire fiable"
+#~ msgstr "Die Sicherheit eines beständigen Partners."
+
+#~ msgid "Développement  −  Web  −  Design  −  Matériel informatique"
+#~ msgstr "Entwicklung  −  Web  −  Design  −  Hardware"
+
+#~ msgid "Tous droits réservés"
+#~ msgstr "Alle Rechte vorbehalten"
+
+#~ msgid "Documents à télécharger"
+#~ msgstr "Downloads"
+
+#~ msgid "Ouvert aujourd'hui de {%hours%}."
+#~ msgstr "Geöffnet heute von {%hours%}."
+
+#~ msgid "Actuellement fermés. Nous ouvrons de {%hours%}."
+#~ msgstr "Zur Zeit geschlossen . Wir öffnen von {%hours%}."
+
+#~ msgid "Fermé toute cette journée"
+#~ msgstr "Geschlossen ganzen Tag"
+
+#~ msgid " à "
+#~ msgstr " bis "
+
+#~ msgid " et "
+#~ msgstr " und "
+
+#~ msgid "Lundi"
+#~ msgstr "Montag"
+
+#~ msgid "Mardi"
+#~ msgstr "Dienstag"
+
+#~ msgid "Mercredi"
+#~ msgstr "Mittwoch"
+
+#~ msgid "Jeudi"
+#~ msgstr "Donnerstag"
+
+#~ msgid "Vendredi"
+#~ msgstr "Freitag"
+
+#~ msgid "Samedi"
+#~ msgstr "Samstag"
+
+#~ msgid "Dimanche"
+#~ msgstr "Sonntag"
+
+#~ msgid "Sur rendez-vous"
+#~ msgstr "Auf Termin"
+
+#~ msgid "Espace client"
+#~ msgstr "Kundenbereich"
+
+#~ msgid "En savoir plus"
+#~ msgstr "Mehr erfahren"
+
+#~ msgid "Votre nom"
+#~ msgstr "Ihren Namen"
+
+#~ msgid "Votre email"
+#~ msgstr "Email Adresse"
+
+#~ msgid "Les avantages :"
+#~ msgstr "Die Vorzüge:"
+
+#~ msgid "Disponible sur"
+#~ msgstr "Verfügbar auf"
+
+#~ msgid ""
+#~ "Faire des transactions bancaires, vérifier votre solde et gérer votre "
+#~ "budget grâce à notre application mobile sécurisée. En cliquant et faisant "
+#~ "glisser du bout des doigts sur smartphones et tablettes. Et bien sûr "
+#~ "gratuitement."
+#~ msgstr ""
+#~ "Bankgeschäfte erledigen, Saldo einsehen, Budget verwalten - ganz einfach "
+#~ "per Smartphone und Tablet mit der sicheren mobilen App. Natürlich völlig "
+#~ "kostenlos."
+
+#~ msgid "Restons en contact"
+#~ msgstr "Kontakt"
+
+#~ msgid "en savoir plus"
+#~ msgstr "Mehr erfahren"
+
+#~ msgid "Espaces client"
+#~ msgstr "Kunde"
