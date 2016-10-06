@@ -7,6 +7,8 @@ Version: 2.13
 Author: Bennett McElwee
 Author URI: http://thunderguy.com/semicolon/
 Donate link: http://thunderguy.com/semicolon/donate/
+Text Domain: search-meter
+Domain Path: /languages
 
 $Revision: 1400894 $
 
@@ -31,8 +33,8 @@ Thanks to everyone who has suggested or contributed improvements. It takes a vil
 
 
 Copyright (C) 2005-16 Bennett McElwee (bennett at thunderguy dotcom)
-This program is distributed under the terms in the included LICENSE file.
-If you would like to use it under different terms, contact the author.
+This software is licensed under the GPL v3. See the included LICENSE file for
+details. If you would like to use it under different terms, contact the author.
 */
 
 // This is here to avoid E_NOTICE when indexing nonexistent array keys. There's probably a better solution. Suggestions are welcome.
@@ -170,7 +172,7 @@ class SM_Popular_Searches_Widget extends WP_Widget {
 		extract($args);
 		$title = apply_filters('widget_title', empty($instance['popular-searches-title']) ? __('Popular Searches') : $instance['popular-searches-title']);
 		$count = (int) (empty($instance['popular-searches-number']) ? 5 : $instance['popular-searches-number']);
-		
+
 		echo $before_widget;
 		if ($title) {
 			echo $before_title . $title . $after_title;
@@ -178,25 +180,25 @@ class SM_Popular_Searches_Widget extends WP_Widget {
 		sm_list_popular_searches('', '', sm_constrain_widget_search_count($count));
 		echo $after_widget;
 	}
-		
+
 	function update($new_instance, $old_instance){
 		$instance = $old_instance;
 		$instance['popular-searches-title'] = strip_tags(stripslashes($new_instance['popular-searches-title']));
 		$instance['popular-searches-number'] = (int) ($new_instance['popular-searches-number']);
 		return $instance;
 	}
-	
+
 	function form($instance){
 		//Defaults
-		$instance = wp_parse_args((array) $instance, array('popular-searches-title' => 'Popular Searches', 'popular-searches-number' => 5));
-		
+		$instance = wp_parse_args((array) $instance, array('popular-searches-title' => __('Popular Searches'), 'popular-searches-number' => 5));
+
 		$title = htmlspecialchars($instance['popular-searches-title']);
 		$count = htmlspecialchars($instance['popular-searches-number']);
-		
+
 		# Output the options
 		echo '<p><label for="' . $this->get_field_name('popular-searches-title') . '">' . __('Title:') . ' <input class="widefat" id="' . $this->get_field_id('title') . '" name="' . $this->get_field_name('popular-searches-title') . '" type="text" value="' . $title . '" /></label></p>';
 		echo '<p><label for="' . $this->get_field_name('popular-searches-number') . '">' . __('Number of searches to show:') . ' <input id="' . $this->get_field_id('popular-searches-number') . '" name="' . $this->get_field_name('popular-searches-number') . '" type="text" value="' . $count . '" size="3" /></label></p>';
-		echo '<p><small>Powered by Search Meter</small></p>';
+		echo '<p><small>' . __('Powered by Search Meter') . '</small></p>';
 	}
 }
 
@@ -210,7 +212,7 @@ class SM_Recent_Searches_Widget extends WP_Widget {
 		extract($args);
 		$title = apply_filters('widget_title', empty($instance['recent-searches-title']) ? __('Recent Searches') : $instance['recent-searches-title']);
 		$count = (int) (empty($instance['recent-searches-number']) ? 5 : $instance['recent-searches-number']);
-		
+
 		echo $before_widget;
 		if ($title) {
 			echo $before_title . $title . $after_title;
@@ -218,25 +220,25 @@ class SM_Recent_Searches_Widget extends WP_Widget {
 		sm_list_recent_searches('', '', sm_constrain_widget_search_count($count));
 		echo $after_widget;
 	}
-		
+
 	function update($new_instance, $old_instance){
 		$instance = $old_instance;
 		$instance['recent-searches-title'] = strip_tags(stripslashes($new_instance['recent-searches-title']));
 		$instance['recent-searches-number'] = (int) ($new_instance['recent-searches-number']);
 		return $instance;
 	}
-	
+
 	function form($instance){
 		//Defaults
-		$instance = wp_parse_args((array) $instance, array('recent-searches-title' => 'Recent Searches', 'recent-searches-number' => 5));
-		
+		$instance = wp_parse_args((array) $instance, array('recent-searches-title' => __('Recent Searches'), 'recent-searches-number' => 5));
+
 		$title = htmlspecialchars($instance['recent-searches-title']);
 		$count = htmlspecialchars($instance['recent-searches-number']);
-		
+
 		# Output the options
 		echo '<p><label for="' . $this->get_field_name('recent-searches-title') . '">' . __('Title:') . ' <input class="widefat" id="' . $this->get_field_id('title') . '" name="' . $this->get_field_name('recent-searches-title') . '" type="text" value="' . $title . '" /></label></p>';
 		echo '<p><label for="' . $this->get_field_name('recent-searches-number') . '">' . __('Number of searches to show:') . ' <input id="' . $this->get_field_id('recent-searches-number') . '" name="' . $this->get_field_name('recent-searches-number') . '" type="text" value="' . $count . '" size="3" /></label></p>';
-		echo '<p><small>Powered by Search Meter</small></p>';
+		echo '<p><small>' . __('Powered by Search Meter') . '</small></p>';
 	}
 }
 
@@ -258,7 +260,7 @@ function tguy_sm_save_search($posts) {
 	//   add_filter('search_meter_record_duplicates', function() { return true; });
 	// Setting to true will record duplicates (the fact that it's a dupe will be recorded in the
 	// details). This will mess up the stats, but could be useful for troubleshooting.
-	$record_duplicates = apply_filters('search_meter_record_duplicates', false);		
+	$record_duplicates = apply_filters('search_meter_record_duplicates', false);
 
 	if (is_search()
 	&& !is_paged() // not the second or subsequent page of a previously-counted search
@@ -288,7 +290,7 @@ function tguy_sm_save_search($posts) {
 		$details = '';
 		if (tguy_sm_array_value($options, 'sm_details_verbose')) {
 			if ($record_duplicates) {
-				$details .= "Search Meter save count: $tguy_sm_save_count\n";
+				$details .= __('Search Meter save count') . ": $tguy_sm_save_count\n";
 			}
 			foreach (array('REQUEST_URI','REQUEST_METHOD','QUERY_STRING','REMOTE_ADDR','HTTP_USER_AGENT','HTTP_REFERER')
 			         as $header) {
@@ -304,28 +306,28 @@ function tguy_sm_save_search($posts) {
 			$hit_count,
 			$details
 		));
-		
+
 		if ($success) {
 
 			$rowcount = $wpdb->get_var(
 				"SELECT count(`datetime`) as rowcount
 				FROM `{$wpdb->prefix}searchmeter_recent`");
-			
+
 			// History size can be overridden by a user by adding a line like this to functions.php:
 			//   add_filter('search_meter_history_size', function() { return 50000; });
-			$history_size = apply_filters('search_meter_history_size', 500);		
+			$history_size = apply_filters('search_meter_history_size', 500);
 
 			// Ensure history table never grows larger than (history size) + 100; truncate it
 			// to (history size) when it gets too big. (This we way will only truncate the table
 			// every 100 searches, rather than every time.)
-			if ($history_size + 100 < $rowcount) 
+			if ($history_size + 100 < $rowcount)
 			{
 				// find time of ($history_size)th entry; delete everything before that
 				$dateZero = $wpdb->get_var($wpdb->prepare(
 					"SELECT `datetime`
 					FROM `{$wpdb->prefix}searchmeter_recent`
 					ORDER BY `datetime` DESC LIMIT %d, 1", $history_size));
-				
+
 				$query = "DELETE FROM `{$wpdb->prefix}searchmeter_recent` WHERE `datetime` < '$dateZero'";
 				$success = $wpdb->query($query);
 			}
