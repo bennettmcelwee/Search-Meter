@@ -164,13 +164,13 @@ function tguy_sm_register_widgets() {
 
 class SM_Popular_Searches_Widget extends WP_Widget {
 	function __construct() {
-		$widget_ops = array('classname' => 'widget_search_meter', 'description' => __( "A list of the most popular successful searches in the last month"));
-		parent::__construct('popular_searches', __('Popular Searches'), $widget_ops);
+		$widget_ops = array('classname' => 'widget_search_meter', 'description' => __( "A list of the most popular successful searches in the last month", 'search-meter'));
+		parent::__construct('popular_searches', __('Popular Searches', 'search-meter'), $widget_ops);
 	}
 
 	function widget($args, $instance) {
 		extract($args);
-		$title = apply_filters('widget_title', empty($instance['popular-searches-title']) ? __('Popular Searches') : $instance['popular-searches-title']);
+		$title = apply_filters('widget_title', empty($instance['popular-searches-title']) ? __('Popular Searches', 'search-meter') : $instance['popular-searches-title']);
 		$count = (int) (empty($instance['popular-searches-number']) ? 5 : $instance['popular-searches-number']);
 
 		echo $before_widget;
@@ -190,27 +190,27 @@ class SM_Popular_Searches_Widget extends WP_Widget {
 
 	function form($instance){
 		//Defaults
-		$instance = wp_parse_args((array) $instance, array('popular-searches-title' => __('Popular Searches'), 'popular-searches-number' => 5));
+		$instance = wp_parse_args((array) $instance, array('popular-searches-title' => __('Popular Searches', 'search-meter'), 'popular-searches-number' => 5));
 
 		$title = htmlspecialchars($instance['popular-searches-title']);
 		$count = htmlspecialchars($instance['popular-searches-number']);
 
 		# Output the options
-		echo '<p><label for="' . $this->get_field_name('popular-searches-title') . '">' . __('Title:') . ' <input class="widefat" id="' . $this->get_field_id('title') . '" name="' . $this->get_field_name('popular-searches-title') . '" type="text" value="' . $title . '" /></label></p>';
-		echo '<p><label for="' . $this->get_field_name('popular-searches-number') . '">' . __('Number of searches to show:') . ' <input id="' . $this->get_field_id('popular-searches-number') . '" name="' . $this->get_field_name('popular-searches-number') . '" type="text" value="' . $count . '" size="3" /></label></p>';
-		echo '<p><small>' . __('Powered by Search Meter') . '</small></p>';
+		echo '<p><label for="' . $this->get_field_name('popular-searches-title') . '">' . __('Title:', 'search-meter') . ' <input class="widefat" id="' . $this->get_field_id('title') . '" name="' . $this->get_field_name('popular-searches-title') . '" type="text" value="' . $title . '" /></label></p>';
+		echo '<p><label for="' . $this->get_field_name('popular-searches-number') . '">' . __('Number of searches to show:', 'search-meter') . ' <input id="' . $this->get_field_id('popular-searches-number') . '" name="' . $this->get_field_name('popular-searches-number') . '" type="text" value="' . $count . '" size="3" /></label></p>';
+		echo '<p><small>' . __('Powered by Search Meter', 'search-meter') . '</small></p>';
 	}
 }
 
 class SM_Recent_Searches_Widget extends WP_Widget {
 	function __construct() {
-		$widget_ops = array('classname' => 'widget_search_meter', 'description' => __( "A list of the most recent successful searches on your blog"));
-		parent::__construct('recent_searches', __('Recent Searches'), $widget_ops);
+		$widget_ops = array('classname' => 'widget_search_meter', 'description' => __( "A list of the most recent successful searches on your blog", 'search-meter'));
+		parent::__construct('recent_searches', __('Recent Searches', 'search-meter'), $widget_ops);
 	}
 
 	function widget($args, $instance) {
 		extract($args);
-		$title = apply_filters('widget_title', empty($instance['recent-searches-title']) ? __('Recent Searches') : $instance['recent-searches-title']);
+		$title = apply_filters('widget_title', empty($instance['recent-searches-title']) ? __('Recent Searches', 'search-meter') : $instance['recent-searches-title']);
 		$count = (int) (empty($instance['recent-searches-number']) ? 5 : $instance['recent-searches-number']);
 
 		echo $before_widget;
@@ -230,15 +230,15 @@ class SM_Recent_Searches_Widget extends WP_Widget {
 
 	function form($instance){
 		//Defaults
-		$instance = wp_parse_args((array) $instance, array('recent-searches-title' => __('Recent Searches'), 'recent-searches-number' => 5));
+		$instance = wp_parse_args((array) $instance, array('recent-searches-title' => __('Recent Searches', 'search-meter'), 'recent-searches-number' => 5));
 
 		$title = htmlspecialchars($instance['recent-searches-title']);
 		$count = htmlspecialchars($instance['recent-searches-number']);
 
 		# Output the options
-		echo '<p><label for="' . $this->get_field_name('recent-searches-title') . '">' . __('Title:') . ' <input class="widefat" id="' . $this->get_field_id('title') . '" name="' . $this->get_field_name('recent-searches-title') . '" type="text" value="' . $title . '" /></label></p>';
-		echo '<p><label for="' . $this->get_field_name('recent-searches-number') . '">' . __('Number of searches to show:') . ' <input id="' . $this->get_field_id('recent-searches-number') . '" name="' . $this->get_field_name('recent-searches-number') . '" type="text" value="' . $count . '" size="3" /></label></p>';
-		echo '<p><small>' . __('Powered by Search Meter') . '</small></p>';
+		echo '<p><label for="' . $this->get_field_name('recent-searches-title') . '">' . __('Title:', 'search-meter') . ' <input class="widefat" id="' . $this->get_field_id('title') . '" name="' . $this->get_field_name('recent-searches-title') . '" type="text" value="' . $title . '" /></label></p>';
+		echo '<p><label for="' . $this->get_field_name('recent-searches-number') . '">' . __('Number of searches to show:', 'search-meter') . ' <input id="' . $this->get_field_id('recent-searches-number') . '" name="' . $this->get_field_name('recent-searches-number') . '" type="text" value="' . $count . '" size="3" /></label></p>';
+		echo '<p><small>' . __('Powered by Search Meter', 'search-meter') . '</small></p>';
 	}
 }
 
@@ -290,7 +290,7 @@ function tguy_sm_save_search($posts) {
 		$details = '';
 		if (tguy_sm_array_value($options, 'sm_details_verbose')) {
 			if ($record_duplicates) {
-				$details .= __('Search Meter save count') . ": $tguy_sm_save_count\n";
+				$details .= __('Search Meter save count', 'search-meter') . ": $tguy_sm_save_count\n";
 			}
 			foreach (array('REQUEST_URI','REQUEST_METHOD','QUERY_STRING','REMOTE_ADDR','HTTP_USER_AGENT','HTTP_REFERER')
 			         as $header) {

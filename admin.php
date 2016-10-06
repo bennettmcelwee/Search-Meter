@@ -169,7 +169,7 @@ add_action('wp_dashboard_setup', 'smcln_sm_dashboard');
 // Add the widget to the dashboard
 function smcln_sm_dashboard() {
 	if (smcln_sm_can_view_stats()) {
-		wp_add_dashboard_widget( 'dashboard_search_meter', __('Search Meter'), 'smcln_sm_summary');
+		wp_add_dashboard_widget( 'dashboard_search_meter', __('Search Meter', 'search-meter'), 'smcln_sm_summary');
 	}
 }
 
@@ -177,15 +177,15 @@ function smcln_sm_dashboard() {
 function smcln_sm_summary() {
 ?>
 	<div class="sm-stats-table">
-		<h4><?php _e('Searches in the Last 7 Days') ?></h4>
+		<h4><?php _e('Searches in the Last 7 Days', 'search-meter') ?></h4>
 		<?php tguy_sm_summary_table(7); ?>
 	</div>
 	<ul class="subsubsub">
-		<li><a href="index.php?page=<?php echo plugin_basename(__FILE__); ?>"><?php _e('Full Dashboard') ?></a> |</li>
+		<li><a href="index.php?page=<?php echo plugin_basename(__FILE__); ?>"><?php _e('Full Dashboard', 'search-meter') ?></a> |</li>
 		<?php if (current_user_can(TGUY_SM_OPTIONS_CAPABILITY)) : ?>
-		<li><a href="options-general.php?page=<?php echo plugin_basename(__FILE__); ?>"><?php _e('Settings') ?></a> |</li>
+		<li><a href="options-general.php?page=<?php echo plugin_basename(__FILE__); ?>"><?php _e('Settings', 'search-meter') ?></a> |</li>
 		<?php endif; ?>
-		<li><a href="http://thunderguy.com/semicolon/donate/"><?php _e('Donate')</a></li>
+		<li><a href="http://thunderguy.com/semicolon/donate/"><?php _e('Donate', 'search-meter') ?></a></li>
 	</ul>
 <?php
 }
@@ -202,8 +202,8 @@ function tguy_sm_add_admin_pages() {
 	if ($view_stats_capability == '') {
 		$view_stats_capability = TGUY_SM_DEFAULT_VIEW_STATS_CAPABILITY;
 	}
-	add_submenu_page('index.php', __('Search Meter'), __('Search Meter'), $view_stats_capability, __FILE__, 'tguy_sm_stats_page');
-	add_options_page(__('Search Meter'), __('Search Meter'), TGUY_SM_OPTIONS_CAPABILITY, __FILE__, 'tguy_sm_options_page');
+	add_submenu_page('index.php', __('Search Meter', 'search-meter'), __('Search Meter', 'search-meter'), $view_stats_capability, __FILE__, 'tguy_sm_stats_page');
+	add_options_page(__('Search Meter', 'search-meter'), __('Search Meter', 'search-meter'), TGUY_SM_OPTIONS_CAPABILITY, __FILE__, 'tguy_sm_options_page');
 }
 
 
@@ -236,53 +236,53 @@ function tguy_sm_summary_page() {
 
 		<ul id="search_meter_menu">
 		<li class="sm-current"><span>Summary</span></li>
-		<li><a href="index.php?page=<?php echo plugin_basename(__FILE__); ?>&amp;recent=100"><?php printf(__('Last %s Searches'), 100) ?></a></li>
-		<li><a href="index.php?page=<?php echo plugin_basename(__FILE__); ?>&amp;recent=500"><?php printf(__('Last %s Searches'), 500) ?></a></li>
+		<li><a href="index.php?page=<?php echo plugin_basename(__FILE__); ?>&amp;recent=100"><?php printf(__('Last %s Searches', 'search-meter'), 100) ?></a></li>
+		<li><a href="index.php?page=<?php echo plugin_basename(__FILE__); ?>&amp;recent=500"><?php printf(__('Last %s Searches', 'search-meter'), 500) ?></a></li>
 		</ul>
 
-		<h2><?php _e('Search summary') ?></h2>
+		<h2><?php _e('Search summary', 'search-meter') ?></h2>
 
-		<p><?php _e('These tables show the most popular searches on your blog for the given time periods.') ?>
-		<strong><?php _e('Term') ?></strong> <?php _e('is the text that was searched for; you can click it to see which posts contain that term. (This won\'t be counted as another search.)') ?>
-		<strong><?php _e('Searches') ?></strong> <?php _e('is the number of times the term was searched for.') ?>
-		<strong><?php _e('Results') ?></strong> <?php _e('is the number of posts that were returned from the <em>last</em> search for that term.') ?>
+		<p><?php _e('These tables show the most popular searches on your blog for the given time periods.', 'search-meter') ?>
+		<strong><?php _e('Term', 'search-meter') ?></strong> <?php _e('is the text that was searched for; you can click it to see which posts contain that term. (This won\'t be counted as another search.)', 'search-meter') ?>
+		<strong><?php _e('Searches', 'search-meter') ?></strong> <?php _e('is the number of times the term was searched for.', 'search-meter') ?>
+		<strong><?php _e('Results', 'search-meter') ?></strong> <?php _e('is the number of posts that were returned from the <em>last</em> search for that term.', 'search-meter') ?>
 		</p>
 
 		<div class="sm-stats-table">
-		<h3><?php _e('Yesterday and today') ?></h3>
+		<h3><?php _e('Yesterday and today', 'search-meter') ?></h3>
 		<?php tguy_sm_summary_table(1); 	?>
 		</div>
 		<div class="sm-stats-table">
-		<h3><?php _e('Last 7 days') ?></h3>
+		<h3><?php _e('Last 7 days', 'search-meter') ?></h3>
 		<?php tguy_sm_summary_table(7); ?>
 		</div>
 		<div class="sm-stats-table">
-		<h3><?php _e('Last 30 days') ?></h3>
+		<h3><?php _e('Last 30 days', 'search-meter') ?></h3>
 		<?php tguy_sm_summary_table(30); ?>
 		</div>
 		<div class="sm-stats-clear"></div>
 
-		<h2><?php _e('Unsuccessful search summary') ?></h2>
+		<h2><?php _e('Unsuccessful search summary', 'search-meter') ?></h2>
 
-		<p><?php _e('These tables show only the search terms for which the last search yielded no results. People are searching your blog for these terms; maybe you should give them what they want.') ?></p>
+		<p><?php _e('These tables show only the search terms for which the last search yielded no results. People are searching your blog for these terms; maybe you should give them what they want.', 'search-meter') ?></p>
 
 		<div class="sm-stats-table">
-		<h3><?php _e('Yesterday and today') ?></h3>
+		<h3><?php _e('Yesterday and today', 'search-meter') ?></h3>
 		<?php tguy_sm_summary_table(1, false); ?>
 		</div>
 		<div class="sm-stats-table">
-		<h3><?php _e('Last 7 days') ?></h3>
+		<h3><?php _e('Last 7 days', 'search-meter') ?></h3>
 		<?php tguy_sm_summary_table(7, false); 	?>
 		</div>
 		<div class="sm-stats-table">
-		<h3><?php _e('Last 30 days') ?></h3>
+		<h3><?php _e('Last 30 days', 'search-meter') ?></h3>
 		<?php tguy_sm_summary_table(30, false); ?>
 		</div>
 		<div class="sm-stats-clear"></div>
 
-		<h3><?php _e('Download summary') ?></h3>
+		<h3><?php _e('Download summary', 'search-meter') ?></h3>
 
-		<p><?php _e('Download your 30-day summary as a CSV file, which can be opened by any spreadsheet program or text editor.') ?></p>
+		<p><?php _e('Download your 30-day summary as a CSV file, which can be opened by any spreadsheet program or text editor.', 'search-meter') ?></p>
 
 		<form name="tguy_sm_admin" action="" method="post">
 			<?php
@@ -291,19 +291,19 @@ function tguy_sm_summary_page() {
 			}
 			?>
 			<p class="submit">
-				<input name="tguy_sm_download_summary" class="button-secondary" value="<?php esc_attr_e('Download Summary') ?>" type="submit" />
+				<input name="tguy_sm_download_summary" class="button-secondary" value="<?php esc_attr_e('Download Summary', 'search-meter') ?>" type="submit" />
 			</p>
 		</form>
 
-		<h2><?php _e('Notes') ?></h2>
+		<h2><?php _e('Notes', 'search-meter') ?></h2>
 
 		<?php if (current_user_can(TGUY_SM_OPTIONS_CAPABILITY)) : ?>
-		<p><?php printf(__('To manage your search statistics, go to the %s page.'), '<a href="options-general.php?page=' . echo plugin_basename(__FILE__) . '">' . __('Search Meter Settings') . '</a>') ?></p>
+		<p><?php printf(__('To manage your search statistics, go to the %s page.', 'search-meter'), '<a href="options-general.php?page=' . plugin_basename(__FILE__) . '">' . __('Search Meter Settings', 'search-meter') . '</a>') ?></p>
 		<?php endif; ?>
 
 		<p><?php
-			printf(__('For information and updates, see the %s page.'), '<a href="http://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/">' . __('Search Meter home page') . '</a>');
-			_e('You can also offer suggestions, request new features or report problems.');
+			printf(__('For information and updates, see the %s page.', 'search-meter'), '<a href="http://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/">' . __('Search Meter home page', 'search-meter') . '</a>');
+			_e('You can also offer suggestions, request new features or report problems.', 'search-meter');
 		?></p>
 
 		<?php if (!$options['sm_disable_donation']) { tguy_sm_show_donation_message(); } ?>
@@ -339,10 +339,10 @@ function tguy_sm_summary_table($days, $do_include_successes = true) {
 		?>
 		<table cellpadding="3" cellspacing="2">
 		<tbody>
-		<tr class="alternate"><th class="sm-text"><?php _e('Term') ?></th><th><?php _e('Searches') ?></th>
+		<tr class="alternate"><th class="sm-text"><?php _e('Term', 'search-meter') ?></th><th><?php _e('Searches', 'search-meter') ?></th>
 		<?php
 		if ($do_include_successes) {
-			?><th><?php _e('Results') ?></th><?php
+			?><th><?php _e('Results', 'search-meter') ?></th><?php
 		}
 		?></tr><?php
 		$class= '';
@@ -364,7 +364,7 @@ function tguy_sm_summary_table($days, $do_include_successes = true) {
 		</table>
 		<?php
 	} else {
-		?><p><em><?php _e('No searches recorded for this period.') ?></em></p><?php
+		?><p><em><?php _e('No searches recorded for this period.', 'search-meter') ?></em></p><?php
 	}
 }
 
@@ -380,24 +380,24 @@ function tguy_sm_recent_page($max_lines, $do_show_details) {
 	<div class="wrap">
 
 		<ul id="search_meter_menu">
-		<li><a href="<?php echo $this_url_base ?>"><?php _e('Summary') ?></a></li>
+		<li><a href="<?php echo $this_url_base ?>"><?php _e('Summary', 'search-meter') ?></a></li>
 		<?php if (100 == $max_lines) : ?>
-			<li class="sm-current"><span><?php printf(__('Last %s Searches'), 100) ?></span></li>
+			<li class="sm-current"><span><?php printf(__('Last %s Searches', 'search-meter'), 100) ?></span></li>
 		<?php else : ?>
-			<li><a href="<?php echo $this_url_base ?>&amp;recent=100"><?php printf(__('Last %s Searches'), 100) ?></a></li>
+			<li><a href="<?php echo $this_url_base ?>&amp;recent=100"><?php printf(__('Last %s Searches', 'search-meter'), 100) ?></a></li>
 		<?php endif ?>
 		<?php if (500 == $max_lines) : ?>
-			<li class="sm-current"><span><?php printf(__('Last %s Searches'), 500) ?></span></li>
+			<li class="sm-current"><span><?php printf(__('Last %s Searches', 'search-meter'), 500) ?></span></li>
 		<?php else : ?>
-			<li><a href="<?php echo $this_url_base ?>&amp;recent=500"><?php printf(__('Last %s Searches'), 500) ?></a></li>
+			<li><a href="<?php echo $this_url_base ?>&amp;recent=500"><?php printf(__('Last %s Searches', 'search-meter'), 500) ?></a></li>
 		<?php endif ?>
 		</ul>
 
-		<h2><?php _e('Recent searches') ?></h2>
+		<h2><?php _e('Recent searches', 'search-meter') ?></h2>
 
 		<p><?php printf('This table shows the last %s searches on this blog.', $max_lines) ?>
-			<strong><?php _e('Term') ?></strong> <?php _e('is the text that was searched for; you can click it to see which posts contain that term. (This won\'t be counted as another search.)') ?>
-			<strong><?php _e('Results') ?></strong> <?php _e('is the number of posts that were returned from the search.') ?>
+			<strong><?php _e('Term', 'search-meter') ?></strong> <?php _e('is the text that was searched for; you can click it to see which posts contain that term. (This won\'t be counted as another search.)', 'search-meter') ?>
+			<strong><?php _e('Results', 'search-meter') ?></strong> <?php _e('is the number of posts that were returned from the search.', 'search-meter') ?>
 		</p>
 
 		<div class="sm-stats-table">
@@ -412,11 +412,11 @@ function tguy_sm_recent_page($max_lines, $do_show_details) {
 			?>
 			<table cellpadding="3" cellspacing="2">
 			<tbody>
-			<tr class="alternate"><th class="sm-text"><?php _e('Date &amp; time') ?></th><th class="sm-text"><?php _e('Term') ?></th><th class="sm-number"><?php _e('Results') ?></th>
+			<tr class="alternate"><th class="sm-text"><?php _e('Date &amp; time', 'search-meter') ?></th><th class="sm-text"><?php _e('Term', 'search-meter') ?></th><th class="sm-number"><?php _e('Results', 'search-meter') ?></th>
 			<?php if ($do_show_details) { ?>
-				<th class="sm-text"><?php _e('Details') ?></th>
+				<th class="sm-text"><?php _e('Details', 'search-meter') ?></th>
 			<?php } else if ($is_details_available) { ?>
-				<th class="sm-text"><a href="<?php echo $this_url_base . $this_url_recent_arg . '&amp;details=1' ?>"><?php _e('Show details') ?></a></th>
+				<th class="sm-text"><a href="<?php echo $this_url_base . $this_url_recent_arg . '&amp;details=1' ?>"><?php _e('Show details', 'search-meter') ?></a></th>
 			<?php } ?>
 			</tr>
 			<?php
@@ -439,15 +439,15 @@ function tguy_sm_recent_page($max_lines, $do_show_details) {
 			</table>
 			<?php
 		} else {
-			?><p><?php _e('No searches recorded.') ?></p><?php
+			?><p><?php _e('No searches recorded.', 'search-meter') ?></p><?php
 		}
 		?>
 		</div>
 		<div class="sm-stats-clear"></div>
 
-		<h3><?php _e('Download recent searches') ?></h3>
+		<h3><?php _e('Download recent searches', 'search-meter') ?></h3>
 
-		<p><?php _e('Download your recent searches as a CSV file, which can be opened by any spreadsheet program or text editor.') ?></p>
+		<p><?php _e('Download your recent searches as a CSV file, which can be opened by any spreadsheet program or text editor.', 'search-meter') ?></p>
 
 		<form name="tguy_sm_admin" action="" method="post">
 			<?php
@@ -456,19 +456,19 @@ function tguy_sm_recent_page($max_lines, $do_show_details) {
 			}
 			?>
 			<p class="submit">
-				<input name="tguy_sm_download_individual" class="button-secondary" value="<?php esc_attr_e('Download Recent Searches') ?>" type="submit" />
+				<input name="tguy_sm_download_individual" class="button-secondary" value="<?php esc_attr_e('Download Recent Searches', 'search-meter') ?>" type="submit" />
 			</p>
 		</form>
 
-		<h2><?php _e('Notes') ?></h2>
+		<h2><?php _e('Notes', 'search-meter') ?></h2>
 
 		<?php if (current_user_can(TGUY_SM_OPTIONS_CAPABILITY)) : ?>
-		<p><?php printf(__('To manage your search statistics, go to the %s page.'), '<a href="options-general.php?page=' . echo plugin_basename(__FILE__) . '">' . __('Search Meter Settings') . '</a>') ?></p>
+		<p><?php printf(__('To manage your search statistics, go to the %s page.', 'search-meter'), '<a href="options-general.php?page=' . plugin_basename(__FILE__) . '">' . __('Search Meter Settings', 'search-meter') . '</a>') ?></p>
 		<?php endif; ?>
 
 		<p><?php
-			printf(__('For information and updates, see the %s page.'), '<a href="http://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/">' . __('Search Meter home page') . '</a>');
-			_e('You can also offer suggestions, request new features or report problems.');
+			printf(__('For information and updates, see the %s page.', 'search-meter'), '<a href="http://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/">' . __('Search Meter home page', 'search-meter') . '</a>');
+			_e('You can also offer suggestions, request new features or report problems.', 'search-meter');
 		?></p>
 
 		<?php if (!$options['sm_disable_donation']) { tguy_sm_show_donation_message(); } ?>
@@ -486,7 +486,7 @@ add_filter('plugin_action_links_'.plugin_basename(dirname(__FILE__).'/search-met
 
 function tguy_sm_settings_link($links) {
 	if (current_user_can(TGUY_SM_OPTIONS_CAPABILITY)) {
-		$settings_link = '<a href="options-general.php?page='.plugin_basename(__FILE__).'">' . __('Settings') . '</a>';
+		$settings_link = '<a href="options-general.php?page='.plugin_basename(__FILE__).'">' . __('Settings', 'search-meter') . '</a>';
 		array_unshift($links, $settings_link);
 	}
 	return $links;
@@ -510,11 +510,11 @@ function tguy_sm_options_page() {
 		$options['sm_details_verbose']  = (bool)tguy_sm_array_value($_POST, 'sm_details_verbose');
 		$options['sm_disable_donation'] = (bool)tguy_sm_array_value($_POST, 'sm_disable_donation');
 		update_option('tguy_search_meter', $options);
-		echo '<div id="message" class="updated fade"><p><strong>' . __('Plugin settings saved.') . '</strong></p></div>';
+		echo '<div id="message" class="updated fade"><p><strong>' . __('Plugin settings saved.', 'search-meter') . '</strong></p></div>';
 	} else if (isset($_POST['tguy_sm_reset'])) {
 		check_admin_referer('search-meter-reset-stats');
 		tguy_sm_reset_stats();
-		echo '<div id="message" class="updated fade"><p><strong>' . __('Statistics have been reset.') . '</strong></p></div>';
+		echo '<div id="message" class="updated fade"><p><strong>' . __('Statistics have been reset.', 'search-meter') . '</strong></p></div>';
 	}
 	$options = get_option('tguy_search_meter');
 	$view_stats_capability = tguy_sm_array_value($options, 'sm_view_stats_capability');
@@ -524,7 +524,7 @@ function tguy_sm_options_page() {
 	?>
 	<div class="wrap">
 
-		<h2><?php _e('Search Meter Settings') ?></h2>
+		<h2><?php _e('Search Meter Settings', 'search-meter') ?></h2>
 
 		<form name="searchmeter" action="" method="post">
 			<?php
@@ -537,31 +537,31 @@ function tguy_sm_options_page() {
 
 			<table class="form-table">
 				<tr>
-					<th scope="row"><?php _e('Show statistics to') ?></th>
+					<th scope="row"><?php _e('Show statistics to', 'search-meter') ?></th>
 					<td>
 						<fieldset>
-						<label title='<?php esc_attr_e('Users with "read" capability') ?>'>
+						<label title='<?php esc_attr_e('Users with "read" capability', 'search-meter') ?>'>
 							<input type="radio" name="sm_view_stats_capability" value="read"
 								<?php echo ($view_stats_capability=='read'?"checked=\"checked\"":"") ?> />
-							<?php _e('All logged-in users') ?></label><br>
-						<label title='<?php esc_attr_e('Users with "publish_posts" capability') ?>'>
+							<?php _e('All logged-in users', 'search-meter') ?></label><br>
+						<label title='<?php esc_attr_e('Users with "publish_posts" capability', 'search-meter') ?>'>
 							<input type="radio" name="sm_view_stats_capability" value="publish_posts"
 								<?php echo ($view_stats_capability=='publish_posts'?"checked=\"checked\"":"") ?> />
-							<?php _e('Post authors and administrators') ?></label><br>
-						<label title='<?php esc_attr_e('Users with "manage_options" capability') ?>'>
+							<?php _e('Post authors and administrators', 'search-meter') ?></label><br>
+						<label title='<?php esc_attr_e('Users with "manage_options" capability', 'search-meter') ?>'>
 							<input type="radio" name="sm_view_stats_capability" value="manage_options"
 								<?php echo ($view_stats_capability=='manage_options'?"checked=\"checked\"":"") ?> />
-							<?php _e('Administrators only') ?></label>
+							<?php _e('Administrators only', 'search-meter') ?></label>
 						</fieldset>
 					</td>
 				</tr>
 				<tr valign="top">
-					<th scope="row"><?php _e('Search filter') ?></th>
+					<th scope="row"><?php _e('Search filter', 'search-meter') ?></th>
 					<td>
 						<fieldset>
 						<label for="sm_filter_words"><?php _e('When a search term contains any of these words, it will be filtered
 						and will not show up in the Recent Searches or Popular Searches widgets. This will match inside words,
-						so &#8220;press&#8221; will match &#8220;WordPress&#8221;.') ?></label>
+						so &#8220;press&#8221; will match &#8220;WordPress&#8221;.', 'search-meter') ?></label>
 						<textarea name="sm_filter_words" rows="3" cols="40" id="sm_filter_words" class="large-text code"><?php echo esc_html(tguy_sm_array_value($options, 'sm_filter_words')); ?></textarea>
 						</fieldset>
 					</td>
@@ -570,7 +570,7 @@ function tguy_sm_options_page() {
 					<th class="th-full" scope="row" colspan="2">
 						<label for="sm_ignore_admin_search" title='Administrators are users with "manage_options" capability'>
 							<input type="checkbox" id="sm_ignore_admin_search" name="sm_ignore_admin_search" <?php echo (tguy_sm_array_value($options, 'sm_ignore_admin_search') ? 'checked="checked"' : '') ?> />
-							<?php _e('Ignore searches made by logged-in administrators') ?>
+							<?php _e('Ignore searches made by logged-in administrators', 'search-meter') ?>
 						</label>
 					</th>
 				</tr>
@@ -578,7 +578,7 @@ function tguy_sm_options_page() {
 					<th class="th-full" scope="row" colspan="2">
 						<label for="sm_details_verbose">
 							<input type="checkbox" id="sm_details_verbose" name="sm_details_verbose" <?php echo (tguy_sm_array_value($options, 'sm_details_verbose') ? 'checked="checked"' : '') ?> />
-							<?php _e('Keep detailed information about recent searches (taken from HTTP headers)') ?>
+							<?php _e('Keep detailed information about recent searches (taken from HTTP headers)', 'search-meter') ?>
 						</label>
 					</th>
 				</tr>
@@ -586,7 +586,7 @@ function tguy_sm_options_page() {
 					<th class="th-full" scope="row" colspan="2">
 						<label for="sm_disable_donation">
 							<input type="checkbox" id="sm_disable_donation" name="sm_disable_donation" <?php echo (tguy_sm_array_value($options, 'sm_disable_donation') ? 'checked="checked"' : '') ?> />
-							<?php _e('Hide the &#8220;Do you find this plugin useful?&#8221; box') ?>
+							<?php _e('Hide the &#8220;Do you find this plugin useful?&#8221; box', 'search-meter') ?>
 						</label>
 					</th>
 				</tr>
@@ -597,9 +597,9 @@ function tguy_sm_options_page() {
 			</p>
 		</form>
 
-		<h3><?php _e('Reset statistics') ?></h3>
+		<h3><?php _e('Reset statistics', 'search-meter') ?></h3>
 
-		<p><?php _e('Click this button to reset all search statistics. This will delete all information about previous searches.') ?></p>
+		<p><?php _e('Click this button to reset all search statistics. This will delete all information about previous searches.', 'search-meter') ?></p>
 
 		<form name="tguy_sm_admin" action="" method="post">
 			<?php
@@ -608,17 +608,17 @@ function tguy_sm_options_page() {
 			}
 			?>
 			<p class="submit">
-				<input name="tguy_sm_reset" class="button-secondary delete" value="<?php esc_attr_e('Reset Statistics') ?>" type="submit" onclick="return confirm('You are about to delete all saved search statistics.\n  \'Cancel\' to stop, \'OK\' to delete.');" />
+				<input name="tguy_sm_reset" class="button-secondary delete" value="<?php esc_attr_e('Reset Statistics', 'search-meter') ?>" type="submit" onclick="return confirm('You are about to delete all saved search statistics.\n  \'Cancel\' to stop, \'OK\' to delete.');" />
 			</p>
 		</form>
 
-		<h3><?php _e('Notes') ?></h3>
+		<h3><?php _e('Notes', 'search-meter') ?></h3>
 
-		<p><?php printf(__('To see your search statistics, go to the %s.'), '<a href="index.php?page=' . echo plugin_basename(__FILE__) . '">' . __('Search Meter Dashboard') . '</a>') ?></p>
+		<p><?php printf(__('To see your search statistics, go to the %s.', 'search-meter'), '<a href="index.php?page=' . plugin_basename(__FILE__) . '">' . __('Search Meter Dashboard', 'search-meter') . '</a>') ?></p>
 
 		<p><?php
-			printf(__('For information and updates, see the %s page.'), '<a href="http://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/">' . __('Search Meter home page') . '</a>');
-			_e('There you can offer suggestions, request new features or report problems.');
+			printf(__('For information and updates, see the %s page.', 'search-meter'), '<a href="http://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/">' . __('Search Meter home page', 'search-meter') . '</a>');
+			_e('There you can offer suggestions, request new features or report problems.', 'search-meter');
 		?></p>
 
 		<?php if ( ! tguy_sm_array_value($options, 'sm_disable_donation')) { tguy_sm_show_donation_message(); } ?>
@@ -650,12 +650,12 @@ function tguy_sm_download_summary() {
 		"SELECT `terms`, `count`, `date`, `last_hits`
 		FROM `{$wpdb->prefix}searchmeter`
 		ORDER BY `date` ASC, `terms` ASC");
-	$results_array = [[__('Date'), __('Search terms'), __('Searches'), __('Results')]];
+	$results_array = [[__('Date', 'search-meter'), __('Search terms', 'search-meter'), __('Searches', 'search-meter'), __('Results', 'search-meter')]];
 	foreach ($results as $result) {
 		$results_array[] = [tguy_sm_format_utc_as_local('Y-m-d', $result->date), $result->terms, $result->count, $result->last_hits];
 	}
 	/* translators: base filename for downloaded summary - lowercase letters, digits, dashes only  */
-	tguy_sm_download_to_csv($results_array, __('search-summary'));
+	tguy_sm_download_to_csv($results_array, __('search-summary', 'search-meter'));
 }
 
 function tguy_sm_download_individual() {
@@ -664,12 +664,12 @@ function tguy_sm_download_individual() {
 		"SELECT `terms`, `datetime`, `hits`, `details`
 		FROM `{$wpdb->prefix}searchmeter_recent`
 		ORDER BY `datetime` ASC");
-	$results_array = [[__('Date'), __('Search terms'), __('Results'), __('Details')]];
+	$results_array = [[__('Date', 'search-meter'), __('Search terms', 'search-meter'), __('Results', 'search-meter'), __('Details', 'search-meter')]];
 	foreach ($results as $result) {
 		$results_array[] = [tguy_sm_format_utc_as_local('Y-m-d H:i:s', $result->datetime), $result->terms, $result->hits, $result->details];
 	}
 	/* translators: base filename for downloaded summary - lowercase letters, digits, dashes only  */
-	tguy_sm_download_to_csv($results_array, __('recent-searches'));
+	tguy_sm_download_to_csv($results_array, __('recent-searches', 'search-meter'));
 }
 
 // Similar to PHP date(), but the timestamp is a string in UTC, and we return a string in Wordpress time zone
@@ -702,7 +702,7 @@ function tguy_sm_show_donation_message() {
 <p><div style="margin: 0; padding: 0 2ex 0.25ex 0; float: left;">
 <?php tguy_sm_show_donation_button() ?>
 </div>
-<strong><?php _e('Do you find this plugin useful?') ?></strong><br />
+<strong><?php _e('Do you find this plugin useful?', 'search-meter') ?></strong><br />
 
 <?php printf(__(<<<EOS
 I enjoy maintaining Search Meter, but it does take time and effort.
@@ -710,7 +710,7 @@ If you think this plugin is useful, please consider donating some appropriate am
 You can also send <strong>Bitcoins</strong> to address %s.
 Thanks!
 EOS
-), '<tt>1542gqyprvQd7gwvtZZ4x25cPeGWVKg45x</tt>') ?>
+, 'search-meter' ), '<tt>1542gqyprvQd7gwvtZZ4x25cPeGWVKg45x</tt>') ?>
 </p>
 <?php
 }
@@ -719,7 +719,7 @@ function tguy_sm_show_donation_button() {
 // I wish PayPal offered a simple little REST-style URL instead of this monstrosity
 ?><form action="https://www.paypal.com/cgi-bin/webscr" method="post" style="margin:0; padding:0;"
 ><input name="cmd" value="_s-xclick" type="hidden" style="margin:0; padding:0;"
-/><input src="https://www.paypal.com/en_US/i/btn/x-click-but04.gif" name="submit" alt="<?php esc_attr_e('Make payments with PayPal - it\'s fast, free and secure!') ?>" border="0" type="image" style="margin:0; padding:0;"
+/><input src="https://www.paypal.com/en_US/i/btn/x-click-but04.gif" name="submit" alt="<?php esc_attr_e('Make payments with PayPal - it\'s fast, free and secure!', 'search-meter') ?>" border="0" type="image" style="margin:0; padding:0;"
 /><input name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
 " type="hidden" style="margin:0; padding:0;"
 /></form><?php
