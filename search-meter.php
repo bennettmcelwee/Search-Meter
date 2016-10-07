@@ -37,6 +37,11 @@ This software is licensed under the GPL v3. See the included LICENSE file for
 details. If you would like to use it under different terms, contact the author.
 */
 
+add_action( 'plugins_loaded', 'tguy_sm_load_plugin_textdomain' );
+function tguy_sm_load_plugin_textdomain() {
+  load_plugin_textdomain('search-meter', FALSE, basename(dirname(__FILE__)) . '/languages/');
+}
+
 // This is here to avoid E_NOTICE when indexing nonexistent array keys. There's probably a better solution. Suggestions are welcome.
 function tguy_sm_array_value(&$array, $key) {
 	return (is_array($array) && array_key_exists($key, $array)) ? $array[$key] : null;

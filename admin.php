@@ -242,10 +242,12 @@ function tguy_sm_summary_page() {
 
 		<h2><?php _e('Search summary', 'search-meter') ?></h2>
 
-		<p><?php _e('These tables show the most popular searches on your blog for the given time periods.', 'search-meter') ?>
-		<strong><?php _e('Term', 'search-meter') ?></strong> <?php _e('is the text that was searched for; you can click it to see which posts contain that term. (This won\'t be counted as another search.)', 'search-meter') ?>
-		<strong><?php _e('Searches', 'search-meter') ?></strong> <?php _e('is the number of times the term was searched for.', 'search-meter') ?>
-		<strong><?php _e('Results', 'search-meter') ?></strong> <?php _e('is the number of posts that were returned from the <em>last</em> search for that term.', 'search-meter') ?>
+		<p><?php
+			_e('These tables show the most popular searches on your blog for the given time periods.', 'search-meter');
+			printf(__('%s is the text that was searched for; you can click it to see which posts contain that term. (This won\'t be counted as another search.)', 'search-meter'), '<strong>' . __('Term', 'search-meter') . '</strong>');
+			printf(__('%s is the number of times the term was searched for.', 'search-meter'), '<strong>' . __('Searches', 'search-meter') . '</strong>');
+			printf(__('%s is the number of posts that were returned from the <em>last</em> search for that term.', 'search-meter'), '<strong>' . __('Results', 'search-meter') . '</strong>');
+			?>
 		</p>
 
 		<div class="sm-stats-table">
@@ -395,9 +397,11 @@ function tguy_sm_recent_page($max_lines, $do_show_details) {
 
 		<h2><?php _e('Recent searches', 'search-meter') ?></h2>
 
-		<p><?php printf('This table shows the last %s searches on this blog.', $max_lines) ?>
-			<strong><?php _e('Term', 'search-meter') ?></strong> <?php _e('is the text that was searched for; you can click it to see which posts contain that term. (This won\'t be counted as another search.)', 'search-meter') ?>
-			<strong><?php _e('Results', 'search-meter') ?></strong> <?php _e('is the number of posts that were returned from the search.', 'search-meter') ?>
+		<p><?php
+			printf(__('This table shows the last %s searches on this blog.', 'search-meter'), $max_lines);
+			printf(__('%s is the text that was searched for; you can click it to see which posts contain that term. (This won\'t be counted as another search.)', 'search-meter'), '<strong>' . __('Term', 'search-meter') . '</strong>');
+			printf(__('%s is the number of posts that were returned from the search.', 'search-meter'), '<strong>' . __('Results', 'search-meter') . '</strong>');
+			?>
 		</p>
 
 		<div class="sm-stats-table">
@@ -668,7 +672,7 @@ function tguy_sm_download_individual() {
 	foreach ($results as $result) {
 		$results_array[] = [tguy_sm_format_utc_as_local('Y-m-d H:i:s', $result->datetime), $result->terms, $result->hits, $result->details];
 	}
-	/* translators: base filename for downloaded summary - lowercase letters, digits, dashes only  */
+	/* translators: base filename for downloaded searches - lowercase letters, digits, dashes only  */
 	tguy_sm_download_to_csv($results_array, __('recent-searches', 'search-meter'));
 }
 
