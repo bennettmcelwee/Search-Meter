@@ -1,0 +1,359 @@
+# Copyright (C) 2016 Search Meter
+# This file is distributed under the same license as the Search Meter package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Search Meter 2.13\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/search-meter\n"
+"POT-Creation-Date: 2016-10-07 04:23:21+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#. #-#-#-#-#  search-meter.pot (Search Meter 2.13)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: admin.php:172 admin.php:205 admin.php:206
+msgid "Search Meter"
+msgstr ""
+
+#: admin.php:180
+msgid "Searches in the Last 7 Days"
+msgstr ""
+
+#: admin.php:184
+msgid "Full Dashboard"
+msgstr ""
+
+#: admin.php:186 admin.php:493
+msgid "Settings"
+msgstr ""
+
+#: admin.php:188
+msgid "Donate"
+msgstr ""
+
+#: admin.php:239 admin.php:240 admin.php:387 admin.php:389 admin.php:392
+#: admin.php:394
+msgid "Last %s Searches"
+msgstr ""
+
+#: admin.php:243
+msgid "Search summary"
+msgstr ""
+
+#: admin.php:246
+msgid ""
+"These tables show the most popular searches on your blog for the given time "
+"periods."
+msgstr ""
+
+#: admin.php:247 admin.php:402
+msgid ""
+"%s is the text that was searched for; you can click it to see which posts "
+"contain that term. (This won't be counted as another search.)"
+msgstr ""
+
+#: admin.php:247 admin.php:344 admin.php:402 admin.php:419
+msgid "Term"
+msgstr ""
+
+#: admin.php:248
+msgid "%s is the number of times the term was searched for."
+msgstr ""
+
+#: admin.php:248 admin.php:344 admin.php:657
+msgid "Searches"
+msgstr ""
+
+#: admin.php:249
+msgid ""
+"%s is the number of posts that were returned from the <em>last</em> search "
+"for that term."
+msgstr ""
+
+#: admin.php:249 admin.php:347 admin.php:403 admin.php:419 admin.php:657
+#: admin.php:671
+msgid "Results"
+msgstr ""
+
+#: admin.php:254 admin.php:272
+msgid "Yesterday and today"
+msgstr ""
+
+#: admin.php:258 admin.php:276
+msgid "Last 7 days"
+msgstr ""
+
+#: admin.php:262 admin.php:280
+msgid "Last 30 days"
+msgstr ""
+
+#: admin.php:267
+msgid "Unsuccessful search summary"
+msgstr ""
+
+#: admin.php:269
+msgid ""
+"These tables show only the search terms for which the last search yielded no "
+"results. People are searching your blog for these terms; maybe you should "
+"give them what they want."
+msgstr ""
+
+#: admin.php:285
+msgid "Download summary"
+msgstr ""
+
+#: admin.php:287
+msgid ""
+"Download your 30-day summary as a CSV file, which can be opened by any "
+"spreadsheet program or text editor."
+msgstr ""
+
+#: admin.php:296
+msgid "Download Summary"
+msgstr ""
+
+#: admin.php:300 admin.php:467 admin.php:619
+msgid "Notes"
+msgstr ""
+
+#: admin.php:303 admin.php:470
+msgid "To manage your search statistics, go to the %s page."
+msgstr ""
+
+#: admin.php:303 admin.php:470 admin.php:531
+msgid "Search Meter Settings"
+msgstr ""
+
+#: admin.php:307 admin.php:474 admin.php:624
+msgid "For information and updates, see the %s page."
+msgstr ""
+
+#: admin.php:307 admin.php:474 admin.php:624
+msgid "Search Meter home page"
+msgstr ""
+
+#: admin.php:308 admin.php:475
+msgid ""
+"You can also offer suggestions, request new features or report problems."
+msgstr ""
+
+#: admin.php:369
+msgid "No searches recorded for this period."
+msgstr ""
+
+#: admin.php:385
+msgid "Summary"
+msgstr ""
+
+#: admin.php:398
+msgid "Recent searches"
+msgstr ""
+
+#: admin.php:401
+msgid "This table shows the last %s searches on this blog."
+msgstr ""
+
+#: admin.php:403
+msgid "%s is the number of posts that were returned from the search."
+msgstr ""
+
+#: admin.php:419
+msgid "Date &amp; time"
+msgstr ""
+
+#: admin.php:421 admin.php:671
+msgid "Details"
+msgstr ""
+
+#: admin.php:423
+msgid "Show details"
+msgstr ""
+
+#: admin.php:446
+msgid "No searches recorded."
+msgstr ""
+
+#: admin.php:452
+msgid "Download recent searches"
+msgstr ""
+
+#: admin.php:454
+msgid ""
+"Download your recent searches as a CSV file, which can be opened by any "
+"spreadsheet program or text editor."
+msgstr ""
+
+#: admin.php:463
+msgid "Download Recent Searches"
+msgstr ""
+
+#: admin.php:517
+msgid "Plugin settings saved."
+msgstr ""
+
+#: admin.php:521
+msgid "Statistics have been reset."
+msgstr ""
+
+#: admin.php:544
+msgid "Show statistics to"
+msgstr ""
+
+#: admin.php:547
+msgid "Users with \"read\" capability"
+msgstr ""
+
+#: admin.php:550
+msgid "All logged-in users"
+msgstr ""
+
+#: admin.php:551
+msgid "Users with \"publish_posts\" capability"
+msgstr ""
+
+#: admin.php:554
+msgid "Post authors and administrators"
+msgstr ""
+
+#: admin.php:555
+msgid "Users with \"manage_options\" capability"
+msgstr ""
+
+#: admin.php:558
+msgid "Administrators only"
+msgstr ""
+
+#: admin.php:563
+msgid "Search filter"
+msgstr ""
+
+#: admin.php:566
+msgid ""
+"When a search term contains any of these words, it will be filtered\n"
+"\t\t\t\t\t\tand will not show up in the Recent Searches or Popular Searches "
+"widgets. This will match inside words,\n"
+"\t\t\t\t\t\tso &#8220;press&#8221; will match &#8220;WordPress&#8221;."
+msgstr ""
+
+#: admin.php:577
+msgid "Ignore searches made by logged-in administrators"
+msgstr ""
+
+#: admin.php:585
+msgid ""
+"Keep detailed information about recent searches (taken from HTTP headers)"
+msgstr ""
+
+#: admin.php:593
+msgid "Hide the &#8220;Do you find this plugin useful?&#8221; box"
+msgstr ""
+
+#: admin.php:604
+msgid "Reset statistics"
+msgstr ""
+
+#: admin.php:606
+msgid ""
+"Click this button to reset all search statistics. This will delete all "
+"information about previous searches."
+msgstr ""
+
+#: admin.php:615
+msgid "Reset Statistics"
+msgstr ""
+
+#: admin.php:621
+msgid "To see your search statistics, go to the %s."
+msgstr ""
+
+#: admin.php:621
+msgid "Search Meter Dashboard"
+msgstr ""
+
+#: admin.php:625
+msgid ""
+"There you can offer suggestions, request new features or report problems."
+msgstr ""
+
+#: admin.php:657 admin.php:671
+msgid "Date"
+msgstr ""
+
+#: admin.php:657 admin.php:671
+msgid "Search terms"
+msgstr ""
+
+#. translators: base filename for downloaded summary - lowercase letters,
+#. digits, dashes only
+#: admin.php:662
+msgid "search-summary"
+msgstr ""
+
+#. translators: base filename for downloaded searches - lowercase letters,
+#. digits, dashes only
+#: admin.php:676
+msgid "recent-searches"
+msgstr ""
+
+#: admin.php:709
+msgid "Do you find this plugin useful?"
+msgstr ""
+
+#: admin.php:726
+msgid "Make payments with PayPal - it's fast, free and secure!"
+msgstr ""
+
+#: search-meter.php:172
+msgid "A list of the most popular successful searches in the last month"
+msgstr ""
+
+#: search-meter.php:173 search-meter.php:178 search-meter.php:198
+msgid "Popular Searches"
+msgstr ""
+
+#: search-meter.php:204 search-meter.php:244
+msgid "Title:"
+msgstr ""
+
+#: search-meter.php:205 search-meter.php:245
+msgid "Number of searches to show:"
+msgstr ""
+
+#: search-meter.php:206 search-meter.php:246
+msgid "Powered by Search Meter"
+msgstr ""
+
+#: search-meter.php:212
+msgid "A list of the most recent successful searches on your blog"
+msgstr ""
+
+#: search-meter.php:213 search-meter.php:218 search-meter.php:238
+msgid "Recent Searches"
+msgstr ""
+
+#: search-meter.php:298
+msgid "Search Meter save count"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid ""
+"http://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Keeps track of what your visitors are searching for. After you have "
+"activated this plugin, you can check the Search Meter section in the "
+"Dashboard to see what your visitors are searching for on your blog."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Bennett McElwee"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://thunderguy.com/semicolon/"
+msgstr ""
