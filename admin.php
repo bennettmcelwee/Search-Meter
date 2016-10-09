@@ -300,12 +300,12 @@ function tguy_sm_summary_page() {
 		<h2><?php _e('Notes', 'search-meter') ?></h2>
 
 		<?php if (current_user_can(TGUY_SM_OPTIONS_CAPABILITY)) : ?>
-		<p><?php printf(__('To manage your search statistics, go to the %s page.', 'search-meter'), '<a href="options-general.php?page=' . plugin_basename(__FILE__) . '">' . __('Search Meter Settings', 'search-meter') . '</a>') ?></p>
+		<p><?php printf(__('To manage your search statistics, go to %s.', 'search-meter'), '<a href="options-general.php?page=' . plugin_basename(__FILE__) . '">' . __('Search Meter Settings', 'search-meter') . '</a>') ?></p>
 		<?php endif; ?>
 
 		<p><?php
-			printf(__('For information and updates, see the %s page.', 'search-meter'), '<a href="http://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/">' . __('Search Meter home page', 'search-meter') . '</a>');
-			_e('You can also offer suggestions, request new features or report problems.', 'search-meter');
+			printf(__('For information and updates, see the %s.', 'search-meter'), '<a href="http://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/">' . __('Search Meter home page', 'search-meter') . '</a>');
+			_e('There you can offer suggestions, request new features or report problems.', 'search-meter');
 		?></p>
 
 		<?php if (!$options['sm_disable_donation']) { tguy_sm_show_donation_message(); } ?>
@@ -471,8 +471,8 @@ function tguy_sm_recent_page($max_lines, $do_show_details) {
 		<?php endif; ?>
 
 		<p><?php
-			printf(__('For information and updates, see the %s page.', 'search-meter'), '<a href="http://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/">' . __('Search Meter home page', 'search-meter') . '</a>');
-			_e('You can also offer suggestions, request new features or report problems.', 'search-meter');
+			printf(__('For information and updates, see the %s.', 'search-meter'), '<a href="http://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/">' . __('Search Meter home page', 'search-meter') . '</a>');
+			_e('There you can offer suggestions, request new features or report problems.', 'search-meter');
 		?></p>
 
 		<?php if (!$options['sm_disable_donation']) { tguy_sm_show_donation_message(); } ?>
@@ -621,7 +621,7 @@ function tguy_sm_options_page() {
 		<p><?php printf(__('To see your search statistics, go to the %s.', 'search-meter'), '<a href="index.php?page=' . plugin_basename(__FILE__) . '">' . __('Search Meter Dashboard', 'search-meter') . '</a>') ?></p>
 
 		<p><?php
-			printf(__('For information and updates, see the %s page.', 'search-meter'), '<a href="http://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/">' . __('Search Meter home page', 'search-meter') . '</a>');
+			printf(__('For information and updates, see the %s.', 'search-meter'), '<a href="http://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/">' . __('Search Meter home page', 'search-meter') . '</a>');
 			_e('There you can offer suggestions, request new features or report problems.', 'search-meter');
 		?></p>
 

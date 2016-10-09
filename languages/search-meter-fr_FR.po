@@ -4,102 +4,114 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Search Meter 2.13\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/search-meter\n"
-"POT-Creation-Date: 2016-10-07 04:23:21+00:00\n"
+"POT-Creation-Date: 2016-10-07 17:28+1300\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2016-10-10 09:45+1300\n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.8.9\n"
+"Last-Translator: Christiaen François\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: fr\n"
 
-#. #-#-#-#-#  search-meter.pot (Search Meter 2.13)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
 #: admin.php:172 admin.php:205 admin.php:206
 msgid "Search Meter"
-msgstr ""
+msgstr "Search Meter"
 
 #: admin.php:180
 msgid "Searches in the Last 7 Days"
-msgstr ""
+msgstr "Recherches ces 7 derniers jours"
 
 #: admin.php:184
 msgid "Full Dashboard"
-msgstr ""
+msgstr "Statistiques complètes"
 
 #: admin.php:186 admin.php:493
 msgid "Settings"
-msgstr ""
+msgstr "Paramètres"
 
 #: admin.php:188
 msgid "Donate"
-msgstr ""
+msgstr "Donations"
 
 #: admin.php:239 admin.php:240 admin.php:387 admin.php:389 admin.php:392
 #: admin.php:394
 msgid "Last %s Searches"
-msgstr ""
+msgstr "%s dernières recherches"
 
 #: admin.php:243
 msgid "Search summary"
-msgstr ""
+msgstr "Résumé des recherches"
 
 #: admin.php:246
 msgid ""
 "These tables show the most popular searches on your blog for the given time "
 "periods."
 msgstr ""
+"Ces tableaux montrent les recherches les plus populaires sur votre blog pour "
+"les périodes de temps donnés."
 
 #: admin.php:247 admin.php:402
 msgid ""
 "%s is the text that was searched for; you can click it to see which posts "
 "contain that term. (This won't be counted as another search.)"
 msgstr ""
+"%s est le texte qui a été recherché. vous pouvez cliquer dessus pour voir quels "
+"messages contiennent ce terme. (Ce ne sera pas considéré comme une autre "
+"recherche.)"
 
 #: admin.php:247 admin.php:344 admin.php:402 admin.php:419
 msgid "Term"
-msgstr ""
+msgstr "Terme"
 
 #: admin.php:248
 msgid "%s is the number of times the term was searched for."
-msgstr ""
+msgstr "%s est le nombre de fois que le terme a été cherché."
 
 #: admin.php:248 admin.php:344 admin.php:657
 msgid "Searches"
-msgstr ""
+msgstr "Recherches"
 
 #: admin.php:249
 msgid ""
-"%s is the number of posts that were returned from the <em>last</em> search "
-"for that term."
+"%s is the number of posts that were returned from the <em>last</em> search for "
+"that term."
 msgstr ""
+"%s sont le nombre de postes qui ont été renvoyés par la <em>dernière</em> "
+"recherche de ce terme."
 
 #: admin.php:249 admin.php:347 admin.php:403 admin.php:419 admin.php:657
 #: admin.php:671
 msgid "Results"
-msgstr ""
+msgstr "Résultats"
 
 #: admin.php:254 admin.php:272
 msgid "Yesterday and today"
-msgstr ""
+msgstr "Hier et aujourd'hui"
 
 #: admin.php:258 admin.php:276
 msgid "Last 7 days"
-msgstr ""
+msgstr "7 derniers jours"
 
 #: admin.php:262 admin.php:280
 msgid "Last 30 days"
-msgstr ""
+msgstr "30 derniers jours"
 
 #: admin.php:267
 msgid "Unsuccessful search summary"
-msgstr ""
+msgstr "Résumé des recherches infructueuses"
 
 #: admin.php:269
 msgid ""
 "These tables show only the search terms for which the last search yielded no "
-"results. People are searching your blog for these terms; maybe you should "
-"give them what they want."
+"results. People are searching your blog for these terms; maybe you should give "
+"them what they want."
 msgstr ""
+"Ces tableaux montrent que les termes de recherche pour lesquels la dernière "
+"recherche n'a donné aucun résultat. Les gens sont à la recherche de ces termes; "
+"peut-être vous devriez leur donner ce qu'ils veulent."
 
 #: admin.php:285
 msgid "Download summary"
@@ -117,59 +129,59 @@ msgstr ""
 
 #: admin.php:300 admin.php:467 admin.php:619
 msgid "Notes"
-msgstr ""
+msgstr "Notes"
 
 #: admin.php:303 admin.php:470
 msgid "To manage your search statistics, go to %s."
-msgstr ""
+msgstr "Pour gérer vos statistiques de recherche, rendez-vous dans %s."
 
 #: admin.php:303 admin.php:470 admin.php:531
 msgid "Search Meter Settings"
-msgstr ""
+msgstr "Paramètres de Search Meter"
 
 #: admin.php:307 admin.php:474 admin.php:624
 msgid "For information and updates, see the %s."
-msgstr ""
+msgstr "Pour plus d'informations et de mises à jour, consultez la %s."
 
 #: admin.php:307 admin.php:474 admin.php:624
 msgid "Search Meter home page"
-msgstr ""
+msgstr "page d'accueil de Search Meter"
 
 #: admin.php:369
 msgid "No searches recorded for this period."
-msgstr ""
+msgstr "Pas de recherches enregistrée pendant cette période."
 
 #: admin.php:385
 msgid "Summary"
-msgstr ""
+msgstr "Résumé"
 
 #: admin.php:398
 msgid "Recent searches"
-msgstr ""
+msgstr "Recherches récentes"
 
 #: admin.php:401
 msgid "This table shows the last %s searches on this blog."
-msgstr ""
+msgstr "Ce tableau présente les %s dernières recherches sur le site."
 
 #: admin.php:403
 msgid "%s is the number of posts that were returned from the search."
-msgstr ""
+msgstr "%s est le nombre de postes qui ont été renvoyés par la recherche."
 
 #: admin.php:419
 msgid "Date &amp; time"
-msgstr ""
+msgstr "Date"
 
 #: admin.php:421 admin.php:671
 msgid "Details"
-msgstr ""
+msgstr "Détails"
 
 #: admin.php:423
 msgid "Show details"
-msgstr ""
+msgstr "Afficher les détails"
 
 #: admin.php:446
 msgid "No searches recorded."
-msgstr ""
+msgstr "Pas de recherches enregistrée pendant cette période."
 
 #: admin.php:452
 msgid "Download recent searches"
@@ -187,15 +199,15 @@ msgstr ""
 
 #: admin.php:517
 msgid "Plugin settings saved."
-msgstr ""
+msgstr "Paramètres sauvegardés."
 
 #: admin.php:521
 msgid "Statistics have been reset."
-msgstr ""
+msgstr "Statistiques réinitialisées avec succès"
 
 #: admin.php:544
 msgid "Show statistics to"
-msgstr ""
+msgstr "Afficher les statistiques à"
 
 #: admin.php:547
 msgid "Users with \"read\" capability"
@@ -203,7 +215,7 @@ msgstr ""
 
 #: admin.php:550
 msgid "All logged-in users"
-msgstr ""
+msgstr "Tous les utilisateurs connectés"
 
 #: admin.php:551
 msgid "Users with \"publish_posts\" capability"
@@ -211,7 +223,7 @@ msgstr ""
 
 #: admin.php:554
 msgid "Post authors and administrators"
-msgstr ""
+msgstr "Auteurs et administrateurs"
 
 #: admin.php:555
 msgid "Users with \"manage_options\" capability"
@@ -219,11 +231,11 @@ msgstr ""
 
 #: admin.php:558
 msgid "Administrators only"
-msgstr ""
+msgstr "Administrateurs seulement"
 
 #: admin.php:563
 msgid "Search filter"
-msgstr ""
+msgstr "Filtrage des recherches"
 
 #: admin.php:566
 msgid ""
@@ -232,53 +244,63 @@ msgid ""
 "widgets. This will match inside words,\n"
 "\t\t\t\t\t\tso &#8220;press&#8221; will match &#8220;WordPress&#8221;."
 msgstr ""
+"Quand un terme de recherche contient un de ces mots, il sera filtré et ne sera "
+"pas affiché dans les recherches récentes ou le widget des recherches "
+"populaires. Ce filtre recherchera à l'intérieur des mots de sorte que \"press\" "
+"filtre \"Wordpress\"."
 
 #: admin.php:577
 msgid "Ignore searches made by logged-in administrators"
-msgstr ""
+msgstr "Ignorer les recherches effectuées par un administrateur conntecté"
 
 #: admin.php:585
-msgid ""
-"Keep detailed information about recent searches (taken from HTTP headers)"
+msgid "Keep detailed information about recent searches (taken from HTTP headers)"
 msgstr ""
+"Gardez des informations détaillées sur les recherches récentes (provenant de "
+"l'en-têtes HTTP)"
 
 #: admin.php:593
 msgid "Hide the &#8220;Do you find this plugin useful?&#8221; box"
-msgstr ""
+msgstr "Masquer le panneau &#8220;Trouvez-vous ce plugin utile&#8221;"
 
 #: admin.php:604
 msgid "Reset statistics"
-msgstr ""
+msgstr "Réinitialiser les statistiques"
 
 #: admin.php:606
 msgid ""
 "Click this button to reset all search statistics. This will delete all "
 "information about previous searches."
 msgstr ""
+"Cliquez sur ce bouton pour réinitialiser toutes les statistiques de recherche. "
+"Ceci supprimera toutes les informations sur les précédentes recherches "
+"effectuées sur le site."
 
 #: admin.php:615
 msgid "Reset Statistics"
-msgstr ""
+msgstr "Réinitialiser"
 
 #: admin.php:621
 msgid "To see your search statistics, go to the %s."
-msgstr ""
+msgstr "Pour voir vos statistiques de recherche, rendez-vous sur le %s."
 
 #: admin.php:621
 msgid "Search Meter Dashboard"
-msgstr ""
+msgstr "tableau de bord Search Meter"
 
 #: admin.php:308 admin.php:475 admin.php:625
 msgid "There you can offer suggestions, request new features or report problems."
 msgstr ""
+"A cette page, vous pouvez également déposer des suggestions, demander de "
+"nouvelles fonctionnalités ou rapporter des problèmes."
 
 #: admin.php:657 admin.php:671
 msgid "Date"
-msgstr ""
+msgstr "Date"
 
 #: admin.php:657 admin.php:671
 msgid "Search terms"
-msgstr ""
+msgstr "Termes de recherche"
 
 #. translators: base filename for downloaded summary - lowercase letters,
 #. digits, dashes only
@@ -294,7 +316,7 @@ msgstr ""
 
 #: admin.php:709
 msgid "Do you find this plugin useful?"
-msgstr ""
+msgstr "Trouvez-vous ce plugin utile?"
 
 #: admin.php:726
 msgid "Make payments with PayPal - it's fast, free and secure!"
@@ -302,46 +324,45 @@ msgstr ""
 
 #: search-meter.php:172
 msgid "A list of the most popular successful searches in the last month"
-msgstr ""
+msgstr "Une liste des recherches les plus populaires avec succès le mois dernier"
 
 #: search-meter.php:173 search-meter.php:178 search-meter.php:198
 msgid "Popular Searches"
-msgstr ""
+msgstr "Recherches populaires"
 
 #: search-meter.php:204 search-meter.php:244
 msgid "Title:"
-msgstr ""
+msgstr "Titre:"
 
 #: search-meter.php:205 search-meter.php:245
 msgid "Number of searches to show:"
-msgstr ""
+msgstr "Nombre de recherches à afficher:"
 
 #: search-meter.php:206 search-meter.php:246
 msgid "Powered by Search Meter"
-msgstr ""
+msgstr "Alimenté par Search Meter"
 
 #: search-meter.php:212
 msgid "A list of the most recent successful searches on your blog"
-msgstr ""
+msgstr "Liste des recherches récentes effectuées sur votre blog"
 
 #: search-meter.php:213 search-meter.php:218 search-meter.php:238
 msgid "Recent Searches"
-msgstr ""
+msgstr "Recherches récentes"
 
 #: search-meter.php:298
 msgid "Search Meter save count"
-msgstr ""
+msgstr "Search Meter save count"
 
 #. Plugin URI of the plugin/theme
-msgid ""
-"http://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/"
+msgid "http://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/"
 msgstr ""
 
 #. Description of the plugin/theme
 msgid ""
-"Keeps track of what your visitors are searching for. After you have "
-"activated this plugin, you can check the Search Meter section in the "
-"Dashboard to see what your visitors are searching for on your blog."
+"Keeps track of what your visitors are searching for. After you have activated "
+"this plugin, you can check the Search Meter section in the Dashboard to see "
+"what your visitors are searching for on your blog."
 msgstr ""
 
 #. Author of the plugin/theme
