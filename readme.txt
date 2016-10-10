@@ -18,7 +18,7 @@ Search Meter installs easily and requires no configuration. Just install it, act
 
 = View Statistics =
 
-To see your search statistics, Log in to WordPress Admin. On your dashboard you will see a Search Meter widget listing search statistics from the last seven days. For more details, go to the Dashboard menu on the left and click Search Meter. You'll see the most popular searches in the last day, week and month. Click "Last 100 Searches" or "Last 500 Searches" to see lists of all recent searches.
+To see your search statistics, Log in to WordPress Admin. On your dashboard you will see a Search Meter widget listing search statistics from the last seven days. For more details, go to the Dashboard menu on the left and click Search Meter. You'll see the most popular searches in the last day, week and month. Click "Last 100 Searches" or "Last 500 Searches" to see lists of all recent searches. You can download the statistics as a file that you can open in Excel or a similar program.
 
 = Manage Statistics =
 
@@ -76,6 +76,7 @@ The [Search Meter home page](http://thunderguy.com/semicolon/wordpress/search-me
 == Changelog ==
 = 2.13 =
 * Search Summary and Recent Searches can be downloaded as CSV files.
+* Search Meter is now set up for translation to other languages. For details, go to https://translate.wordpress.org/ (Thanks to Christiaen François)
 * All stats are now displayed in the WordPress time zone, and stored in the database as UTC. Previously, they were stored and displayed in the server time zone, which was confusing. The change means that old search statistics may be out by up to 13 hours.
 * Updated licensing, now using GPL3.
 
