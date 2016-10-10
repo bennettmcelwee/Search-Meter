@@ -235,7 +235,7 @@ function tguy_sm_summary_page() {
 	<div class="wrap">
 
 		<ul id="search_meter_menu">
-		<li class="sm-current"><span>Summary</span></li>
+		<li class="sm-current"><span><?php _e('Summary', 'search-meter') ?></span></li>
 		<li><a href="index.php?page=<?php echo plugin_basename(__FILE__); ?>&amp;recent=100"><?php printf(__('Last %s Searches', 'search-meter'), 100) ?></a></li>
 		<li><a href="index.php?page=<?php echo plugin_basename(__FILE__); ?>&amp;recent=500"><?php printf(__('Last %s Searches', 'search-meter'), 500) ?></a></li>
 		</ul>
@@ -244,8 +244,11 @@ function tguy_sm_summary_page() {
 
 		<p><?php
 			_e('These tables show the most popular searches on your blog for the given time periods.', 'search-meter');
+			echo ' ';
 			printf(__('%s is the text that was searched for; you can click it to see which posts contain that term. (This won\'t be counted as another search.)', 'search-meter'), '<strong>' . __('Term', 'search-meter') . '</strong>');
+			echo ' ';
 			printf(__('%s is the number of times the term was searched for.', 'search-meter'), '<strong>' . __('Searches', 'search-meter') . '</strong>');
+			echo ' ';
 			printf(__('%s is the number of posts that were returned from the <em>last</em> search for that term.', 'search-meter'), '<strong>' . __('Results', 'search-meter') . '</strong>');
 			?>
 		</p>
@@ -300,11 +303,13 @@ function tguy_sm_summary_page() {
 		<h2><?php _e('Notes', 'search-meter') ?></h2>
 
 		<?php if (current_user_can(TGUY_SM_OPTIONS_CAPABILITY)) : ?>
-		<p><?php printf(__('To manage your search statistics, go to %s.', 'search-meter'), '<a href="options-general.php?page=' . plugin_basename(__FILE__) . '">' . __('Search Meter Settings', 'search-meter') . '</a>') ?></p>
+			<p><?php printf(__('To manage your search statistics, go to %s.', 'search-meter'), '<a href="options-general.php?page=' . plugin_basename(__FILE__) . '">' . __('Search Meter Settings', 'search-meter') . '</a>') ?></p>
+			echo ' ';
 		<?php endif; ?>
 
 		<p><?php
 			printf(__('For information and updates, see the %s.', 'search-meter'), '<a href="http://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/">' . __('Search Meter home page', 'search-meter') . '</a>');
+			echo ' ';
 			_e('There you can offer suggestions, request new features or report problems.', 'search-meter');
 		?></p>
 
@@ -399,7 +404,9 @@ function tguy_sm_recent_page($max_lines, $do_show_details) {
 
 		<p><?php
 			printf(__('This table shows the last %s searches on this blog.', 'search-meter'), $max_lines);
+			echo ' ';
 			printf(__('%s is the text that was searched for; you can click it to see which posts contain that term. (This won\'t be counted as another search.)', 'search-meter'), '<strong>' . __('Term', 'search-meter') . '</strong>');
+			echo ' ';
 			printf(__('%s is the number of posts that were returned from the search.', 'search-meter'), '<strong>' . __('Results', 'search-meter') . '</strong>');
 			?>
 		</p>
@@ -467,11 +474,13 @@ function tguy_sm_recent_page($max_lines, $do_show_details) {
 		<h2><?php _e('Notes', 'search-meter') ?></h2>
 
 		<?php if (current_user_can(TGUY_SM_OPTIONS_CAPABILITY)) : ?>
-		<p><?php printf(__('To manage your search statistics, go to the %s page.', 'search-meter'), '<a href="options-general.php?page=' . plugin_basename(__FILE__) . '">' . __('Search Meter Settings', 'search-meter') . '</a>') ?></p>
+			<p><?php printf(__('To manage your search statistics, go to %s.', 'search-meter'), '<a href="options-general.php?page=' . plugin_basename(__FILE__) . '">' . __('Search Meter Settings', 'search-meter') . '</a>') ?></p>
+			echo ' ';
 		<?php endif; ?>
 
 		<p><?php
 			printf(__('For information and updates, see the %s.', 'search-meter'), '<a href="http://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/">' . __('Search Meter home page', 'search-meter') . '</a>');
+			echo ' ';
 			_e('There you can offer suggestions, request new features or report problems.', 'search-meter');
 		?></p>
 
