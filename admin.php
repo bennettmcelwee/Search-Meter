@@ -303,8 +303,7 @@ function tguy_sm_summary_page() {
 		<h2><?php _e('Notes', 'search-meter') ?></h2>
 
 		<?php if (current_user_can(TGUY_SM_OPTIONS_CAPABILITY)) : ?>
-			<p><?php printf(__('To manage your search statistics, go to %s.', 'search-meter'), '<a href="options-general.php?page=' . plugin_basename(__FILE__) . '">' . __('Search Meter Settings', 'search-meter') . '</a>');
-			echo ' '; ?></p>
+			<p><?php printf(__('To manage your search statistics, go to %s.', 'search-meter'), '<a href="options-general.php?page=' . plugin_basename(__FILE__) . '">' . __('Search Meter Settings', 'search-meter') . '</a>') ?></p>
 		<?php endif; ?>
 
 		<p><?php
@@ -474,8 +473,7 @@ function tguy_sm_recent_page($max_lines, $do_show_details) {
 		<h2><?php _e('Notes', 'search-meter') ?></h2>
 
 		<?php if (current_user_can(TGUY_SM_OPTIONS_CAPABILITY)) : ?>
-			<p><?php printf(__('To manage your search statistics, go to %s.', 'search-meter'), '<a href="options-general.php?page=' . plugin_basename(__FILE__) . '">' . __('Search Meter Settings', 'search-meter') . '</a>') ?></p>
-			echo ' ';
+			<p><?php printf(__('To manage your search statistics, go to %s.', 'search-meter'), '<a href="options-general.php?page=' . plugin_basename(__FILE__) . '">' . __('Search Meter Settings', 'search-meter') . '</a>'); ?></p>
 		<?php endif; ?>
 
 		<p><?php
@@ -599,14 +597,14 @@ function tguy_sm_options_page() {
 					<th class="th-full" scope="row" colspan="2">
 						<label for="sm_disable_donation">
 							<input type="checkbox" id="sm_disable_donation" name="sm_disable_donation" <?php echo (tguy_sm_array_value($options, 'sm_disable_donation') ? 'checked="checked"' : '') ?> />
-							<?php _e('Hide the &#8220;Do you find this plugin useful?&#8221; box', 'search-meter') ?>
+							<?php printf(__('Hide the &#8220;%s&#8221; section.', 'search-meter'), __('Do you find this plugin useful?', 'search-meter')); ?>
 						</label>
 					</th>
 				</tr>
 			</table>
 
 			<p class="submit">
-				<input name="Submit" class="button-primary" value="Save Changes" type="submit">
+				<input name="Submit" class="button-primary" value="<?php esc_attr_e('Save Changes') ?>" type="submit">
 			</p>
 		</form>
 
