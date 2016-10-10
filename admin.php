@@ -303,8 +303,8 @@ function tguy_sm_summary_page() {
 		<h2><?php _e('Notes', 'search-meter') ?></h2>
 
 		<?php if (current_user_can(TGUY_SM_OPTIONS_CAPABILITY)) : ?>
-			<p><?php printf(__('To manage your search statistics, go to %s.', 'search-meter'), '<a href="options-general.php?page=' . plugin_basename(__FILE__) . '">' . __('Search Meter Settings', 'search-meter') . '</a>') ?></p>
-			echo ' ';
+			<p><?php printf(__('To manage your search statistics, go to %s.', 'search-meter'), '<a href="options-general.php?page=' . plugin_basename(__FILE__) . '">' . __('Search Meter Settings', 'search-meter') . '</a>');
+			echo ' '; ?></p>
 		<?php endif; ?>
 
 		<p><?php
@@ -631,6 +631,7 @@ function tguy_sm_options_page() {
 
 		<p><?php
 			printf(__('For information and updates, see the %s.', 'search-meter'), '<a href="http://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/">' . __('Search Meter home page', 'search-meter') . '</a>');
+			echo ' ';
 			_e('There you can offer suggestions, request new features or report problems.', 'search-meter');
 		?></p>
 
