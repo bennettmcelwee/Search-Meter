@@ -10,7 +10,7 @@ Donate link: http://thunderguy.com/semicolon/donate/
 Text Domain: search-meter
 Domain Path: /languages
 
-$Revision: 1400894 $
+$Revision: 1512540 $
 
 
 INSTRUCTIONS
