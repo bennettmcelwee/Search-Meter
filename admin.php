@@ -662,9 +662,9 @@ function tguy_sm_download_summary() {
 		"SELECT `terms`, `count`, `date`, `last_hits`
 		FROM `{$wpdb->prefix}searchmeter`
 		ORDER BY `date` ASC, `terms` ASC");
-	$results_array = [[__('Date', 'search-meter'), __('Search terms', 'search-meter'), __('Searches', 'search-meter'), __('Results', 'search-meter')]];
+	$results_array = array(array(__('Date', 'search-meter'), __('Search terms', 'search-meter'), __('Searches', 'search-meter'), __('Results', 'search-meter')));
 	foreach ($results as $result) {
-		$results_array[] = [tguy_sm_format_utc_as_local('Y-m-d', $result->date), $result->terms, $result->count, $result->last_hits];
+		$results_array[] = array(tguy_sm_format_utc_as_local('Y-m-d', $result->date), $result->terms, $result->count, $result->last_hits);
 	}
 	/* translators: base filename for downloaded summary - lowercase letters, digits, dashes only  */
 	tguy_sm_download_to_csv($results_array, __('search-summary', 'search-meter'));
@@ -676,9 +676,9 @@ function tguy_sm_download_individual() {
 		"SELECT `terms`, `datetime`, `hits`, `details`
 		FROM `{$wpdb->prefix}searchmeter_recent`
 		ORDER BY `datetime` ASC");
-	$results_array = [[__('Date', 'search-meter'), __('Search terms', 'search-meter'), __('Results', 'search-meter'), __('Details', 'search-meter')]];
+	$results_array = array(array(__('Date', 'search-meter'), __('Search terms', 'search-meter'), __('Results', 'search-meter'), __('Details', 'search-meter')));
 	foreach ($results as $result) {
-		$results_array[] = [tguy_sm_format_utc_as_local('Y-m-d H:i:s', $result->datetime), $result->terms, $result->hits, $result->details];
+		$results_array[] = array(tguy_sm_format_utc_as_local('Y-m-d H:i:s', $result->datetime), $result->terms, $result->hits, $result->details);
 	}
 	/* translators: base filename for downloaded searches - lowercase letters, digits, dashes only  */
 	tguy_sm_download_to_csv($results_array, __('recent-searches', 'search-meter'));
