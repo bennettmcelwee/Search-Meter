@@ -74,6 +74,9 @@ The [Search Meter home page](http://thunderguy.com/semicolon/wordpress/search-me
 1. The Search Meter administration interface, showing some of the reports available.
 
 == Changelog ==
+= 2.13.2 =
+* Restore compatibility with some older versions of PHP (probably back to 5.0).
+
 = 2.13.1 =
 * Some fixes for text and internationalization.
 
