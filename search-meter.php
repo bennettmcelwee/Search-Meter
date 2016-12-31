@@ -358,6 +358,29 @@ function tguy_sm_save_search($posts) {
 			));
 		}
 		++$tguy_sm_save_count;
+
+		// Save search word into the DB. Usually this will be a new row, so try to insert first
+		$exploded = explode(' ', $search_terms);
+		foreach($exploded as $word) {
+			if($word === '') {
+				continue;
+			}
+			$suppress = $wpdb->suppress_errors();
+			$success = $wpdb->query($wpdb->prepare("
+				INSERT INTO `{$wpdb->prefix}searchmeter_word` (`word`,`date`,`count`)
+				VALUES (%s, UTC_DATE(), 1)",
+				$word
+			));
+			$wpdb->suppress_errors($suppress);
+			if (!$success) {
+				$success = $wpdb->query($wpdb->prepare("
+					UPDATE `{$wpdb->prefix}searchmeter_word` SET
+						`count` = `count` + 1
+					WHERE `word` = %s AND `date` = UTC_DATE()",
+					$word
+				));
+			}
+		}
 	}
 	return $posts;
 }

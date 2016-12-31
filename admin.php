@@ -108,6 +108,7 @@ div.sm-stats-clear {
 function tguy_sm_init() {
 	tguy_sm_create_summary_table();
 	tguy_sm_create_recent_table();
+	tguy_sm_create_word_table();
 }
 
 function tguy_sm_create_summary_table() {
@@ -144,6 +145,25 @@ function tguy_sm_create_recent_table() {
 				KEY `datetimeindex` (`datetime`)
 			)
 			CHARACTER SET utf8 COLLATE utf8_general_ci;
+			");
+	}
+}
+
+function tguy_sm_create_word_table() {
+// Create the table if not already there.
+	global $wpdb;
+	$table_name = $wpdb->prefix . "searchmeter_word";
+	if ($wpdb->get_var("show tables like '$table_name'") != $table_name) {
+		require_once(ABSPATH . '/wp-admin/includes/upgrade.php');
+		$charset_collate = $wpdb->get_charset_collate();
+		dbDelta("
+			CREATE TABLE `{$table_name}` (
+				`word` VARCHAR(50) NOT NULL,
+				`date` DATE NOT NULL,
+				`count` INT(11) NOT NULL,
+				PRIMARY KEY (`word`,`date`)
+			)
+			{$charset_collate};
 			");
 	}
 }
@@ -231,6 +251,11 @@ function tguy_sm_summary_page() {
 	"DELETE FROM `{$wpdb->prefix}searchmeter`
 	WHERE `date` < DATE_SUB( CURDATE() , INTERVAL 30 DAY)");
 	echo "<!-- Search Meter: deleted $result old rows -->\n";
+	
+	$result = $wpdb->query(
+	"DELETE FROM `{$wpdb->prefix}searchmeter_word`
+	WHERE `date` < DATE_SUB( CURDATE() , INTERVAL 30 DAY)");
+	echo "<!-- Search Meter: deleted $result old rows from word -->\n";
 	?>
 	<div class="wrap">
 
@@ -264,6 +289,21 @@ function tguy_sm_summary_page() {
 		<div class="sm-stats-table">
 		<h3><?php _e('Last 30 days', 'search-meter') ?></h3>
 		<?php tguy_sm_summary_table(30); ?>
+		</div>
+		<div class="sm-stats-clear"></div>
+
+		<h2><?php _e('Search summary words', 'search-meter') ?></h2>
+		<div class="sm-stats-table">
+		<h3><?php _e('Yesterday and today', 'search-meter') ?></h3>
+		<?php tguy_sm_summary_word_table(1); 	?>
+		</div>
+		<div class="sm-stats-table">
+		<h3><?php _e('Last 7 days', 'search-meter') ?></h3>
+		<?php tguy_sm_summary_word_table(7); ?>
+		</div>
+		<div class="sm-stats-table">
+		<h3><?php _e('Last 30 days', 'search-meter') ?></h3>
+		<?php tguy_sm_summary_word_table(30); ?>
 		</div>
 		<div class="sm-stats-clear"></div>
 
@@ -363,6 +403,40 @@ function tguy_sm_summary_table($days, $do_include_successes = true) {
 				<td class="sm-number"><?php echo $result->hits ?></td></tr>
 				<?php
 			}
+			$class = ($class == '' ? 'alternate' : '');
+		}
+		?>
+		</tbody>
+		</table>
+		<?php
+	} else {
+		?><p><em><?php _e('No searches recorded for this period.', 'search-meter') ?></em></p><?php
+	}
+}
+
+function tguy_sm_summary_word_table($days) {
+	global $wpdb;
+	$results = $wpdb->get_results(
+		"SELECT `word`,
+		SUM( `count` ) AS countsum
+		FROM `{$wpdb->prefix}searchmeter_word`
+		WHERE DATE_SUB( CURDATE( ) , INTERVAL $days DAY ) <= `date`
+		GROUP BY `word`
+		ORDER BY countsum DESC, `word` ASC
+		LIMIT 20");
+	if (count($results)) {
+		?>
+		<table cellpadding="3" cellspacing="2">
+		<tbody>
+		<tr class="alternate"><th class="sm-text"><?php _e('Word', 'search-meter') ?></th><th><?php _e('Searches', 'search-meter') ?></th></tr>
+		<?php
+		$class= '';
+		foreach ($results as $result) {
+			?>
+			<tr class="<?php echo $class ?>">
+			<td><a href="<?php echo get_bloginfo('wpurl').'/wp-admin/edit.php?s='.urlencode($result->word).'&submit=Search' ?>"><?php echo htmlspecialchars($result->word) ?></a></td>
+			<td class="sm-number"><?php echo $result->countsum ?></td></tr>
+			<?php
 			$class = ($class == '' ? 'alternate' : '');
 		}
 		?>
