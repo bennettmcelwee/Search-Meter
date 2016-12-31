@@ -116,6 +116,7 @@ function tguy_sm_create_summary_table() {
 	$table_name = $wpdb->prefix . "searchmeter";
 	if ($wpdb->get_var("show tables like '$table_name'") != $table_name) {
 		require_once(ABSPATH . '/wp-admin/includes/upgrade.php');
+		$charset_collate = $wpdb->get_charset_collate();
 		dbDelta("
 			CREATE TABLE `{$table_name}` (
 				`terms` VARCHAR(50) NOT NULL,
@@ -124,7 +125,7 @@ function tguy_sm_create_summary_table() {
 				`last_hits` INT(11) NOT NULL,
 				PRIMARY KEY (`terms`,`date`)
 			)
-			CHARACTER SET utf8 COLLATE utf8_general_ci;
+			{$charset_collate}
 			");
 	}
 }
@@ -135,6 +136,7 @@ function tguy_sm_create_recent_table() {
 	$table_name = $wpdb->prefix . "searchmeter_recent";
 	if ($wpdb->get_var("show tables like '$table_name'") != $table_name) {
 		require_once(ABSPATH . '/wp-admin/includes/upgrade.php');
+		$charset_collate = $wpdb->get_charset_collate();
 		dbDelta("
 			CREATE TABLE `{$table_name}` (
 				`terms` VARCHAR(50) NOT NULL,
@@ -143,7 +145,7 @@ function tguy_sm_create_recent_table() {
 				`details` TEXT NOT NULL,
 				KEY `datetimeindex` (`datetime`)
 			)
-			CHARACTER SET utf8 COLLATE utf8_general_ci;
+			{$charset_collate}
 			");
 	}
 }
