@@ -360,9 +360,12 @@ function tguy_sm_summary_table($days, $do_include_successes = true) {
 			<?php
 			if ($do_include_successes) {
 				?>
-				<td class="sm-number"><?php echo $result->hits ?></td></tr>
+				<td class="sm-number"><?php echo $result->hits ?></td>
 				<?php
 			}
+			?>
+			</tr>
+			<?php
 			$class = ($class == '' ? 'alternate' : '');
 		}
 		?>
