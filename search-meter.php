@@ -81,14 +81,27 @@ function sm_list_popular_searches($before = '', $after = '', $count = 5) {
 		GROUP BY `terms`
 		ORDER BY countsum DESC, `terms` ASC
 		LIMIT $count");
-	if (count($results)) {
-		echo "$before\n<ul>\n";
-		$home_url_slash = get_option('home') . '/';
-		foreach ($results as $result) {
-			echo '<li><a href="'. $home_url_slash . sm_get_relative_search_url($result->terms) . '">'. htmlspecialchars($result->terms) .'</a></li>'."\n";
-		}
-		echo "</ul>\n$after\n";
+
+	$searches = array();
+
+	foreach ($results as $result) {
+		array_push($searches, array(
+			'term' => $result->terms,
+			'href' => get_search_link($result->terms)
+		));
 	}
+
+	$display = '';
+
+	if (count($searches)) {
+		$display = "$before\n<ul>\n";
+		foreach ($searches as $search) {
+			$display .= '<li><a href="' . $search['href'] . '">'. htmlspecialchars($search['term']) .'</a></li>'."\n";
+		}
+		$display .= "</ul>\n$after\n";
+	}
+
+	echo apply_filters('sm_list_popular_searches_display', $display, $searches);
 }
 
 function sm_list_recent_searches($before = '', $after = '', $count = 5) {
@@ -337,26 +350,14 @@ function tguy_sm_save_search($posts) {
 				$success = $wpdb->query($query);
 			}
 		}
-		// Save search summary into the DB. Usually this will be a new row, so try to insert first
-		// Temporarily suppress errors, as this query is expected to fail on duplicate searches in a single day. Thanks to James Collins.
-		$suppress = $wpdb->suppress_errors();
-		$success = $wpdb->query($wpdb->prepare("
+		// Save search summary into the DB.
+		$wpdb->query($wpdb->prepare("
 			INSERT INTO `{$wpdb->prefix}searchmeter` (`terms`,`date`,`count`,`last_hits`)
-			VALUES (%s, UTC_DATE(), 1, %d)",
+			VALUES (%s, UTC_DATE(), 1, %d)
+			ON DUPLICATE KEY UPDATE `count` = `count` + 1, `last_hits` = VALUES(`last_hits`)",
 			$search_terms,
 			$hit_count
 		));
-		$wpdb->suppress_errors($suppress);
-		if (!$success) {
-			$success = $wpdb->query($wpdb->prepare("
-				UPDATE `{$wpdb->prefix}searchmeter` SET
-					`count` = `count` + 1,
-					`last_hits` = %d
-				WHERE `terms` = %s AND `date` = UTC_DATE()",
-				$hit_count,
-				$search_terms
-			));
-		}
 		++$tguy_sm_save_count;
 	}
 	return $posts;
