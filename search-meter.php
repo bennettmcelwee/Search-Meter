@@ -350,35 +350,14 @@ function tguy_sm_save_search($posts) {
 				$success = $wpdb->query($query);
 			}
 		}
-		// Save search summary into the DB. Usually this will be a new row, so try to insert first
-		// Temporarily suppress errors, as this query is expected to fail on duplicate searches in a single day. Thanks to James Collins.
-		$suppress = $wpdb->suppress_errors();
-
-		$rowcount = $wpdb->get_var($wpdb->prepare(
-			"SELECT count(*) as rowcount
-				FROM `{$wpdb->prefix}searchmeter`
-				WHERE `terms` = %s AND `date` = UTC_DATE()", $search_terms));
-
-		if ($rowcount) {
-			$success = $wpdb->query($wpdb->prepare("
-				UPDATE `{$wpdb->prefix}searchmeter` SET
-					`count` = `count` + 1,
-					`last_hits` = %d
-				WHERE `terms` = %s AND `date` = UTC_DATE()",
-				$hit_count,
-				$search_terms
-			));
-		} else {
-			$success = $wpdb->query($wpdb->prepare("
+		// Save search summary into the DB.
+		$wpdb->query($wpdb->prepare("
 			INSERT INTO `{$wpdb->prefix}searchmeter` (`terms`,`date`,`count`,`last_hits`)
-			VALUES (%s, UTC_DATE(), 1, %d)",
-				$search_terms,
-				$hit_count
-			));
-		}
-
-		$wpdb->suppress_errors($suppress);
-
+			VALUES (%s, UTC_DATE(), 1, %d)
+			ON DUPLICATE KEY UPDATE `count` = `count` + 1, `last_hits` = VALUES(`last_hits`)",
+			$search_terms,
+			$hit_count
+		));
 		++$tguy_sm_save_count;
 	}
 	return $posts;
