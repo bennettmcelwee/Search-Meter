@@ -1,6 +1,6 @@
 <?php
 /*
-Copyright (C) 2005-16 Bennett McElwee (bennett at thunderguy dotcom)
+Copyright (C) 2005-20 Bennett McElwee (bennett at thunderguy dotcom)
 This software is licensed under the GPL v3. See the included LICENSE file for
 details. If you would like to use it under different terms, contact the author.
 */
@@ -185,7 +185,7 @@ function smcln_sm_summary() {
 		<?php if (current_user_can(TGUY_SM_OPTIONS_CAPABILITY)) : ?>
 		<li><a href="options-general.php?page=<?php echo plugin_basename(__FILE__); ?>"><?php _e('Settings', 'search-meter') ?></a> |</li>
 		<?php endif; ?>
-		<li><a href="http://thunderguy.com/semicolon/donate/"><?php _e('Donate', 'search-meter') ?></a></li>
+		<li><a href="https://thunderguy.com/semicolon/donate/"><?php _e('Donate', 'search-meter') ?></a></li>
 	</ul>
 <?php
 }
@@ -307,7 +307,7 @@ function tguy_sm_summary_page() {
 		<?php endif; ?>
 
 		<p><?php
-			printf(__('For information and updates, see the %s.', 'search-meter'), '<a href="http://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/">' . __('Search Meter home page', 'search-meter') . '</a>');
+			printf(__('For information and updates, see the %s.', 'search-meter'), '<a href="https://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/">' . __('Search Meter home page', 'search-meter') . '</a>');
 			echo ' ';
 			_e('There you can offer suggestions, request new features or report problems.', 'search-meter');
 		?></p>
@@ -480,7 +480,7 @@ function tguy_sm_recent_page($max_lines, $do_show_details) {
 		<?php endif; ?>
 
 		<p><?php
-			printf(__('For information and updates, see the %s.', 'search-meter'), '<a href="http://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/">' . __('Search Meter home page', 'search-meter') . '</a>');
+			printf(__('For information and updates, see the %s.', 'search-meter'), '<a href="https://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/">' . __('Search Meter home page', 'search-meter') . '</a>');
 			echo ' ';
 			_e('There you can offer suggestions, request new features or report problems.', 'search-meter');
 		?></p>
@@ -631,7 +631,7 @@ function tguy_sm_options_page() {
 		<p><?php printf(__('To see your search statistics, go to the %s.', 'search-meter'), '<a href="index.php?page=' . plugin_basename(__FILE__) . '">' . __('Search Meter Dashboard', 'search-meter') . '</a>') ?></p>
 
 		<p><?php
-			printf(__('For information and updates, see the %s.', 'search-meter'), '<a href="http://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/">' . __('Search Meter home page', 'search-meter') . '</a>');
+			printf(__('For information and updates, see the %s.', 'search-meter'), '<a href="https://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/">' . __('Search Meter home page', 'search-meter') . '</a>');
 			echo ' ';
 			_e('There you can offer suggestions, request new features or report problems.', 'search-meter');
 		?></p>
@@ -659,6 +659,16 @@ function tguy_sm_download() {
 		tguy_sm_download_individual();
 	}
 }
+
+function tguy_sm_sanitise_terms_for_csv($terms) {
+	// Excel (and its clones) interpret CSV values starting with certain characters as formulas, leading to
+	// potential vulnerabilities: https://owasp.org/www-community/attacks/CSV_Injection
+	// So here we work around that: if the search string starts with an Excel formula character, prepend a
+	// space so Excel/Sheets/LibreOffice don't execute it as a formula. It's a shame we have to add a space
+	// to work around this behaviour, but hey, it's only a space.
+	return (preg_match('/^[=@+-]/', $terms) ? (' ' . $terms) : $terms);
+}
+
 function tguy_sm_download_summary() {
 	global $wpdb;
 	$results = $wpdb->get_results(
@@ -667,7 +677,7 @@ function tguy_sm_download_summary() {
 		ORDER BY `date` ASC, `terms` ASC");
 	$results_array = array(array(__('Date', 'search-meter'), __('Search terms', 'search-meter'), __('Searches', 'search-meter'), __('Results', 'search-meter')));
 	foreach ($results as $result) {
-		$results_array[] = array(tguy_sm_format_utc_as_local('Y-m-d', $result->date), $result->terms, $result->count, $result->last_hits);
+		$results_array[] = array(tguy_sm_format_utc_as_local('Y-m-d', $result->date), tguy_sm_sanitise_terms_for_csv($result->terms), $result->count, $result->last_hits);
 	}
 	/* translators: base filename for downloaded summary - lowercase letters, digits, dashes only  */
 	tguy_sm_download_to_csv($results_array, __('search-summary', 'search-meter'));
@@ -681,7 +691,7 @@ function tguy_sm_download_individual() {
 		ORDER BY `datetime` ASC");
 	$results_array = array(array(__('Date', 'search-meter'), __('Search terms', 'search-meter'), __('Results', 'search-meter'), __('Details', 'search-meter')));
 	foreach ($results as $result) {
-		$results_array[] = array(tguy_sm_format_utc_as_local('Y-m-d H:i:s', $result->datetime), $result->terms, $result->hits, $result->details);
+		$results_array[] = array(tguy_sm_format_utc_as_local('Y-m-d H:i:s', $result->datetime), tguy_sm_sanitise_terms_for_csv($result->terms), $result->hits, $result->details);
 	}
 	/* translators: base filename for downloaded searches - lowercase letters, digits, dashes only  */
 	tguy_sm_download_to_csv($results_array, __('recent-searches', 'search-meter'));
@@ -704,7 +714,7 @@ function tguy_sm_download_to_csv($array, $filenamebase) {
 	header('Content-Type: application/csv');
 	header('Content-Disposition: attachment; filename="'.$filenamebase.'-'.current_time('Ymd-His').'.csv";');
 
-    // see http://www.php.net/manual/en/wrappers.php.php#refsect2-wrappers.php-unknown-unknown-unknown-descriptioq
+    // see https://www.php.net/manual/en/wrappers.php.php#refsect2-wrappers.php-unknown-unknown-unknown-descriptioq
     $f = fopen('php://output', 'w');
     foreach ($array as $line) {
         fputcsv($f, $line);

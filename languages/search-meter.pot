@@ -334,7 +334,7 @@ msgstr ""
 
 #. Plugin URI of the plugin/theme
 msgid ""
-"http://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/"
+"https://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/"
 msgstr ""
 
 #. Description of the plugin/theme
@@ -349,5 +349,5 @@ msgid "Bennett McElwee"
 msgstr ""
 
 #. Author URI of the plugin/theme
-msgid "http://thunderguy.com/semicolon/"
+msgid "https://thunderguy.com/semicolon/"
 msgstr ""

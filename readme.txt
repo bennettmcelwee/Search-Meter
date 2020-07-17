@@ -67,7 +67,7 @@ Show a simple list of the 5 most recent successful search terms, hyperlinked to 
 
 = Where can I find out more information? =
 
-The [Search Meter home page](http://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/) has more information and a form to submit comments and questions.
+The [Search Meter home page](https://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/) has more information and a form to submit comments and questions.
 
 == Screenshots ==
 

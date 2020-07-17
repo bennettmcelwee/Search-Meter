@@ -1,16 +1,16 @@
 <?php
 /*
 Plugin Name: Search Meter
-Plugin URI: http://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/
+Plugin URI: https://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/
 Description: Keeps track of what your visitors are searching for. After you have activated this plugin, you can check the Search Meter section in the Dashboard to see what your visitors are searching for on your blog.
 Version: 2.13.2
 Author: Bennett McElwee
-Author URI: http://thunderguy.com/semicolon/
-Donate link: http://thunderguy.com/semicolon/donate/
+Author URI: https://thunderguy.com/semicolon/
+Donate link: https://thunderguy.com/semicolon/donate/
 Text Domain: search-meter
 Domain Path: /languages
 
-$Revision: 1512540 $
+$Revision: 2278181 $
 
 
 INSTRUCTIONS
@@ -27,12 +27,12 @@ INSTRUCTIONS
 * To display recent and popular searches, use the Recent Searches and
   Popular Searches widgets, or the sm_list_popular_searches() and
   sm_list_recent_searches() template tags.
-* For full details, see http://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/
+* For full details, see https://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/
 
 Thanks to everyone who has suggested or contributed improvements. It takes a village to build a plugin.
 
 
-Copyright (C) 2005-16 Bennett McElwee (bennett at thunderguy dotcom)
+Copyright (C) 2005-20 Bennett McElwee (bennett at thunderguy dotcom)
 This software is licensed under the GPL v3. See the included LICENSE file for
 details. If you would like to use it under different terms, contact the author.
 */
