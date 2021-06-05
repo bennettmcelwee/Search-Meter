@@ -3,8 +3,8 @@ Contributors: bennettmcelwee
 Donate link: https://thunderguy.com/semicolon/donate/
 Tags: search, meter, search-meter, statistics, widget, admin, keywords, terms, search terms
 Requires at least: 3.2
-Tested up to: 5.4
-Stable tag: 2.13.2
+Tested up to: 5.7.2
+Stable tag: 2.13.3
 
 Search Meter tracks what your readers are searching for on your blog. View full details of recent searches or stats for the last day, week or month.
 
@@ -74,6 +74,9 @@ The [Search Meter home page](https://thunderguy.com/semicolon/wordpress/search-m
 1. The Search Meter administration interface, showing some of the reports available.
 
 == Changelog ==
+= 2.13.4 =
+* Remove deprecation warning.
+
 = 2.13.3 =
 * Work around Excel bug that could lead to exploits in downloaded search files.
 
