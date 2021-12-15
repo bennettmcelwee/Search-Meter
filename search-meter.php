@@ -104,6 +104,21 @@ function sm_list_popular_searches($before = '', $after = '', $count = 5) {
 	echo apply_filters('sm_list_popular_searches_display', $display, $searches);
 }
 
+function sm_list_popular_searches_shortcode( $atts ) {
+	$atts_ = shortcode_atts( array(
+		'before' => '',
+		'after' => '',
+		'count' => 5,
+	), $atts );
+
+	ob_start();
+	sm_list_popular_searches($atts_['before'], $atts_['after'], $atts_['count']);
+	$ret = ob_get_contents();
+	ob_end_clean();
+
+	return $ret;
+}
+
 function sm_list_recent_searches($before = '', $after = '', $count = 5) {
 // List the most recent successful searches, ignoring duplicates
 	global $wpdb;
@@ -127,6 +142,27 @@ function sm_list_recent_searches($before = '', $after = '', $count = 5) {
 		echo "</ul>\n$after\n";
 	}
 }
+
+function sm_list_recent_searches_shortcode( $atts ) {
+	$atts_ = shortcode_atts( array(
+		'before' => '',
+		'after' => '',
+		'count' => 5,
+	), $atts );
+
+	ob_start();
+	sm_list_recent_searches($atts_['before'], $atts_['after'], $atts_['count']);
+	$ret = ob_get_contents();
+	ob_end_clean();
+
+	return $ret;
+}
+
+function sm_register_shortcodes(){
+	add_shortcode('sm_list_popular_searches', 'sm_list_popular_searches_shortcode');
+	add_shortcode('sm_list_recent_searches', 'sm_list_recent_searches_shortcode');
+}
+add_action( 'init', 'sm_register_shortcodes');
 
 function sm_get_relative_search_url($term) {
 // Return the URL for a search term, relative to the home directory.
