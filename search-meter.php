@@ -279,6 +279,9 @@ function tguy_sm_save_search($posts) {
 	// Setting to true will record duplicates (the fact that it's a dupe will be recorded in the
 	// details). This will mess up the stats, but could be useful for troubleshooting.
 	$record_duplicates = apply_filters('search_meter_record_duplicates', false);
+	
+	// Get all details of this search
+	// Filter search string
 	$search_string = $wp_query->query_vars['s'];
 	$len          = (strlen($search_string) > 0);
     	$www           = ('www' === substr($search_string, 0, 3));
@@ -297,9 +300,6 @@ function tguy_sm_save_search($posts) {
 		if (tguy_sm_array_value($options, 'sm_ignore_admin_search') && current_user_can("manage_options")) {
 			return $posts; // EARLY EXIT
 		}
-
-		// Get all details of this search
-		// search string is the raw query
 		
 		// search terms is the words in the query
 		$search_terms = $search_string;
