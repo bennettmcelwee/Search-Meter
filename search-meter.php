@@ -10,7 +10,7 @@ Donate link: https://thunderguy.com/semicolon/donate/
 Text Domain: search-meter
 Domain Path: /languages
 
-$Revision: 2278181 $
+$Revision: 2542977 $
 
 
 INSTRUCTIONS
@@ -279,12 +279,17 @@ function tguy_sm_save_search($posts) {
 	// Setting to true will record duplicates (the fact that it's a dupe will be recorded in the
 	// details). This will mess up the stats, but could be useful for troubleshooting.
 	$record_duplicates = apply_filters('search_meter_record_duplicates', false);
+	$search_string = $wp_query->query_vars['s'];
+	$len          = (strlen($search_string) > 0);
+    	$www           = ('www' === substr($search_string, 0, 3));
+	$slashes       = (false !== strpos($search_string, '/'));
 
 	if (is_search()
 	&& !is_paged() // not the second or subsequent page of a previously-counted search
 	&& !tguy_is_admin_interface() // not using the administration console
 	&& (0 === $tguy_sm_save_count || $record_duplicates)
 	&& (tguy_sm_array_value($_SERVER, 'HTTP_REFERER')) // proper referrer (otherwise could be search engine, cache...)
+	&& ($len or $www or $slashes)
 	) {
 		$options = get_option('tguy_search_meter');
 
@@ -295,7 +300,7 @@ function tguy_sm_save_search($posts) {
 
 		// Get all details of this search
 		// search string is the raw query
-		$search_string = $wp_query->query_vars['s'];
+		
 		// search terms is the words in the query
 		$search_terms = $search_string;
 		$search_terms = preg_replace('/[," ]+/', ' ', $search_terms);
