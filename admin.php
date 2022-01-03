@@ -137,10 +137,12 @@ function tguy_sm_create_recent_table() {
 		require_once(ABSPATH . '/wp-admin/includes/upgrade.php');
 		dbDelta("
 			CREATE TABLE `{$table_name}` (
+				`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
 				`terms` VARCHAR(50) NOT NULL,
 				`datetime` DATETIME NOT NULL,
 				`hits` INT(11) NOT NULL,
 				`details` TEXT NOT NULL,
+				PRIMARY KEY (`id`),
 				KEY `datetimeindex` (`datetime`)
 			)
 			CHARACTER SET utf8 COLLATE utf8_general_ci;
