@@ -516,9 +516,6 @@ function tguy_sm_options_page() {
 		$options = get_option('tguy_search_meter');
 		$options['sm_view_stats_capability']  = ($_POST['sm_view_stats_capability']);
 		$sm_filter_words = $_POST['sm_filter_words'];
-		if (get_magic_quotes_gpc()) {
-			$sm_filter_words = stripslashes($sm_filter_words);
-		}
 		$options['sm_filter_words']  = preg_replace('/\\s+/', ' ', trim($sm_filter_words));
 		$options['sm_ignore_admin_search']  = (bool)tguy_sm_array_value($_POST, 'sm_ignore_admin_search');
 		$options['sm_details_verbose']  = (bool)tguy_sm_array_value($_POST, 'sm_details_verbose');
