@@ -8,13 +8,19 @@
   "icon": "editor-ul",
   "description": "A list of the most recent successful searches on the blog",
   "example": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "count": {
+      "type": "number"
+    }
+  },
   "supports": {
     "html": false
   },
   "textdomain": "search-meter",
   "editorScript": "file:./index.js",
-  "editorStyle": "file:./index.css",
   "style": "file:./style-index.css",
-  "render": "file:./render.php",
-  "viewScript": "file:./view.js"
+  "render": "file:./render.php"
 }

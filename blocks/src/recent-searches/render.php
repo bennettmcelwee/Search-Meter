@@ -10,6 +10,17 @@
  * @see https://github.com/WordPress/gutenberg/blob/trunk/docs/reference-guides/block-api/block-metadata.md#render
  */
 ?>
-<p <?php echo get_block_wrapper_attributes(); ?>>
-	<?php esc_html_e( 'Recent Searches – hello from a dynamic block!', 'recent-searches' ); ?>
-</p>
+
+<?php
+	$title = @$attributes['title'] ?? 'Recent Searches';
+	$count = (int) (@$attributes['count'] ?? 5);
+?>
+
+<div <?php echo get_block_wrapper_attributes(); ?>>
+	<?php if ($title) { ?>
+		<h2><?php echo esc_html($title) ?></h2>
+	<?php } ?>
+
+	<?php sm_list_recent_searches('', '', sm_constrain_widget_search_count($count)); ?>
+
+</div>
