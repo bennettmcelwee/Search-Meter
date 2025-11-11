@@ -17,7 +17,14 @@
     }
   },
   "supports": {
-    "html": false
+    "color": {
+      "background": false,
+      "text": true
+    },
+    "html": false,
+    "typography": {
+      "fontSize": true
+    }
   },
   "textdomain": "search-meter",
   "editorScript": "file:./index.js",
