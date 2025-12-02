@@ -47,7 +47,7 @@ export default function Edit( { attributes, setAttributes } ) {
                 </PanelBody>
             </InspectorControls>
 			<div { ...useBlockProps() }>
-				{title && <h2>{title}</h2>}
+				{title && <h2 class="wp-block-heading">{title}</h2>}
 				<ul>
 					{Array.from({length: count}, (_, i) => <li key={i}>search{i}</li>)}
 				</ul>

@@ -18,7 +18,7 @@
 
 <div <?php echo get_block_wrapper_attributes(); ?>>
 	<?php if ($title) { ?>
-		<h2><?php echo esc_html($title) ?></h2>
+		<h2 class="wp-block-heading"><?php echo esc_html($title) ?></h2>
 	<?php } ?>
 
 	<?php sm_list_recent_searches('', '', sm_constrain_widget_search_count($count)); ?>
