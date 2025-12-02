@@ -13,7 +13,7 @@ import { __ } from '@wordpress/i18n';
  */
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 
-import { PanelBody, __experimentalText as Text, TextControl } from '@wordpress/components';
+import { PanelBody, TextControl } from '@wordpress/components';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -44,9 +44,6 @@ export default function Edit( { attributes, setAttributes } ) {
                         __nextHasNoMarginBottom
                         __next40pxDefaultSize
                     />
-                    <Text variant="muted">
-                        To customize the appearance of the title, delete it here and instead add a Heading block above this block.
-                    </Text>
                 </PanelBody>
             </InspectorControls>
 			<div { ...useBlockProps() }>
