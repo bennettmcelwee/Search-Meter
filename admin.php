@@ -237,7 +237,7 @@ function tguy_sm_summary_page() {
 		<h2><?php _e('Search summary', 'search-meter') ?></h2>
 
 		<p><?php
-			_e('These tables show the most popular searches on your blog for the given time periods.', 'search-meter');
+			_e('These tables show the most popular searches on your site for the given time periods.', 'search-meter');
 			echo ' ';
 			printf(__('%s is the text that was searched for; you can click it to see which posts contain that term. (This won\'t be counted as another search.)', 'search-meter'), '<strong>' . __('Term', 'search-meter') . '</strong>');
 			echo ' ';
@@ -263,7 +263,7 @@ function tguy_sm_summary_page() {
 
 		<h2><?php _e('Unsuccessful search summary', 'search-meter') ?></h2>
 
-		<p><?php _e('These tables show only the search terms for which the last search yielded no results. People are searching your blog for these terms; maybe you should give them what they want.', 'search-meter') ?></p>
+		<p><?php _e('These tables show only the search terms for which the last search yielded no results. People are searching your site for these terms; maybe you should give them what they want.', 'search-meter') ?></p>
 
 		<div class="sm-stats-table">
 		<h3><?php _e('Yesterday and today', 'search-meter') ?></h3>
@@ -397,7 +397,7 @@ function tguy_sm_recent_page($max_lines, $do_show_details) {
 		<h2><?php _e('Recent searches', 'search-meter') ?></h2>
 
 		<p><?php
-			printf(__('This table shows the last %s searches on this blog.', 'search-meter'), $max_lines);
+			printf(__('This table shows the last %s searches on this site.', 'search-meter'), $max_lines);
 			echo ' ';
 			printf(__('%s is the text that was searched for; you can click it to see which posts contain that term. (This won\'t be counted as another search.)', 'search-meter'), '<strong>' . __('Term', 'search-meter') . '</strong>');
 			echo ' ';

@@ -2,7 +2,7 @@
 /*
 Plugin Name: Search Meter
 Plugin URI: https://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/
-Description: Keeps track of what your visitors are searching for. After you have activated this plugin, you can check the Search Meter section in the Dashboard to see what your visitors are searching for on your blog.
+Description: Keeps track of what your visitors are searching for. After you have activated this plugin, you can check the Search Meter section in the Dashboard to see what your visitors are searching for on your site.
 Version: 2.13.5
 Author: Bennett McElwee
 Author URI: https://thunderguy.com/semicolon/
@@ -226,7 +226,7 @@ class SM_Popular_Searches_Widget extends WP_Widget {
 
 class SM_Recent_Searches_Widget extends WP_Widget {
 	public function __construct() {
-		$widget_ops = ['classname' => 'widget_search_meter', 'description' => __( "A list of the most recent successful searches on your blog", 'search-meter')];
+		$widget_ops = ['classname' => 'widget_search_meter', 'description' => __( "A list of the most recent successful searches on your site", 'search-meter')];
 		parent::__construct('recent_searches', __('Recent Searches', 'search-meter'), $widget_ops);
 	}
 

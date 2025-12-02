@@ -6,13 +6,13 @@ Requires at least: 3.2
 Tested up to: 6.8.3
 Stable tag: 2.13.5
 
-Search Meter tracks what your readers are searching for on your blog. View full details of recent searches or stats for the last day, week or month.
+Search Meter tracks what your readers are searching for on your site. View full details of recent searches or stats for the last day, week or month.
 
 == Description ==
 
-If you have a Search box on your blog, Search Meter automatically records what people are searching for -- and whether they are finding what they are looking for. Search Meter's admin interface shows you what people have been searching for in the last couple of days, and in the last week or month. It also shows you which searches have been unsuccessful. If people search your blog and get no results, they'll probably go elsewhere. With Search Meter, you'll be able to find out what people are searching for, and give them what they want by creating new posts on those topics.
+If you have a Search box on your site, Search Meter automatically records what people are searching for -- and whether they are finding what they are looking for. Search Meter's admin interface shows you what people have been searching for in the last couple of days, and in the last week or month. It also shows you which searches have been unsuccessful. If people search your site and get no results, they'll probably go elsewhere. With Search Meter, you'll be able to find out what people are searching for, and give them what they want by creating new posts on those topics.
 
-You can also show your readers what the most popular searches are. Customize your theme and add the Popular Searches block, which displays a configurable list of recent popular successful search terms on your blog, with each term hyperlinked to the actual search results. You can also add a Recent Searches block, which simply displays the most recent searches. Both blocks are also available as widgets for older WordPress installations. And if you want to edit your theme, both of these functions are also available as template tags.
+You can also show your readers what the most popular searches are. Customize your theme and add the Popular Searches block, which displays a configurable list of recent popular successful search terms on your site, with each term hyperlinked to the actual search results. You can also add a Recent Searches block, which simply displays the most recent searches. Both blocks are also available as widgets for older WordPress installations. And if you want to edit your theme, both of these functions are also available as template tags.
 
 Search Meter installs easily and requires no configuration. Just install it, activate it, and it starts tracking your visitors' searches.
 
@@ -36,12 +36,12 @@ If you want to install manually, download and unzip the search-meter.zip file an
 
 = Blocks: Popular and Recent Searches =
 
-The Popular Searches block displays a list of the most popular successful search terms on your blog during the last 30 days. The Recent Searches block displays a simple list of the most recent successful search terms. In both cases, the search terms in the lists are hyperlinked to the actual search results; readers can click the search term to show the results for that search. For each block you can configure the text colour and size, the title, and the maximum number of searches to display.
+The Popular Searches block displays a list of the most popular successful search terms on your site during the last 30 days. The Recent Searches block displays a simple list of the most recent successful search terms. In both cases, the search terms in the lists are hyperlinked to the actual search results; readers can click the search term to show the results for that search. For each block you can configure the text colour and size, the title, and the maximum number of searches to display.
 
 To add these blocks to your page, log in to WordPress, then go to the page you want to add them to. Click Edit Site to go to the
 page editor. You can add a block, and you'll be able to add the Popular Searches and Recent Searches blocks, and customize them as you wish.
 
-The blocks only display successful searches, so they will only display words that actually appear in your blog. If you still want to prevent some of these words appearing in the blocks, you can add search filter words in the Search Meter settings page.
+The blocks only display successful searches, so they will only display words that actually appear in your site. If you still want to prevent some of these words appearing in the blocks, you can add search filter words in the Search Meter settings page.
 
 The title will be a standard size and the same colour as the rest of the block. If you want its appearance to be different, you can leave it blank to omit it. Then you can just add a Heading block above the Search Meter block, and configure it however you like.
 
@@ -53,7 +53,7 @@ Older WordPress version use widgets instead of blocks. To add these widgets to y
 
 If you are familiar with template tags, you can edit your theme to include the Search Meter template tags to display the same information.
 
-The `sm_list_popular_searches()` template tag displays a list of the 5 most popular successful search terms on your blog during the last 30 days. Each term is a hyperlink; readers can click the search term to show the results for that search. Here are some examples of using this template tag.
+The `sm_list_popular_searches()` template tag displays a list of the 5 most popular successful search terms on your site during the last 30 days. Each term is a hyperlink; readers can click the search term to show the results for that search. Here are some examples of using this template tag.
 
 `sm_list_popular_searches()`
 Show a simple list of the 5 most popular recent successful search terms, hyperlinked to the actual search results.
