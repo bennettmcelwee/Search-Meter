@@ -22,7 +22,14 @@ return array(
 			)
 		),
 		'supports' => array(
-			'html' => false
+			'color' => array(
+				'background' => false,
+				'text' => true
+			),
+			'html' => false,
+			'typography' => array(
+				'fontSize' => true
+			)
 		),
 		'textdomain' => 'search-meter',
 		'editorScript' => 'file:./index.js',
@@ -50,7 +57,14 @@ return array(
 			)
 		),
 		'supports' => array(
-			'html' => false
+			'color' => array(
+				'background' => false,
+				'text' => true
+			),
+			'html' => false,
+			'typography' => array(
+				'fontSize' => true
+			)
 		),
 		'textdomain' => 'search-meter',
 		'editorScript' => 'file:./index.js',
