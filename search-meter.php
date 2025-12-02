@@ -32,7 +32,7 @@ INSTRUCTIONS
 Thanks to everyone who has suggested or contributed improvements. It takes a village to build a plugin.
 
 
-Copyright (C) 2005-23 Bennett McElwee (bennett at thunderguy dotcom)
+Copyright (C) 2005-25 Bennett McElwee (bennett at thunderguy dotcom)
 This software is licensed under the GPL v3. See the included LICENSE file for
 details. If you would like to use it under different terms, contact the author.
 */
@@ -40,11 +40,6 @@ details. If you would like to use it under different terms, contact the author.
 add_action( 'plugins_loaded', 'tguy_sm_load_plugin_textdomain' );
 function tguy_sm_load_plugin_textdomain() {
   load_plugin_textdomain('search-meter', FALSE, basename(dirname(__FILE__)) . '/languages/');
-}
-
-// This is here to avoid E_NOTICE when indexing nonexistent array keys. There's probably a better solution. Suggestions are welcome.
-function tguy_sm_array_value(&$array, $key) {
-	return (is_array($array) && array_key_exists($key, $array)) ? $array[$key] : null;
 }
 
 function tguy_is_admin_interface() {
@@ -82,13 +77,13 @@ function sm_list_popular_searches($before = '', $after = '', $count = 5) {
 		ORDER BY countsum DESC, `terms` ASC
 		LIMIT $count");
 
-	$searches = array();
+	$searches = [];
 
 	foreach ($results as $result) {
-		array_push($searches, array(
+		array_push($searches, [
 			'term' => $result->terms,
 			'href' => get_search_link($result->terms)
-		));
+		]);
 	}
 
 	$display = '';
@@ -120,7 +115,7 @@ function sm_list_recent_searches($before = '', $after = '', $count = 5) {
 		LIMIT $count");
 	if (count($results)) {
 		echo "$before\n<ul>\n";
-		$home_url_slash = get_option('home') . '/';
+		$home_url_slash = (get_option('home') ?: '') . '/';
 		foreach ($results as $result) {
 			echo '<li><a href="'. $home_url_slash . sm_get_relative_search_url($result->terms) . '">'. htmlspecialchars($result->terms) .'</a></li>'."\n";
 		}
@@ -149,9 +144,9 @@ function sm_get_escaped_filter_regex() {
 // Return a regular expression, escaped to go into a DB query, that will match any terms to be filtered out
 	global $sm_escaped_filter_regex, $wpdb;
 	if ( ! isset($sm_escaped_filter_regex)) {
-		$options = get_option('tguy_search_meter');
-		$filter_words = tguy_sm_array_value($options, 'sm_filter_words');
-		if ($filter_words == '') {
+		$options = get_option('tguy_search_meter') ?: [];
+		$filter_words = @$options['sm_filter_words'];
+		if (!$filter_words) {
 			$sm_escaped_filter_regex = '';
 		} else {
 			$filter_regex = str_replace(' ', '|', preg_quote($filter_words));
@@ -181,12 +176,12 @@ function tguy_sm_register_widgets() {
 }
 
 class SM_Popular_Searches_Widget extends WP_Widget {
-	function __construct() {
-		$widget_ops = array('classname' => 'widget_search_meter', 'description' => __( "A list of the most popular successful searches in the last month", 'search-meter'));
+	public function __construct() {
+		$widget_ops = ['classname' => 'widget_search_meter', 'description' => __( "A list of the most popular successful searches in the last month", 'search-meter')];
 		parent::__construct('popular_searches', __('Popular Searches', 'search-meter'), $widget_ops);
 	}
 
-	function widget($args, $instance) {
+	public function widget($args, $instance) {
 		extract($args);
 		$title = apply_filters('widget_title', empty($instance['popular-searches-title']) ? __('Popular Searches', 'search-meter') : $instance['popular-searches-title']);
 		$count = (int) (empty($instance['popular-searches-number']) ? 5 : $instance['popular-searches-number']);
@@ -199,16 +194,16 @@ class SM_Popular_Searches_Widget extends WP_Widget {
 		echo $after_widget;
 	}
 
-	function update($new_instance, $old_instance){
+	public function update($new_instance, $old_instance){
 		$instance = $old_instance;
 		$instance['popular-searches-title'] = strip_tags(stripslashes($new_instance['popular-searches-title']));
 		$instance['popular-searches-number'] = (int) ($new_instance['popular-searches-number']);
 		return $instance;
 	}
 
-	function form($instance){
+	public function form($instance){
 		//Defaults
-		$instance = wp_parse_args((array) $instance, array('popular-searches-title' => __('Popular Searches', 'search-meter'), 'popular-searches-number' => 5));
+		$instance = wp_parse_args((array) $instance, ['popular-searches-title' => __('Popular Searches', 'search-meter'), 'popular-searches-number' => 5]);
 
 		$title = htmlspecialchars($instance['popular-searches-title']);
 		$count = htmlspecialchars($instance['popular-searches-number']);
@@ -221,12 +216,12 @@ class SM_Popular_Searches_Widget extends WP_Widget {
 }
 
 class SM_Recent_Searches_Widget extends WP_Widget {
-	function __construct() {
-		$widget_ops = array('classname' => 'widget_search_meter', 'description' => __( "A list of the most recent successful searches on your blog", 'search-meter'));
+	public function __construct() {
+		$widget_ops = ['classname' => 'widget_search_meter', 'description' => __( "A list of the most recent successful searches on your blog", 'search-meter')];
 		parent::__construct('recent_searches', __('Recent Searches', 'search-meter'), $widget_ops);
 	}
 
-	function widget($args, $instance) {
+	public function widget($args, $instance) {
 		extract($args);
 		$title = apply_filters('widget_title', empty($instance['recent-searches-title']) ? __('Recent Searches', 'search-meter') : $instance['recent-searches-title']);
 		$count = (int) (empty($instance['recent-searches-number']) ? 5 : $instance['recent-searches-number']);
@@ -239,16 +234,16 @@ class SM_Recent_Searches_Widget extends WP_Widget {
 		echo $after_widget;
 	}
 
-	function update($new_instance, $old_instance){
+	public function update($new_instance, $old_instance){
 		$instance = $old_instance;
 		$instance['recent-searches-title'] = strip_tags(stripslashes($new_instance['recent-searches-title']));
 		$instance['recent-searches-number'] = (int) ($new_instance['recent-searches-number']);
 		return $instance;
 	}
 
-	function form($instance){
+	public function form($instance){
 		//Defaults
-		$instance = wp_parse_args((array) $instance, array('recent-searches-title' => __('Recent Searches', 'search-meter'), 'recent-searches-number' => 5));
+		$instance = wp_parse_args((array) $instance, ['recent-searches-title' => __('Recent Searches', 'search-meter'), 'recent-searches-number' => 5]);
 
 		$title = htmlspecialchars($instance['recent-searches-title']);
 		$count = htmlspecialchars($instance['recent-searches-number']);
@@ -284,12 +279,12 @@ function tguy_sm_save_search($posts) {
 	&& !is_paged() // not the second or subsequent page of a previously-counted search
 	&& !tguy_is_admin_interface() // not using the administration console
 	&& (0 === $tguy_sm_save_count || $record_duplicates)
-	&& (tguy_sm_array_value($_SERVER, 'HTTP_REFERER')) // proper referrer (otherwise could be search engine, cache...)
+	&& (@$_SERVER['HTTP_REFERER']) // proper referrer (otherwise could be search engine, cache...)
 	) {
-		$options = get_option('tguy_search_meter');
+		$options = get_option('tguy_search_meter') ?: [];
 
-		// Break out if we're supposed to ignore admin searches
-		if (tguy_sm_array_value($options, 'sm_ignore_admin_search') && current_user_can("manage_options")) {
+		// Break out if we're supposed to ignore admin searches and this is one
+		if (@$options['sm_ignore_admin_search'] && current_user_can("manage_options")) {
 			return $posts; // EARLY EXIT
 		}
 
@@ -303,13 +298,13 @@ function tguy_sm_save_search($posts) {
 		$hit_count = $wp_query->found_posts; // Thanks to Will for this line
 		// Other useful details of the search
 		$details = '';
-		if (tguy_sm_array_value($options, 'sm_details_verbose')) {
+		if (@$options['sm_details_verbose']) {
 			if ($record_duplicates) {
 				$details .= __('Search Meter save count', 'search-meter') . ": $tguy_sm_save_count\n";
 			}
-			foreach (array('REQUEST_URI','REQUEST_METHOD','QUERY_STRING','REMOTE_ADDR','HTTP_USER_AGENT','HTTP_REFERER')
+			foreach (['REQUEST_URI','REQUEST_METHOD','QUERY_STRING','REMOTE_ADDR','HTTP_USER_AGENT','HTTP_REFERER']
 			         as $header) {
-				$details .= $header . ': ' . tguy_sm_array_value($_SERVER, $header) . "\n";
+				$details .= $header . ': ' . @$_SERVER[$header] . "\n";
 			}
 		}
 

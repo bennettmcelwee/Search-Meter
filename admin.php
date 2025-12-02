@@ -1,6 +1,6 @@
 <?php
 /*
-Copyright (C) 2005-20 Bennett McElwee (bennett at thunderguy dotcom)
+Copyright (C) 2005-25 Bennett McElwee (bennett at thunderguy dotcom)
 This software is licensed under the GPL v3. See the included LICENSE file for
 details. If you would like to use it under different terms, contact the author.
 */
@@ -8,10 +8,10 @@ details. If you would like to use it under different terms, contact the author.
 //////// Parameters
 
 
-define('TGUY_SM_DEFAULT_VIEW_STATS_CAPABILITY', 'publish_posts');
+const TGUY_SM_DEFAULT_VIEW_STATS_CAPABILITY = 'publish_posts';
 // Default capability users must have in order to see stats.
 
-define('TGUY_SM_OPTIONS_CAPABILITY', 'manage_options');
+const TGUY_SM_OPTIONS_CAPABILITY = 'manage_options';
 // Capability users must have in order to set options.
 
 
@@ -153,11 +153,8 @@ function tguy_sm_create_recent_table() {
 
 
 function smcln_sm_can_view_stats() {
-	$options = get_option('tguy_search_meter');
-	$view_stats_capability = tguy_sm_array_value($options, 'sm_view_stats_capability');
-	if ($view_stats_capability == '') {
-		$view_stats_capability = TGUY_SM_DEFAULT_VIEW_STATS_CAPABILITY;
-	}
+	$options = get_option('tguy_search_meter') ?: [];
+	$view_stats_capability = @$options['sm_view_stats_capability'] ?? TGUY_SM_DEFAULT_VIEW_STATS_CAPABILITY;
 	return current_user_can($view_stats_capability);
 }
 
@@ -197,11 +194,8 @@ function smcln_sm_summary() {
 add_action('admin_menu', 'tguy_sm_add_admin_pages');
 
 function tguy_sm_add_admin_pages() {
-	$options = get_option('tguy_search_meter');
-	$view_stats_capability = tguy_sm_array_value($options, 'sm_view_stats_capability');
-	if ($view_stats_capability == '') {
-		$view_stats_capability = TGUY_SM_DEFAULT_VIEW_STATS_CAPABILITY;
-	}
+	$options = get_option('tguy_search_meter') ?: [];
+	$view_stats_capability = @$options['sm_view_stats_capability'] ?? TGUY_SM_DEFAULT_VIEW_STATS_CAPABILITY;
 	add_submenu_page('index.php', __('Search Meter', 'search-meter'), __('Search Meter', 'search-meter'), $view_stats_capability, __FILE__, 'tguy_sm_stats_page');
 	add_options_page(__('Search Meter', 'search-meter'), __('Search Meter', 'search-meter'), TGUY_SM_OPTIONS_CAPABILITY, __FILE__, 'tguy_sm_options_page');
 }
@@ -223,8 +217,8 @@ function tguy_sm_stats_page() {
 function tguy_sm_summary_page() {
 	global $wpdb;
 
-	$options = get_option('tguy_search_meter');
-	$is_disable_donation = $options['sm_disable_donation'];
+	$options = get_option('tguy_search_meter') ?: [];
+	$is_disable_donation = @$options['sm_disable_donation'] ?? false;
 
 	// Delete old records
 	$result = $wpdb->query(
@@ -312,7 +306,7 @@ function tguy_sm_summary_page() {
 			_e('There you can offer suggestions, request new features or report problems.', 'search-meter');
 		?></p>
 
-		<?php if (!$options['sm_disable_donation']) { tguy_sm_show_donation_message(); } ?>
+		<?php if (!$is_disable_donation) { tguy_sm_show_donation_message(); } ?>
 
 	</div>
 	<?php
@@ -380,9 +374,7 @@ function tguy_sm_summary_table($days, $do_include_successes = true) {
 function tguy_sm_recent_page($max_lines, $do_show_details) {
 	global $wpdb;
 
-	$options = get_option('tguy_search_meter');
-	$is_details_available = $options['sm_details_verbose'];
-	$is_disable_donation = $options['sm_disable_donation'];
+	$options = get_option('tguy_search_meter') ?: [];
 	$this_url_base = 'index.php?page=' . plugin_basename(__FILE__);
 	$this_url_recent_arg = '&amp;recent=' . $max_lines;
 	?>
@@ -428,7 +420,7 @@ function tguy_sm_recent_page($max_lines, $do_show_details) {
 			<tr class="alternate"><th class="sm-text"><?php _e('Date &amp; time', 'search-meter') ?></th><th class="sm-text"><?php _e('Term', 'search-meter') ?></th><th class="sm-number"><?php _e('Results', 'search-meter') ?></th>
 			<?php if ($do_show_details) { ?>
 				<th class="sm-text"><?php _e('Details', 'search-meter') ?></th>
-			<?php } else if ($is_details_available) { ?>
+			<?php } else if (@$options['sm_details_verbose']) { ?>
 				<th class="sm-text"><a href="<?php echo $this_url_base . $this_url_recent_arg . '&amp;details=1' ?>"><?php _e('Show details', 'search-meter') ?></a></th>
 			<?php } ?>
 			</tr>
@@ -485,7 +477,7 @@ function tguy_sm_recent_page($max_lines, $do_show_details) {
 			_e('There you can offer suggestions, request new features or report problems.', 'search-meter');
 		?></p>
 
-		<?php if (!$options['sm_disable_donation']) { tguy_sm_show_donation_message(); } ?>
+		<?php if (!@$options['sm_disable_donation']) { tguy_sm_show_donation_message(); } ?>
 
 	</div>
 	<?php
@@ -513,13 +505,13 @@ function tguy_sm_settings_link($links) {
 function tguy_sm_options_page() {
 	if (isset($_POST['submitted'])) {
 		check_admin_referer('search-meter-update-options_all');
-		$options = get_option('tguy_search_meter');
-		$options['sm_view_stats_capability']  = ($_POST['sm_view_stats_capability']);
+		$options = get_option('tguy_search_meter') ?: [];
+		$options['sm_view_stats_capability']  = (@$_POST['sm_view_stats_capability'] ?? '');
 		$sm_filter_words = $_POST['sm_filter_words'];
 		$options['sm_filter_words']  = preg_replace('/\\s+/', ' ', trim($sm_filter_words));
-		$options['sm_ignore_admin_search']  = (bool)tguy_sm_array_value($_POST, 'sm_ignore_admin_search');
-		$options['sm_details_verbose']  = (bool)tguy_sm_array_value($_POST, 'sm_details_verbose');
-		$options['sm_disable_donation'] = (bool)tguy_sm_array_value($_POST, 'sm_disable_donation');
+		$options['sm_ignore_admin_search']  = (bool) @$_POST['sm_ignore_admin_search'];
+		$options['sm_details_verbose']  = (bool) @$_POST['sm_details_verbose'];
+		$options['sm_disable_donation'] = (bool) @$_POST['sm_disable_donation'];
 		update_option('tguy_search_meter', $options);
 		echo '<div id="message" class="updated fade"><p><strong>' . __('Plugin settings saved.', 'search-meter') . '</strong></p></div>';
 	} else if (isset($_POST['tguy_sm_reset'])) {
@@ -527,11 +519,8 @@ function tguy_sm_options_page() {
 		tguy_sm_reset_stats();
 		echo '<div id="message" class="updated fade"><p><strong>' . __('Statistics have been reset.', 'search-meter') . '</strong></p></div>';
 	}
-	$options = get_option('tguy_search_meter');
-	$view_stats_capability = tguy_sm_array_value($options, 'sm_view_stats_capability');
-	if ($view_stats_capability == '') {
-		$view_stats_capability = TGUY_SM_DEFAULT_VIEW_STATS_CAPABILITY;
-	}
+	$options = get_option('tguy_search_meter') ?: [];
+	$view_stats_capability = @$options['sm_view_stats_capability'] ?? TGUY_SM_DEFAULT_VIEW_STATS_CAPABILITY;
 	?>
 	<div class="wrap">
 
@@ -573,14 +562,14 @@ function tguy_sm_options_page() {
 						<label for="sm_filter_words"><?php _e('When a search term contains any of these words, it will be filtered
 						and will not show up in the Recent Searches or Popular Searches widgets. This will match inside words,
 						so &#8220;press&#8221; will match &#8220;WordPress&#8221;.', 'search-meter') ?></label>
-						<textarea name="sm_filter_words" rows="3" cols="40" id="sm_filter_words" class="large-text code"><?php echo esc_html(tguy_sm_array_value($options, 'sm_filter_words')); ?></textarea>
+						<textarea name="sm_filter_words" rows="3" cols="40" id="sm_filter_words" class="large-text code"><?php echo esc_html(@$options['sm_filter_words'] ?? ''); ?></textarea>
 						</fieldset>
 					</td>
 				</tr>
 				<tr>
 					<th class="th-full" scope="row" colspan="2">
 						<label for="sm_ignore_admin_search" title='Administrators are users with "manage_options" capability'>
-							<input type="checkbox" id="sm_ignore_admin_search" name="sm_ignore_admin_search" <?php echo (tguy_sm_array_value($options, 'sm_ignore_admin_search') ? 'checked="checked"' : '') ?> />
+							<input type="checkbox" id="sm_ignore_admin_search" name="sm_ignore_admin_search" <?php echo (@$options['sm_ignore_admin_search'] ? 'checked="checked"' : '') ?> />
 							<?php _e('Ignore searches made by logged-in administrators', 'search-meter') ?>
 						</label>
 					</th>
@@ -588,7 +577,7 @@ function tguy_sm_options_page() {
 				<tr>
 					<th class="th-full" scope="row" colspan="2">
 						<label for="sm_details_verbose">
-							<input type="checkbox" id="sm_details_verbose" name="sm_details_verbose" <?php echo (tguy_sm_array_value($options, 'sm_details_verbose') ? 'checked="checked"' : '') ?> />
+							<input type="checkbox" id="sm_details_verbose" name="sm_details_verbose" <?php echo (@$options['sm_details_verbose'] ? 'checked="checked"' : '') ?> />
 							<?php _e('Keep detailed information about recent searches (taken from HTTP headers)', 'search-meter') ?>
 						</label>
 					</th>
@@ -596,7 +585,7 @@ function tguy_sm_options_page() {
 				<tr>
 					<th class="th-full" scope="row" colspan="2">
 						<label for="sm_disable_donation">
-							<input type="checkbox" id="sm_disable_donation" name="sm_disable_donation" <?php echo (tguy_sm_array_value($options, 'sm_disable_donation') ? 'checked="checked"' : '') ?> />
+							<input type="checkbox" id="sm_disable_donation" name="sm_disable_donation" <?php echo (@$options['sm_disable_donation'] ? 'checked="checked"' : '') ?> />
 							<?php printf(__('Hide the &#8220;%s&#8221; section.', 'search-meter'), __('Do you find this plugin useful?', 'search-meter')); ?>
 						</label>
 					</th>
@@ -633,7 +622,7 @@ function tguy_sm_options_page() {
 			_e('There you can offer suggestions, request new features or report problems.', 'search-meter');
 		?></p>
 
-		<?php if ( ! tguy_sm_array_value($options, 'sm_disable_donation')) { tguy_sm_show_donation_message(); } ?>
+		<?php if (!@$options['sm_disable_donation']) { tguy_sm_show_donation_message(); } ?>
 
 	</div>
 	<?php
@@ -672,9 +661,9 @@ function tguy_sm_download_summary() {
 		"SELECT `terms`, `count`, `date`, `last_hits`
 		FROM `{$wpdb->prefix}searchmeter`
 		ORDER BY `date` ASC, `terms` ASC");
-	$results_array = array(array(__('Date', 'search-meter'), __('Search terms', 'search-meter'), __('Searches', 'search-meter'), __('Results', 'search-meter')));
+	$results_array = [[__('Date', 'search-meter'), __('Search terms', 'search-meter'), __('Searches', 'search-meter'), __('Results', 'search-meter')]];
 	foreach ($results as $result) {
-		$results_array[] = array(tguy_sm_format_utc_as_local('Y-m-d', $result->date), tguy_sm_sanitise_terms_for_csv($result->terms), $result->count, $result->last_hits);
+		$results_array[] = [tguy_sm_format_utc_as_local('Y-m-d', $result->date), tguy_sm_sanitise_terms_for_csv($result->terms), $result->count, $result->last_hits];
 	}
 	/* translators: base filename for downloaded summary - lowercase letters, digits, dashes only  */
 	tguy_sm_download_to_csv($results_array, __('search-summary', 'search-meter'));
@@ -686,9 +675,9 @@ function tguy_sm_download_individual() {
 		"SELECT `terms`, `datetime`, `hits`, `details`
 		FROM `{$wpdb->prefix}searchmeter_recent`
 		ORDER BY `datetime` ASC");
-	$results_array = array(array(__('Date', 'search-meter'), __('Search terms', 'search-meter'), __('Results', 'search-meter'), __('Details', 'search-meter')));
+	$results_array = [[__('Date', 'search-meter'), __('Search terms', 'search-meter'), __('Results', 'search-meter'), __('Details', 'search-meter')]];
 	foreach ($results as $result) {
-		$results_array[] = array(tguy_sm_format_utc_as_local('Y-m-d H:i:s', $result->datetime), tguy_sm_sanitise_terms_for_csv($result->terms), $result->hits, $result->details);
+		$results_array[] = [tguy_sm_format_utc_as_local('Y-m-d H:i:s', $result->datetime), tguy_sm_sanitise_terms_for_csv($result->terms), $result->hits, $result->details];
 	}
 	/* translators: base filename for downloaded searches - lowercase letters, digits, dashes only  */
 	tguy_sm_download_to_csv($results_array, __('recent-searches', 'search-meter'));
