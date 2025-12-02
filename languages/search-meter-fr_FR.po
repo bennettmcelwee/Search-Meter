@@ -47,10 +47,10 @@ msgstr "Résumé des recherches"
 
 #: admin.php:246
 msgid ""
-"These tables show the most popular searches on your blog for the given time "
+"These tables show the most popular searches on your site for the given time "
 "periods."
 msgstr ""
-"Ces tableaux montrent les recherches les plus populaires sur votre blog pour "
+"Ces tableaux montrent les recherches les plus populaires sur votre site pour "
 "les périodes de temps donnés."
 
 #: admin.php:247 admin.php:402
@@ -106,7 +106,7 @@ msgstr "Résumé des recherches infructueuses"
 #: admin.php:269
 msgid ""
 "These tables show only the search terms for which the last search yielded no "
-"results. People are searching your blog for these terms; maybe you should give "
+"results. People are searching your site for these terms; maybe you should give "
 "them what they want."
 msgstr ""
 "Ces tableaux montrent que les termes de recherche pour lesquels la dernière "
@@ -160,7 +160,7 @@ msgid "Recent searches"
 msgstr "Recherches récentes"
 
 #: admin.php:401
-msgid "This table shows the last %s searches on this blog."
+msgid "This table shows the last %s searches on this site."
 msgstr "Ce tableau présente les %s dernières recherches sur le site."
 
 #: admin.php:403
@@ -343,8 +343,8 @@ msgid "Powered by Search Meter"
 msgstr "Alimenté par Search Meter"
 
 #: search-meter.php:212
-msgid "A list of the most recent successful searches on your blog"
-msgstr "Liste des recherches récentes effectuées sur votre blog"
+msgid "A list of the most recent successful searches on your site"
+msgstr "Liste des recherches récentes effectuées sur votre site"
 
 #: search-meter.php:213 search-meter.php:218 search-meter.php:238
 msgid "Recent Searches"
@@ -362,7 +362,7 @@ msgstr ""
 msgid ""
 "Keeps track of what your visitors are searching for. After you have activated "
 "this plugin, you can check the Search Meter section in the Dashboard to see "
-"what your visitors are searching for on your blog."
+"what your visitors are searching for on your site."
 msgstr ""
 
 #. Author of the plugin/theme
