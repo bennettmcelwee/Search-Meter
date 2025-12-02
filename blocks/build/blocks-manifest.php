@@ -9,7 +9,7 @@ return array(
 		'title' => 'Popular Searches',
 		'category' => 'widgets',
 		'icon' => 'editor-ul',
-		'description' => 'A list of the most popular successful searches on the blog',
+		'description' => 'A list of the most popular successful searches on the site. Powered by Search Meter',
 		'example' => array(
 			
 		),
@@ -44,7 +44,7 @@ return array(
 		'title' => 'Recent Searches',
 		'category' => 'widgets',
 		'icon' => 'editor-ul',
-		'description' => 'A list of the most recent successful searches on the blog',
+		'description' => 'A list of the most recent successful searches on the site. Powered by Search Meter',
 		'example' => array(
 			
 		),
