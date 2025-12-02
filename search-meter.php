@@ -167,6 +167,15 @@ add_filter('the_posts', 'tguy_sm_save_search', 20); // run after other plugins
 // Functionality
 
 
+// Blocks
+
+add_action( 'init', 'tguy_sm_register_blocks' );
+function tguy_sm_register_blocks() {
+	register_block_type( __DIR__ . '/blocks/build/recent-searches' );
+	// TODO register_block_type( __DIR__ . '/blocks/build/popular-searches' );
+}
+
+
 // Widgets
 
 add_action('widgets_init', 'tguy_sm_register_widgets');
