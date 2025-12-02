@@ -11,15 +11,9 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { useBlockProps } from '@wordpress/block-editor';
+import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 
-/**
- * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
- * Those files can contain any CSS code that gets applied to the editor.
- *
- * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
- */
-import './editor.scss';
+import { PanelBody, TextControl } from '@wordpress/components';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -29,10 +23,37 @@ import './editor.scss';
  *
  * @return {Element} Element to render.
  */
-export default function Edit() {
+export default function Edit( { attributes, setAttributes } ) {
+    const { title = 'Recent Searches', count = 5 } = attributes;
 	return (
-		<p { ...useBlockProps() }>
-			{ __( 'Recent Searches – hello from the editor!', 'recent-searches' ) }
-		</p>
+        <>
+            <InspectorControls>
+                <PanelBody title={ __( 'Settings', 'search-meter' ) }>
+                    <TextControl
+                        label={ __('Title', 'search-meter') }
+                        value={ title }
+                        onChange={ (value) => setAttributes( { title: value } ) }
+                        __nextHasNoMarginBottom
+                        __next40pxDefaultSize
+                    />
+                    <TextControl
+                        label={ __('Count', 'search-meter') }
+                        value={ count }
+						type="number"
+                        onChange={ (value) => setAttributes( { count: clamp(1, 100, value) } ) }
+                        __nextHasNoMarginBottom
+                        __next40pxDefaultSize
+                    />
+                </PanelBody>
+            </InspectorControls>
+			<div { ...useBlockProps() }>
+				{title && <h2>{title}</h2>}
+				<ul>
+					{Array.from({length: count}, (_, i) => <li key={i}>search{i}</li>)}
+				</ul>
+			</div>
+        </>
 	);
 }
+
+const clamp = (min, max, value ) => Math.max(min, Math.min(max, value));

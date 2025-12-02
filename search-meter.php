@@ -117,7 +117,7 @@ function sm_list_recent_searches($before = '', $after = '', $count = 5) {
 		echo "$before\n<ul>\n";
 		$home_url_slash = (get_option('home') ?: '') . '/';
 		foreach ($results as $result) {
-			echo '<li><a href="'. $home_url_slash . sm_get_relative_search_url($result->terms) . '">'. htmlspecialchars($result->terms) .'</a></li>'."\n";
+			echo '<li><a href="'. $home_url_slash . sm_get_relative_search_url($result->terms) . '">'. esc_html($result->terms) .'</a></li>'."\n";
 		}
 		echo "</ul>\n$after\n";
 	}

@@ -13,14 +13,20 @@ return array(
 		'example' => array(
 			
 		),
+		'attributes' => array(
+			'title' => array(
+				'type' => 'string'
+			),
+			'count' => array(
+				'type' => 'number'
+			)
+		),
 		'supports' => array(
 			'html' => false
 		),
 		'textdomain' => 'search-meter',
 		'editorScript' => 'file:./index.js',
-		'editorStyle' => 'file:./index.css',
 		'style' => 'file:./style-index.css',
-		'render' => 'file:./render.php',
-		'viewScript' => 'file:./view.js'
+		'render' => 'file:./render.php'
 	)
 );
