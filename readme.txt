@@ -4,7 +4,7 @@ Donate link: https://thunderguy.com/semicolon/donate/
 Tags: search, meter, search-meter, statistics, widget, admin, keywords, terms, search terms
 Requires at least: 3.2
 Tested up to: 6.9
-Stable tag: 2.13.5
+Stable tag: 2.14.1
 
 Search Meter tracks what your readers are searching for on your site. View full details of recent searches or stats for the last day, week or month.
 
