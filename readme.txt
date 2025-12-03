@@ -4,7 +4,7 @@ Donate link: https://thunderguy.com/semicolon/donate/
 Tags: search, meter, search-meter, statistics, widget
 Requires at least: 3.2
 Tested up to: 6.9
-Stable tag: 2.14.1
+Stable tag: 2.14.2
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
