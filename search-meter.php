@@ -187,8 +187,8 @@ class SM_Popular_Searches_Widget extends WP_Widget {
 		//Defaults
 		$instance = wp_parse_args((array) $instance, ['popular-searches-title' => __('Popular Searches', 'search-meter'), 'popular-searches-number' => 5]);
 
-		$title = htmlspecialchars($instance['popular-searches-title']);
-		$count = htmlspecialchars($instance['popular-searches-number']);
+		$title = esc_html($instance['popular-searches-title']);
+		$count = esc_html($instance['popular-searches-number']);
 
 		# Output the options
 		echo '<p><label for="' . $this->get_field_name('popular-searches-title') . '">' . __('Title:', 'search-meter') . ' <input class="widefat" id="' . $this->get_field_id('title') . '" name="' . $this->get_field_name('popular-searches-title') . '" type="text" value="' . $title . '" /></label></p>';
@@ -227,8 +227,8 @@ class SM_Recent_Searches_Widget extends WP_Widget {
 		//Defaults
 		$instance = wp_parse_args((array) $instance, ['recent-searches-title' => __('Recent Searches', 'search-meter'), 'recent-searches-number' => 5]);
 
-		$title = htmlspecialchars($instance['recent-searches-title']);
-		$count = htmlspecialchars($instance['recent-searches-number']);
+		$title = esc_html($instance['recent-searches-title']);
+		$count = esc_html($instance['recent-searches-number']);
 
 		# Output the options
 		echo '<p><label for="' . $this->get_field_name('recent-searches-title') . '">' . __('Title:', 'search-meter') . ' <input class="widefat" id="' . $this->get_field_id('title') . '" name="' . $this->get_field_name('recent-searches-title') . '" type="text" value="' . $title . '" /></label></p>';
