@@ -2,8 +2,8 @@
 /*
 Plugin Name: Search Meter
 Plugin URI: https://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/
-Description: Keeps track of what your visitors are searching for. After you have activated this plugin, you can check the Search Meter section in the Dashboard to see what your visitors are searching for on your site.
-Version: 2.14.1
+Description: Keeps track of what your visitors are searching for. This adds a Search Meter section in the Dashboard to see what your visitors are searching for on your site.
+Version: 2.14.3
 Author: Bennett McElwee
 Author URI: https://thunderguy.com/semicolon/
 Donate link: https://thunderguy.com/semicolon/donate/
@@ -25,14 +25,14 @@ INSTRUCTIONS
 * To control search statistics, log in to WordPress Admin, go to the Settings
   section and click Search Meter.
 * To display recent and popular searches, use the Recent Searches and
-  Popular Searches widgets, or the sm_list_popular_searches() and
+  Popular Searches blocks or widgets, or the sm_list_popular_searches() and
   sm_list_recent_searches() template tags.
 * For full details, see https://thunderguy.com/semicolon/wordpress/search-meter-wordpress-plugin/
 
 Thanks to everyone who has suggested or contributed improvements. It takes a village to build a plugin.
 
 
-Copyright (C) 2005-25 Bennett McElwee (bennett at thunderguy dotcom)
+Copyright (C) 2005-26 Bennett McElwee (bennett at thunderguy dotcom)
 This software is licensed under the GPL v3. See the included LICENSE file for
 details. If you would like to use it under different terms, contact the author.
 */
@@ -58,7 +58,7 @@ if (tguy_is_admin_interface()) {
 
 function sm_list_popular_searches($before = '', $after = '', $count = 5) {
 // List the most popular searches in the last month in decreasing order of popularity.
-	global $wpdb, $wp_rewrite;
+	global $wpdb;
 	$count = intval($count);
 	$escaped_filter_regex = sm_get_escaped_filter_regex();
 	$filter_term = ($escaped_filter_regex == "" ? "" : "AND NOT `terms` REGEXP '{$escaped_filter_regex}'");
@@ -76,27 +76,8 @@ function sm_list_popular_searches($before = '', $after = '', $count = 5) {
 		GROUP BY `terms`
 		ORDER BY countsum DESC, `terms` ASC
 		LIMIT $count");
-
-	$searches = [];
-
-	foreach ($results as $result) {
-		array_push($searches, [
-			'term' => $result->terms,
-			'href' => get_search_link($result->terms)
-		]);
-	}
-
-	$display = '';
-
-	if (count($searches)) {
-		$display = "$before\n<ul>\n";
-		foreach ($searches as $search) {
-			$display .= '<li><a href="' . $search['href'] . '">'. htmlspecialchars($search['term']) .'</a></li>'."\n";
-		}
-		$display .= "</ul>\n$after\n";
-	}
-
-	echo apply_filters('sm_list_popular_searches_display', $display, $searches);
+	$display = sm_render_results($results, $before, $after);
+	echo apply_filters('sm_list_popular_searches', $display, $results);
 }
 
 function sm_list_recent_searches($before = '', $after = '', $count = 5) {
@@ -113,32 +94,22 @@ function sm_list_recent_searches($before = '', $after = '', $count = 5) {
 		GROUP BY `terms`
 		ORDER BY `maxdatetime` DESC
 		LIMIT $count");
+	$display = sm_render_results($results, $before, $after);
+	echo apply_filters('sm_list_recent_searches', $display, $results);
+}
+
+function sm_render_results($results, $before, $after) {
+// Return a string containing an HTML list of the query results, or an empty string if there are no results.
+	$rendered = '';
 	if (count($results)) {
-		echo "$before\n<ul>\n";
-		$home_url_slash = (get_option('home') ?: '') . '/';
+		$rendered .= "$before\n<ul>\n";
 		foreach ($results as $result) {
-			echo '<li><a href="'. $home_url_slash . sm_get_relative_search_url($result->terms) . '">'. esc_html($result->terms) .'</a></li>'."\n";
+			$rendered .= '<li><a href="' . get_search_link($result->terms) . '">'. esc_html($result->terms) .'</a></li>'."\n";
 		}
-		echo "</ul>\n$after\n";
+		$rendered .= "</ul>\n$after\n";
 	}
+	return $rendered;
 }
-
-function sm_get_relative_search_url($term) {
-// Return the URL for a search term, relative to the home directory.
-	global $wp_rewrite;
-	$relative_url = null;
-	if ($wp_rewrite->using_permalinks()) {
-		$structure = $wp_rewrite->get_search_permastruct();
-		if (strpos($structure, '%search%') !== false) {
-			$relative_url = str_replace('%search%', rawurlencode($term), $structure);
-		}
-	}
-	if ( ! $relative_url) {
-		$relative_url =  '?s=' . urlencode($term);
-	}
-	return $relative_url;
-}
-
 
 function sm_get_escaped_filter_regex() {
 // Return a regular expression, escaped to go into a DB query, that will match any terms to be filtered out
