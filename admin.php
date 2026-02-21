@@ -585,6 +585,16 @@ function tguy_sm_options_page() {
 				</tr>
 				<tr>
 					<th class="th-full" scope="row" colspan="2">
+						<label for="sm_include_ip">
+							<input type="checkbox" id="sm_include_ip" name="sm_include_ip"
+								<?php echo (@$options['sm_include_ip'] ? 'checked="checked"' : '') ?>
+								<?php echo (@$options['sm_details_verbose'] ? '' : 'disabled="disabled"') ?> />
+							<?php _e('Include IP address in details', 'search-meter') ?>
+						</label>
+					</th>
+				</tr>
+				<tr>
+					<th class="th-full" scope="row" colspan="2">
 						<label for="sm_disable_donation">
 							<input type="checkbox" id="sm_disable_donation" name="sm_disable_donation" <?php echo (@$options['sm_disable_donation'] ? 'checked="checked"' : '') ?> />
 							<?php printf(__('Hide the &#8220;%s&#8221; section.', 'search-meter'), __('Do you find this plugin useful?', 'search-meter')); ?>
