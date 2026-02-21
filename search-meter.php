@@ -284,8 +284,11 @@ function tguy_sm_save_search($posts) {
 			if ($record_duplicates) {
 				$details .= __('Search Meter save count', 'search-meter') . ": $tguy_sm_save_count\n";
 			}
-			foreach (['REQUEST_URI','REQUEST_METHOD','QUERY_STRING','REMOTE_ADDR','HTTP_USER_AGENT','HTTP_REFERER']
+			foreach (['REQUEST_URI','REQUEST_METHOD','QUERY_STRING','HTTP_USER_AGENT','HTTP_REFERER']
 			         as $header) {
+				if ($header === 'REMOTE_ADDR' && !$options['sm_include_ip']) {
+					continue;  // Skip REMOTE_ADDR if option is disabled
+				}
 				$details .= $header . ': ' . @$_SERVER[$header] . "\n";
 			}
 		}
