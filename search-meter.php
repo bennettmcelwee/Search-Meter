@@ -284,9 +284,14 @@ function tguy_sm_save_search($posts) {
 			if ($record_duplicates) {
 				$details .= __('Search Meter save count', 'search-meter') . ": $tguy_sm_save_count\n";
 			}
-			foreach (['REQUEST_URI','REQUEST_METHOD','QUERY_STRING','REMOTE_ADDR','HTTP_USER_AGENT','HTTP_REFERER']
-			         as $header) {
-				$details .= $header . ': ' . @$_SERVER[$header] . "\n";
+			$headers = ['REQUEST_URI','REQUEST_METHOD','QUERY_STRING','HTTP_REFERER'];
+			if (@$options['sm_include_personal_data']) {
+				$headers[] = 'REMOTE_ADDR';
+				$headers[] = 'HTTP_USER_AGENT';
+			}
+			foreach ($headers as $header) {
+				$value = @$_SERVER[$header];
+				$details .= "{$header}: {$value}\n";
 			}
 		}
 

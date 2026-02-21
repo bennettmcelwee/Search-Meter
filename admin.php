@@ -97,7 +97,31 @@ div.sm-stats-clear {
 	float: none;
 }
 
+/* Form tweaks*/
+form[name=searchmeter] .th-full.sm-sub-option {
+	padding-left: 30px;
+	padding-top: 0;
+}
+form[name=searchmeter] label.disabled {
+	color: gray;
+}
+form[name=searchmeter] label.disabled input[type=checkbox]:disabled {
+	/* WP default is so light it's almost invisible */
+	border-color: gray;
+}
 </style>
+<script>
+jQuery(($) => {
+	$('#sm_details_verbose').on('change', () => {
+		const noVerbose = !$('#sm_details_verbose').prop('checked');
+		$('#sm_include_personal_data').prop('disabled', noVerbose);
+		$('label[for=sm_include_personal_data]').toggleClass('disabled', noVerbose);
+		if (noVerbose) {
+			$('#sm_include_personal_data').prop('checked', false);
+		}
+	});
+});
+</script>
 <?php
 }
 
@@ -511,6 +535,7 @@ function tguy_sm_options_page() {
 		$options['sm_filter_words']  = preg_replace('/\\s+/', ' ', trim($sm_filter_words));
 		$options['sm_ignore_admin_search']  = (bool) @$_POST['sm_ignore_admin_search'];
 		$options['sm_details_verbose']  = (bool) @$_POST['sm_details_verbose'];
+		$options['sm_include_personal_data']  = (bool) @$_POST['sm_include_personal_data'] && (bool) @$_POST['sm_details_verbose'];
 		$options['sm_disable_donation'] = (bool) @$_POST['sm_disable_donation'];
 		update_option('tguy_search_meter', $options);
 		echo '<div id="message" class="updated fade"><p><strong>' . __('Plugin settings saved.', 'search-meter') . '</strong></p></div>';
@@ -579,6 +604,17 @@ function tguy_sm_options_page() {
 						<label for="sm_details_verbose">
 							<input type="checkbox" id="sm_details_verbose" name="sm_details_verbose" <?php echo (@$options['sm_details_verbose'] ? 'checked="checked"' : '') ?> />
 							<?php _e('Keep detailed information about recent searches (taken from HTTP headers)', 'search-meter') ?>
+						</label>
+					</th>
+				</tr>
+				<tr>
+					<th class="th-full sm-sub-option" scope="row" colspan="2">
+						<label for="sm_include_personal_data"
+							<?php echo (@$options['sm_details_verbose'] ? '' : 'class="disabled"') ?> >
+							<input type="checkbox" id="sm_include_personal_data" name="sm_include_personal_data"
+								<?php echo (@$options['sm_include_personal_data'] ? 'checked="checked"' : '') ?>
+								<?php echo (@$options['sm_details_verbose'] ? '' : 'disabled="disabled"') ?> />
+							<?php _e('Include personal data in details (check privacy laws before enabling this)', 'search-meter') ?>
 						</label>
 					</th>
 				</tr>
