@@ -511,6 +511,7 @@ function tguy_sm_options_page() {
 		$options['sm_filter_words']  = preg_replace('/\\s+/', ' ', trim($sm_filter_words));
 		$options['sm_ignore_admin_search']  = (bool) @$_POST['sm_ignore_admin_search'];
 		$options['sm_details_verbose']  = (bool) @$_POST['sm_details_verbose'];
+		$options['sm_include_ip']  = (bool) @$_POST['sm_include_ip'];
 		$options['sm_disable_donation'] = (bool) @$_POST['sm_disable_donation'];
 		update_option('tguy_search_meter', $options);
 		echo '<div id="message" class="updated fade"><p><strong>' . __('Plugin settings saved.', 'search-meter') . '</strong></p></div>';
