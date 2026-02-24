@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(superpowers:using-superpowers)",
+      "Skill(superpowers:brainstorming)",
+      "Skill(superpowers:writing-plans)",
+      "Skill(superpowers:subagent-driven-development)",
+      "Bash(git add /Users/bennettmcelwee/Local Sites/searchmeter/app/public/wp-content/plugins/Search-Meter/admin.php)",
+      "Bash(git commit -m \"feat: add Include IP address checkbox to settings\")",
+      "Bash(git add search-meter.php)",
+      "Bash(git commit -m \"feat: conditionally include REMOTE_ADDR based on sm_include_ip option\")",
+      "Skill(superpowers:finishing-a-development-branch)",
+      "Bash(git branch -r --contains HEAD)",
+      "Bash(git push -u origin refactor)",
+      "Bash(gh pr create --title \"feat: Add Include IP address option to settings\" --body \"$\\(cat <<''EOF''\n## Summary\n\n- Add new option \"Include IP address\" to control whether REMOTE_ADDR is saved to search details\n- Option only visible when \"Keep detailed information\" is enabled\n- Checkbox is visually disabled when verbose mode is unchecked\n- By default, IP addresses are not included in search details \\(privacy-friendly\\)\n\n## Test Plan\n\n- [ ] Enable \"Keep detailed information\" → IP checkbox becomes enabled\n- [ ] Disable \"Keep detailed information\" → IP checkbox remains visible but disabled\n- [ ] Check \"Include IP address\" and save → REMOTE_ADDR is included in details\n- [ ] Uncheck \"Include IP address\" and save → REMOTE_ADDR is omitted from details\n- [ ] Verify existing behavior preserved when option is unchecked\n\n## Changes\n\n- `admin.php:514` - Add `sm_include_ip` to options save handler\n- `admin.php:586-595` - Add IP checkbox with disabled state logic\n- `search-meter.php:289-291` - Conditionally include REMOTE_ADDR based on option\nEOF\n\\)\")"
+    ]
+  }
+}
